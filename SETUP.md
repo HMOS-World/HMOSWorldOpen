@@ -118,7 +118,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     ![image](screenshots/cloud/clouddata1.jpg)
 
-3. 在项目中选中CloudProgram，右击选择Deploy Cloud Program，即可上传云数据库和云函数。
+3. 在项目中选中CloudProgram，右击选择Deploy Cloud Program，即可上传云数据库和云函数，请确保上传完成并成功。
 
     ![image](screenshots/cloud/cloudprogram.jpg)
 
@@ -130,13 +130,13 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     ![image](screenshots/client/auto_signature.jpg)
 
-至此，已完成HMOS世界服务端适配，可以体验除地图服务、消息推送和卡片推送之外的所有基本功能。
+至此，已完成HMOS世界服务端适配，可以体验除地图服务、华为账号登录、消息推送和卡片推送之外的所有基本功能。
 
 ### 6.特殊功能配置
 
 #### 6.1手动签名
 
-在开启消息推送服务后，为确保地图服务、消息推送和卡片推送功能正常运行，客户端工程需进行手动签名。步骤如下：
+在开启消息推送服务后，为确保地图服务、华为账号登录、消息推送和卡片推送功能正常运行，客户端工程需进行手动签名。地图服务和华为账号登录在完成手动签名后重新卸载安装应用即可使用。步骤如下：
 
 1. 生成密钥（.p12文件），详见[手动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-signing-V5#section297715173233)。
 
@@ -192,11 +192,12 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
     
     ![image](screenshots/client/signature.jpg)
 
-#### 6.2地图服务
+6. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“项目设置”，并点击“添加公钥指纹 (HarmonyOS API 9及以上)”，选择在第4步申请的调试证书“HMOSWorld”。
 
-1. 地图服务功能在完成手动签名后即可体验，无其他配置。
+    ![image](screenshots/cloud/fingerprint.jpg)
 
-#### 6.3消息推送
+
+#### 6.2消息推送
 
 1. 请确保先执行第3章第11步，在[AGC平台]开启消息推送服务，再执行第6.1章手动签名。
 
@@ -230,7 +231,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 7. 至此，已完成HMOS世界消息推送功能实现。
 
-#### 6.4卡片推送
+#### 6.3卡片推送
 
 1. 请确保先执行第3章第11步，在[AGC平台]开启消息推送服务，再执行第6.1章手动签名。
 
@@ -242,21 +243,19 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     ![image](screenshots/cloud/push_data2.jpg)
 
-4. 如果您尚未实现6.1章节中的消息推送功能，请完成第6.1章的第1步及第6至8步；若已完成，则可跳过此步骤。
+4. 在手机桌面长按HMOS世界图标创建卡片。
 
-5. 在手机桌面长按HMOS世界图标创建卡片。
-
-6. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云函数”，选择“push-data”，点击“操作”中的的测试，然后点击“测试函数”中的“测试”，即可推送卡片。
+5. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云函数”，选择“push-data”，点击“操作”中的的测试，然后点击“测试函数”中的“测试”，即可推送卡片。
 
     如果显示推送卡片失败，可退出应用进程后，再次打开应用，因为应用打开时会上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)用于推送，此时再等待几分钟，确保Push Token上传成功后，可再次尝试。
  
     ![image](screenshots/cloud/push_data3.jpg)
 
-7. 至此，已完成HMOS世界卡片推送功能实现。
+6. 至此，已完成HMOS世界卡片推送功能实现。
 
 ### 7.FAQ
 
-#### 7.1完成第6.1章所述配置后，仍无法实现消息推送功能？
+#### 7.1完成消息推送所述配置后，仍无法实现消息推送功能？
 
 请先排查是否成功上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)，登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“user_push_token”，点击“查询”。如果该表中存在数据，则证明端侧已经成功上传Push。如未成功可多次关闭启动应用，如仍未成功，可重新安装HMOS世界应用，并选择同意用户协议，后台打开消息推送授权后，再次关闭启动应用并等待几分钟。
 
