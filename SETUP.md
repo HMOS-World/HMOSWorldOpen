@@ -8,11 +8,11 @@ HMOS世界涉及端云一体化开发，[开源代码](https://github.com/HMOS-W
 
 1. 注册华为账号
 
-   HMOS世界端云一体化搭建依托于[AppGallery Connect（AGC）](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)平台，使用AGC平台需要前往[华为开发者联盟官网](https://developer.huawei.com/consumer/cn/)进行华为账号注册，具体请参见[注册账号](https://developer.huawei.com/consumer/cn/doc/start/registration-and-verification-0000001053628148)，如果已经拥有华为账号，可跳过本步骤。
+   HMOS世界端云一体化搭建依托于[AppGallery Connect（AGC）](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)平台，使用AGC平台需要前往[华为开发者联盟官网](https://developer.huawei.com/consumer/cn/)进行华为账号注册，具体请参见[注册账号](https://developer.huawei.com/consumer/cn/doc/start/registration-and-verification-0000001053628148)。如果您已经拥有华为账号，可跳过本步骤。
 
 2. 项目打开
 
-   使用[DevEco Studio](https://developer.huawei.com/consumer/cn/deveco-studio/)，选择file > open，选择“HMOSWorld”，点击“OK”打开项目。请注意，HMOSWorld目录下客户端工程（Application文件）可以作为单独项目打开，但服务端工程（CloudProgram文件）尽可以通过打开HMOSWorld整个项目打开。
+   使用[DevEco Studio](https://developer.huawei.com/consumer/cn/deveco-studio/)，选择File > open，选择“HMOSWorld”，点击“OK”打开项目。请注意，HMOSWorld目录下客户端工程（Application文件）可以作为单独项目打开，但是会编译失败；服务端工程（CloudProgram文件）仅可以通过打开HMOSWorld整个项目打开。建议您直接选择打开“HMOSWorld”文件，同时打开客户端工程（Application文件）和服务端工程（CloudProgram文件），而不是只打开客户端工程（Application文件）。
 
    ![image](screenshots/client/open_object.jpg)
 
@@ -28,9 +28,9 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
 
    ![image](screenshots/cloud/creat_project1.jpg)
 
-3. 项目创建后会进入“开通分析服务”页面，“为此项目启动分析服务”开关默认为开启状态，但因为华为分析服务已于2024年6月关闭，所以选择关闭“为此项目启动分析服务”并点击“完成”，即可完成项目的创建。
+3. 项目创建成功后，会跳转至“开通分析服务”页面。此时，“为此项目启动分析服务”开关处于默认开启状态。由于华为分析服务已于 2024 年 6 月停止运营，因此需将该开关关闭，然后点击“完成”，即可顺利完成项目创建。
 
-4. 此时页面会停留在左侧导航栏的“项目设置”页面，点击“项目设置”页面中的“添加应用”。
+4. 完成项目创建后，点击左侧导航栏的“项目设置”中的“添加应用”即可进行后续操作。
 
    ![image](screenshots/cloud/add_apply1.jpg)
 
@@ -74,6 +74,11 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
 
     ![image](screenshots/cloud/push_message1.jpg)
 
+    HMOS世界暂未涉及自分类消息推送，点击弹窗“不在提醒”。
+
+    ![image](screenshots/cloud/push_message2.jpg)
+
+
 至此，已完成HMOS世界AGC基本环境搭建。
 
 ### 4.客户端适配
@@ -84,7 +89,7 @@ HMOS世界端云一体化配置，需要修改客户端项目中的部分配置�
 
     ![image](screenshots/client/bundle_name1.jpg)
 
-2. 修改客户端Bundle name，打开客户端代码feature > challenge > src > main > views > MapViews，修改Bundle name为包名，与第3章第6步的包名保持一致，以“com.hmosworld.XXX”为例。
+2. 修改客户端Bundle name，打开客户端代码Application > features > challenge > src > main > > ets > views > MapView，修改Bundle name为包名，与第3章第6步的包名保持一致，以“com.hmosworld.XXX”为例。
 
     ![image](screenshots/client/bundle_name2.jpg)
 
@@ -95,10 +100,6 @@ HMOS世界端云一体化配置，需要修改客户端项目中的部分配置�
 4. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“我的项目”，选择“项目设置”中的“常规”，并点击下载“agconnect-services.json”，存放在掉客户端工程products > phone > src > main > resources > rawfile下。
 
     ![image](screenshots/client/agconnect_services.jpg)
-
-    HMOS世界暂未涉及自分类消息推送，点击弹窗“不在提醒”。
-
-    ![image](screenshots/cloud/push_message2.jpg)
 
 至此，已完成HMOS世界客户端适配。
 
