@@ -201,7 +201,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 1. 请确保先执行第3章第11步，在[AGC平台]开启消息推送服务，再执行第6.1章手动签名。
 
-2. 登录[华为开发者联盟管理中心](https://developer.huawei.com/consumer/cn/console)，点击“凭证”，点击“服务账号密码”的“创建凭证”。进入创建服务账号秘钥后，“名称”填写“HMOSWorld”，点击“生成公私钥”，待生成秘钥后点击“创建并下载JSON”，此秘钥尽可下载一次，下载后请妥善保存。
+2. 登录[华为开发者联盟管理中心](https://developer.huawei.com/consumer/cn/console)，点击“凭证”，点击“服务账号秘钥”的“创建凭证”。进入创建服务账号秘钥后，“名称”填写“HMOSWorld”，点击“生成公私钥”，待生成秘钥后点击“创建并下载JSON”，此秘钥尽可下载一次，下载后请妥善保存。
  
     ![image](screenshots/client/developer1.jpg)
 
@@ -211,7 +211,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     其中替换“SEND_URL”时，请将字段中“project ID”部分替换为秘钥中的“project_id”。
 
-    其中替换“PRIVATE_KEY”时，请注意粘贴完整的“private_key”，并注意粘贴后秘钥中应为“\n”，而不是“\\n”。
+    其中替换“PRIVATE_KEY”时，请注意粘贴完整的“private_key”，并注意粘贴后秘钥中应为“\n”，而不是有两个“\”。
 
     ![image](screenshots/cloud/push_message3.jpg)
 
@@ -261,4 +261,4 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 ![image](screenshots/cloud/FAQ_push_message.jpg)
 
-如果成功上传用户的Push Token仍然推送消息失败，可检查是否正确执行第6.2章第3步，请格外注意替换“PRIVATE_KEY”时，粘贴完整的“private_key”，并注意粘贴后秘钥中所有的“\n”均为“\n”，而不是“\\n”。
+如果成功上传用户的Push Token仍然推送消息失败，可检查是否正确执行第6.2章第3步，请格外注意替换“PRIVATE_KEY”时，粘贴完整的“private_key”，并注意粘贴后秘钥中所有的“\n”均为“\n”，而不是有两个“\”。
