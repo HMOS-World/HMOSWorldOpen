@@ -106,7 +106,7 @@ struct LoginPage {
 
   getHWAuthorization() {
     let authRequest = new authentication.HuaweiIDProvider().createAuthorizationWithHuaweiIDRequest();
-    authRequest.scopes = ['profile', 'openid', 'phone'];
+    authRequest.scopes = ['profile', 'openid'];
     authRequest.permissions = ['idtoken'];
     authRequest.forceAuthorization = true;
     authRequest.state = util.generateRandomUUID();

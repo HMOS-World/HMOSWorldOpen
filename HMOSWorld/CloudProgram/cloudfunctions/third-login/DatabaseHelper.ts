@@ -78,7 +78,7 @@ export class DatabaseHelper {
           userResult.getPortrait(),
           userResult.getDescription(),
           userResult.getNickname(),
-          Number.parseInt(userResult.getUsertype())
+          userResult.getUser_type()
         );
       }
       return userResp;
@@ -94,7 +94,7 @@ export class DatabaseHelper {
       createUser.setPortrait(loginParams.portrait);
       createUser.setNickname(loginParams.nickname);
       createUser.setUnion_id(loginParams.unionId);
-      createUser.setUsertype(HW_ACCOUNT_LOGIN);
+      createUser.setUser_type(HW_ACCOUNT_LOGIN);
       createUser.setDescription('这个人很懒，什么也没留下');
       return await this.colUser.upsert(createUser);
     }
