@@ -55,11 +55,11 @@ export class DatabaseHelper {
         logger2.info(`[push-data] sendMessage request push-data token======${JSON.stringify(httpResponse)}`);
         if (httpResponse.statusCode == 200) {
           const result = JSON.parse(body);
-          console.info(`[push-data] getToken success:${JSON.stringify(body)}`);
+          logger2.info(`[push-data] getToken success:${JSON.stringify(body)}`);
           const tokenData = result.token_type + " " + result.access_token;
           resolve(tokenData);;
         } else {
-          console.info(`[push-data] getToken error:${JSON.stringify(err)}`);
+          logger2.error(`[push-data] getToken error:${JSON.stringify(err)}`);
           reject(err);
         }
       })
