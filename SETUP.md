@@ -47,6 +47,8 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
     - “应用包名”以“com.hmosworld.XXX”为例，因为应用包名唯一，创建相同包名应用会创建失败，所以配置时请修改为其他应用包名。此处的应用包名必须与客户端工程中配置的Bundle name一致，在后文客户端工程配置时会详细说明，具体命名规范参照[软件包规范](https://developer.huawei.com/consumer/cn/doc/app/agc-help-createharmonyapp-0000001945392297)；  
    
     - “应用分类”选择“应用”。  
+
+    - 点击“下一步”。
    
     ![image](screenshots/cloud/add_apply3.jpg)  
 
@@ -54,7 +56,7 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
 
     ![image](screenshots/cloud/add_apply4.jpg)
 
-8. 点击“确认”后，页面下发会出现多个开放能力，将“定位服务”、“位置服务”、“地图服务”和“推送服务”开放能力打开，再点击最下方的“确认”。
+8. 点击“确认”后，页面下发会出现多个API的开放能力，将“定位服务”、“位置服务”、“地图服务”和“推送服务”开放能力打开，再点击最下方的“确认”。
 
     ![image](screenshots/cloud/add_apply5.jpg)
 
@@ -77,7 +79,6 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
     HMOS世界暂未涉及自分类消息推送，点击弹窗“不在提醒”。
 
     ![image](screenshots/cloud/push_message2.jpg)
-
 
 至此，已完成HMOS世界AGC基本环境搭建。
 
@@ -106,37 +107,44 @@ HMOS世界端云一体化配置，需要修改客户端项目中的部分配置�
 ### 5.服务端项目配置
 
 HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)链接。操作步骤如下：
+
 1. 修改配置文件CloudProgram > cloud-config.json。
 
     修改cloud-config.json中的appId、projectId和teamId为[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)创建HMOS世界“项目设置”中的对应信息。
 
     ![image](screenshots/cloud/cloud_config.jpg)
 
-2. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“我的项目”，选择“云数据库”，点击“存储区”，点击“新增”，设置“存储区名称”为“HMOSWorld”，因为第3步上传的数据的存储区名称已经设置为“HMOSWorld”，所以此处不建议更为其他存储区名称。
+2. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，依次选择“我的项目” > “云数据库” > “存储区”，然后点击“新增”。在设置“存储区名称”时，请填写“HMOSWorld”。由于第3步上传的数据已关联此存储区名称，建议不要更改为其他名称。
 
     ![image](screenshots/cloud/clouddata1.jpg)
 
 3. 在项目中选中CloudProgram，右击选择Deploy Cloud Program，即可上传云数据库和云函数。
 
-    如果上传超时，请检查是否登录IDE；如果仍然上传超时或显示teamId报错，可重启IDE再次上传。
+    ![image](screenshots/cloud/cloudprogram.jpg)
 
-   ![image](screenshots/cloud/cloudprogram.jpg)
+    如果上传超时，请检查是否登录DevEco Studio；如果仍然上传超时或显示teamId报错，可重启DevEco Studio后再次上传。
 
-至此，已完成HMOS世界服务端适配，可以体验除消息推送、卡片推送和华为账号一键登录之外的所有基本功能。
+    ![image](screenshots/client/check_signature.jpg)
+
+4. 在DevEco Studio主菜单栏File > Project Structure > Project > Signing Configs窗口中，勾选“Automatically generate signature”，然后点击“Sign in”，登录华为账号后，点击“OK”，即可完成自动签名。
+
+    ![image](screenshots/client/auto_signature.jpg)
+
+至此，已完成HMOS世界服务端适配，可以体验除地图服务、消息推送和卡片推送之外的所有基本功能。
 
 ### 6.特殊功能配置
 
 #### 6.1手动签名
 
-在开启消息推送服务后，客户端工程需要手动签名保证保证消息推送和卡片推送可以正常使用，并且第6.4章华为账号一键登录也需要手动签名。步骤如下：
+在开启消息推送服务后，为确保地图服务、消息推送和卡片推送功能正常运行，客户端工程需进行手动签名。步骤如下：
 
 1. 生成密钥（.p12文件），详见[手动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-signing-V5#section297715173233)。
 
-    - 在DevEco Studio主菜单栏单击Build > Generate Key and CSR。单击Choose Existing选择已有的密钥库文件（存储有密钥的.p12文件）；如果没有密钥库文件，单击New进行创建。
+    - 在DevEco Studio主菜单栏点击Build > Generate Key and CSR。单击Choose Existing选择已有的密钥库文件（存储有密钥的.p12文件）；如果没有密钥库文件，单击New进行创建。
 
     ![image](screenshots/client/creat_key_store1.jpg)
 
-    - 在Create Key Store窗口中，选择并填入密钥（.p12文件）存储位置，建议选择客户端工程下的signature文件作为存储位置，以“signature\HMOSWorld.p12”为例，设置完Password后单击OK，请记住设置的Password，Password将被用于第7.5步完成手动签名。
+    - 在Create Key Store窗口中，选择并填入密钥（.p12文件）存储位置，建议在客户端工程（Application文件）下新建signature文件作为存储位置，以“signature\HMOSWorld.p12”为例，设置完Password后单击OK，请记住设置的Password，Password将被用于第5步完成手动签名。
 
     ![image](screenshots/client/creat_key_store2.jpg)
 
@@ -162,7 +170,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     ![image](screenshots/client/certificate2.jpg)
 
-    - 下载生成的发布证书（.cer文件），并存储在客户端工程下的signature文件下。
+    - 下载生成的发布证书（.cer文件），建议在客户端工程（Application文件）下新建signature文件作为存储位置。
 
 4. 使用发布证书（.cer文件）申请发布Profile（.p7b文件），详见[申请发布Profile](https://developer.huawei.com/consumer/cn/doc/app/agc-help-add-releaseprofile-0000001914714796)。
 
@@ -176,19 +184,19 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     ![image](screenshots/client/profile2.jpg)
 
-    - 下载生成的发布Profile（.p7b文件），并存储在客户端工程下的signature文件下。
+    - 下载生成的发布Profile（.p7b文件），建议在客户端工程（Application文件）下新建signature文件作为存储位置。
 
 5. 使用密钥（.p12文件），发布证书（.cer文件）和Profile（.p7b文件）完成手动签名，建议将全部文件放于客户端代码中的signature文件，详见[手动配置签名信息](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-signing-V5#section112371245115818)。
  
-    - 在DevEco Studio主菜单栏单击File > Project Structure > Project > Signing Configs窗口中，取消勾选“Automatically generate signature”，然后配置工程的签名信息。  
+    - 在DevEco Studio主菜单栏File > Project Structure > Project > Signing Configs窗口中，取消勾选“Automatically generate signature”，然后配置工程的签名信息。  
     
     ![image](screenshots/client/signature.jpg)
 
-6. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“我的项目”，选择“项目设置”中的“常规”，并点击下载“agconnect-services.json”，存放在掉客户端工程products > phone > src > main > resources > rawfile，替换掉第4章第4步创建的agconnect-services.json文件。
+#### 6.2地图服务
 
-   ![image](screenshots/client/agconnect_services.jpg)
+1. 地图服务功能在完成手动签名后即可体验，无其他配置。
 
-#### 6.2消息推送
+#### 6.3消息推送
 
 1. 请确保先执行第3章第11步，在[AGC平台]开启消息推送服务，再执行第6.1章手动签名。
 
@@ -222,7 +230,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 7. 至此，已完成HMOS世界消息推送功能实现。
 
-#### 6.3卡片推送
+#### 6.4卡片推送
 
 1. 请确保先执行第3章第11步，在[AGC平台]开启消息推送服务，再执行第6.1章手动签名。
 
@@ -230,11 +238,11 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
    
     ![image](screenshots/cloud/push_data1.jpg)
 
-3. 在项目中选中CloudProgram > cloudfunctions > push-data，右击选择Deploy ‘push-message’，即可上传更改后的push-data云函数。
+3. 在项目中选中CloudProgram > cloudfunctions > push-data，右击选择Deploy ‘push-data’，即可上传更改后的push-data云函数。
 
     ![image](screenshots/cloud/push_data2.jpg)
 
-4. 如果您未进行6.1消息推送功能的实现，需再完成第6.1章第1和6-8步，如果您已完成，请忽略。
+4. 如果您尚未实现6.1章节中的消息推送功能，请完成第6.1章的第1步及第6至8步；若已完成，则可跳过此步骤。
 
 5. 在手机桌面长按HMOS世界图标创建卡片。
 
@@ -246,14 +254,6 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 7. 至此，已完成HMOS世界卡片推送功能实现。
 
-#### 6.4华为账号一键登录
-
-1. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“项目设置”，并点击“添加公钥指纹 (HarmonyOS API 9及以上)”，选择在第6.1章申请的调试证书“HMOSWorld”，如果您未完成手动签名，请查看第6.1章第7步完成手动签名，如果已完成，请忽略。
-
-    ![image](screenshots/cloud/fingerprint.jpg)
-
-2. 申请配置scope权限，详见[配置scope权限](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V13/account-config-permissions-V13)。
-
 ### 7.FAQ
 
 #### 7.1完成第6.1章所述配置后，仍无法实现消息推送功能？
@@ -262,5 +262,4 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 ![image](screenshots/cloud/FAQ_push_message.jpg)
 
-如果成功上传用户的Push Token仍然推送消息失败，可检查是否正确执行第6.2章第3步，**请格外注意替换“PRIVATE_KEY”时，粘贴完整的“private_key”，并注意粘贴后秘钥中所有的“\n”均为“\n”，而不是“\\n”**。
-
+如果成功上传用户的Push Token仍然推送消息失败，可检查是否正确执行第6.2章第3步，请格外注意替换“PRIVATE_KEY”时，粘贴完整的“private_key”，并注意粘贴后秘钥中所有的“\n”均为“\n”，而不是“\\n”。
