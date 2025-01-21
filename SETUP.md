@@ -201,7 +201,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 1. 请确保先执行第3章第11步，在[AGC平台]开启消息推送服务，再执行第6.1章手动签名。
 
-2. 登录[华为开发者联盟管理中心](https://developer.huawei.com/consumer/cn/console)，点击“凭证”，点击“服务账号密码”的“创建凭证”。进入创建服务账号秘钥后，“名称”填写“HMOSWorld”，点击“生成公私钥”，待生成秘钥后点击“创建并下载JSON”，此秘钥尽可下载一次，下载后请妥善保存。
+2. 登录[华为开发者联盟管理中心](https://developer.huawei.com/consumer/cn/console)，点击“凭证”，点击“服务账号秘钥”的“创建凭证”。进入创建服务账号秘钥后，“名称”填写“HMOSWorld”，点击“生成公私钥”，待生成秘钥后点击“创建并下载JSON”，此秘钥尽可下载一次，下载后请妥善保存。
  
     ![image](screenshots/client/developer1.jpg)
 
