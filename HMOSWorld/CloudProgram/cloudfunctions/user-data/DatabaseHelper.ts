@@ -48,7 +48,7 @@ export class DatabaseHelper {
           user.getPortrait(),
           user.getDescription(),
           user.getNickname(),
-          user.getUsertype(),
+          user.getUser_type(),
           likedIds,
           collectedIds);
       } else {

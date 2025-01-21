@@ -19,7 +19,7 @@ class user {
         fieldTypeMap.set('id', 'String');
         fieldTypeMap.set('username', 'String');
         fieldTypeMap.set('password', 'String');
-        fieldTypeMap.set('portrait', 'String');
+        fieldTypeMap.set('portrait', 'Text');
         fieldTypeMap.set('description', 'String');
         fieldTypeMap.set('phone', 'String');
         fieldTypeMap.set('nickname', 'String');
@@ -27,7 +27,7 @@ class user {
         fieldTypeMap.set('access_token', 'String');
         fieldTypeMap.set('refresh_token', 'String');
         fieldTypeMap.set('email', 'String');
-        fieldTypeMap.set('usertype', 'String');
+        fieldTypeMap.set('user_type', 'Integer');
         return fieldTypeMap;
     }
 
@@ -139,12 +139,12 @@ class user {
         return this.email;
     }
 
-    setUsertype(usertype) {
-        this.usertype = usertype;
+    setUser_type(user_type) {
+        this.user_type = user_type;
     }
 
-    getUsertype() {
-        return this.usertype;
+    getUser_type() {
+        return this.user_type;
     }
 }
 
