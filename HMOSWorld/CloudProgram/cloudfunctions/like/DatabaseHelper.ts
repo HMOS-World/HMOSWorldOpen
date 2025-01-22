@@ -41,7 +41,7 @@ export class DatabaseHelper {
       return resp;
     }
     catch (error) {
-      this.logger.error(`[like] insert like error: ${error}`);
+      this.logger.error(`[like] insert like error: ${JSON.stringify(error)}`);
       return -1;
     }
   }
@@ -54,7 +54,7 @@ export class DatabaseHelper {
       this.updateLikeCount(resourceId, -1)
       return resp2;
     } catch (error) {
-      this.logger.error(`[like] delete like error: ${error}`);
+      this.logger.error(`[like] delete like error: ${JSON.stringify(error)}`);
       return -1;
     }
   }
@@ -70,7 +70,7 @@ export class DatabaseHelper {
       }
     }
     catch (error) {
-      this.logger.error(`[like] updateLikeCount error: ${error}`);
+      this.logger.error(`[like] updateLikeCount error: ${JSON.stringify(error)}`);
     }
   }
 }
