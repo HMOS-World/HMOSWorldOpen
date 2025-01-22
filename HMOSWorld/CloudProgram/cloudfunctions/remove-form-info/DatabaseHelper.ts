@@ -36,7 +36,7 @@ export class DatabaseHelper {
       formInfo.setToken(token)
       return await this.colFormInfo.delete(formInfo);
     } catch (error) {
-      this.logger.error(`[removeforminfo] removeFormInfo error: ${error}`);
+      this.logger.error(`[removeforminfo] removeFormInfo error: ${JSON.stringify(error)}`);
       return -1;
     }
   }

@@ -48,7 +48,7 @@ export class DatabaseHelper {
         }
       }, (err) => {
         if (err) {
-          this.logger.error(`[set-push-token] Upsert set-push-token async-lock error: ${err}`);
+          this.logger.error(`[set-push-token] Upsert set-push-token async-lock error: ${JSON.stringify(err)}`);
           reject(result);
         }
       }, null)
@@ -67,7 +67,7 @@ export class DatabaseHelper {
       return userPushToken
     }
     catch (error) {
-      this.logger.error(`[set-push-token] queryPushToken error: ${error}`);
+      this.logger.error(`[set-push-token] queryPushToken error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -81,7 +81,7 @@ export class DatabaseHelper {
       return await this.colUserPushToken.insert(userPushToken);
     }
     catch (error) {
-      this.logger.error(`[set-push-token] insert UserPushToken error: ${error}`);
+      this.logger.error(`[set-push-token] insert UserPushToken error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -93,7 +93,7 @@ export class DatabaseHelper {
       return await this.colUserPushToken.upsert(userPushToken);
     }
     catch (error) {
-      this.logger.error(`[set-push-token] update UserPushToken error: ${error}`);
+      this.logger.error(`[set-push-token] update UserPushToken error:${JSON.stringify(error)}`);
     }
   }
 }

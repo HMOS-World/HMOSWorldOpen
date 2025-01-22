@@ -62,7 +62,7 @@ export class DatabaseHelper {
       }
       return result;
     } catch (error) {
-      this.logger.info("query user error " + error);
+      this.logger.info(`query user error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -104,7 +104,7 @@ export class DatabaseHelper {
         form: JSON.stringify(postData),
         headers: headers
       }, function (err, httpResponse, body) {
-        logger2.info('sendMessage request======' + JSON.stringify(httpResponse));
+        logger2.info(`sendMessage request: ${JSON.stringify(httpResponse)}`);
         const result = JSON.parse(body);
         if (httpResponse.statusCode == 200 &&( result.code === "80000000"|| result.code === "80100000")) {
           logger2.info(`sendMessage success: ${JSON.stringify(body)}`);
@@ -128,7 +128,7 @@ export class DatabaseHelper {
       }
       return randomResource;
     } catch (error) {
-      this.logger.info("getRandomResource error " + error);
+      this.logger.info(`getRandomResource error ${JSON.stringify(error)}`);
     }
   }
 

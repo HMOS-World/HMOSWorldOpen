@@ -41,7 +41,7 @@ export class DatabaseHelper {
       aspectInfo.setCreateTime(new Date());
       return await this.colAspectInfo.upsert(aspectInfo);
     } catch (error) {
-      this.logger.error(`[upload-log] insert aspect info failed: ${error}`);
+      this.logger.error(`[upload-log] insert aspect info failed: ${JSON.stringify(error)}`);
       return -1;
     }
   }

@@ -39,7 +39,7 @@ export class DatabaseHelper {
       const topics: Topic[] = await this.queryTopic();
       return await this.queryResourceList(keyWords, topics);
     } catch (error) {
-      this.logger.error(`[resource-search] queryResource error: ${error}`);
+      this.logger.error(`[resource-search] queryResource error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -65,7 +65,7 @@ export class DatabaseHelper {
         return this.getResourceList(mergedAndUniqueArray, topics);
       }
     } catch (error) {
-      this.logger.error(`[resource-search] queryResourceList error: ${error}`);
+      this.logger.error(`[resource-search] queryResourceList error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -112,7 +112,7 @@ export class DatabaseHelper {
       }
       return resourceIds;
     } catch (error) {
-      this.logger.error(`[resource-search] queryFollowedTopicResourceIds error: ${error}`);
+      this.logger.error(`[resource-search] queryFollowedTopicResourceIds error: ${JSON.stringify(error)}`);
     }
   }
 
