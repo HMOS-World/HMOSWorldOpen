@@ -14,8 +14,9 @@
  */
 
 import { router } from '@kit.ArkUI';
-import { common, ConfigurationConstant } from '@kit.AbilityKit';
+import { abilityAccessCtrl, bundleManager, common, ConfigurationConstant, Permissions } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { notificationManager } from '@kit.NotificationKit';
 import { PreferenceManager } from '@ohos/datastore';
 import { DiscoverModel } from '@ohos/discover';
 import {
@@ -153,6 +154,32 @@ struct SplashPage {
     });
   }
 
+  async checkPermissions(): Promise<void> {
+    const permissions: Array<Permissions> = ["ohos.permission.DISTRIBUTED_DATASYNC"];
+    const accessManager = abilityAccessCtrl.createAtManager();
+    try {
+      const bundleFlags = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
+      const bundleInfo = await bundleManager.getBundleInfoForSelf(bundleFlags);
+      const grantStatus = await accessManager.checkAccessToken(bundleInfo.appInfo.accessTokenId, permissions[0]);
+      if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+        accessManager.requestPermissionsFromUser(getContext(this), permissions)
+      }
+    } catch (err) {
+      Logger.error('EntryAbility', 'checkPermissions', `Catch err: ${err}`);
+      return;
+    }
+  }
+
+  requestNotification() {
+    notificationManager.requestEnableNotification(getContext(this) as common.UIAbilityContext).then(() => {
+      Logger.info('requestEnableNotification success');
+      this.checkPermissions();
+    }).catch((err: BusinessError) => {
+      this.checkPermissions();
+      Logger.error(`requestEnableNotification fail: ${JSON.stringify(err)}`);
+    });
+  }
+
   jump(): void {
     let bundleName = (getContext(this) as common.UIAbilityContext).applicationInfo.name;
     if (!this.loggedIn) {
@@ -191,6 +218,7 @@ struct SplashPage {
         this.firstStart = false;
       } else {
         Logger.info(TAG, 'First startup.');
+        this.requestNotification();
         this.userModel.savePushToken();
         this.preferenceManager.setValue('isFirstStart', false).then(() => {
           Logger.info(TAG, 'Put the value of startup Successfully.');
