@@ -76,6 +76,6 @@ HarmonyOS的分层架构主要包括三个层次：产品定制层、基础特�
 ### 约束与限制
 
 1. 本示例仅支持标准系统上运行，支持设备：华为手机。
-2. HarmonyOS系统：HarmonyOS NEXT Developer Beta1及以上。
-3. DevEco Studio版本：DevEco Studio NEXT Developer Beta1及以上。
-4. HarmonyOS SDK版本：HarmonyOS NEXT Developer Beta1 SDK及以上。
+2. HarmonyOS系统：HarmonyOS 5.0.0 Release及以上。
+3. DevEco Studio版本：DevEco Studio 5.0.0 Release及以上。
+4. HarmonyOS SDK版本：HarmonyOS 5.0.0 Release SDK及以上。
