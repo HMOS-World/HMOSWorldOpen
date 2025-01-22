@@ -199,7 +199,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 #### 6.2消息推送
 
-1. 请确保先执行第3章第11步，在[AGC平台]开启消息推送服务，再执行第6.1章手动签名。
+1. 请确保先执行第3章第11步，在[AGC](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)开启消息推送服务，再执行第6.1章手动签名。
 
 2. 登录[华为开发者联盟管理中心](https://developer.huawei.com/consumer/cn/console)，点击“凭证”，点击“服务账号秘钥”的“创建凭证”。进入创建服务账号秘钥后，“名称”填写“HMOSWorld”，点击“生成公私钥”，待生成秘钥后点击“创建并下载JSON”，此秘钥尽可下载一次，下载后请妥善保存。
  
@@ -249,9 +249,19 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 6. 至此，已完成HMOS世界卡片推送功能实现。
 
-### 7.FAQ
+### 7.服务端日志查询
 
-#### 7.1完成消息推送所述配置后，仍无法实现消息推送功能？
+1. [AGC](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)平台提供了在线查询服务端日志的功能，您可以登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“我的项目”后，在左侧边栏选择“质量”下的“云监控”中的“日志服务”进行查看。
+
+    ![image](screenshots/cloud/log_ervice1.jpg)
+
+2. 如需查看特定云函数的日志，请点击“增加过滤条件”，依次选择“function_name” > “等于”，并输入目标云函数的名称。例如，若需查看云函数“push-message”的日志，请在输入框中填写“push-message”，如下图所示。
+
+    ![image](screenshots/cloud/log_ervice2.jpg)
+
+### 8.FAQ
+
+#### 8.1完成消息推送所述配置后，仍无法实现消息推送功能？
 
 请先排查是否成功上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)，登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“user_push_token”，点击“查询”。如果该表中存在数据，则证明端侧已经成功上传Push。如未成功上传Push Token，可重新安装HMOS世界应用，并选择同意用户协议，后台打开消息推送授权后，再等待几分钟再进行消息推送。
 
@@ -259,8 +269,8 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 如果成功上传用户的Push Token仍然推送消息失败，可检查是否正确执行第6.2章第3步，请格外注意替换“PRIVATE_KEY”时，粘贴完整的“private_key”，并注意粘贴后秘钥中所有的“\n”均为“\n”，而不是有两个“\”，或将秘钥值连带前后的双引号复制后替换[‘private_key’]。
 
-#### 7.2完成卡片推送所述配置后，仍无法实现卡片推送功能？
+#### 8.2完成卡片推送所述配置后，仍无法实现卡片推送功能？
 
-如果完成卡片推送所述配置后仍然推送卡片失败，可登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“form_info”点击“查询”。如果该表中存在数据，可点击“删除”后删除数据，再重新进行尝试。如仍然推送卡片失败可重新安装应用后，再重新进行尝试。
+如果完成卡片推送所述配置后仍然推送卡片失败，可登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“form_info”点击“查询”。如果该表中存在数据，可点击“删除”后删除数据，再删除桌面现有卡片后，重新添加卡片进行尝试。
 
 ![image](screenshots/cloud/FAQ_push_data.jpg)
