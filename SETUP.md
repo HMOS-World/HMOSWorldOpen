@@ -211,7 +211,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     其中替换“SEND_URL”时，请将字段中“project ID”部分替换为秘钥中的“project_id”。
 
-    其中替换“PRIVATE_KEY”时，请注意粘贴完整的“private_key”，并注意粘贴后秘钥中应为“\n”，而不是有两个“\”，或将秘钥值连带前后的双引号复制后替换“‘private_key’”。
+    其中替换“PRIVATE_KEY”时，请注意粘贴完整的“private_key”，并注意粘贴后秘钥中应为“\n”，而不是有两个“\”，或将秘钥值连带前后的双引号复制后替换[‘private_key’]。
 
     ![image](screenshots/cloud/push_message3.jpg)
 
