@@ -86,7 +86,7 @@ export class DatabaseHelper {
       }
       return resList;
     } catch (error) {
-      this.logger.error(`[push-data] queryResData error: ${error}`);
+      this.logger.error(`[push-data] queryResData error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -195,7 +195,7 @@ export class DatabaseHelper {
 
         await axios.post(api, params, config)
           .then(response => {
-            this.logger.info(`push-data success ${response}`);
+            this.logger.info(`push-data success: ${JSON.stringify(response)}`);
           })
           .catch(error => {
             this.logger.error(`[push-data] sendMessage error: ${JSON.stringify(error)}`);
@@ -203,7 +203,7 @@ export class DatabaseHelper {
       }
       this.logger.info(`[push-data] end post`);
     } catch (error) {
-      this.logger.error(`[push-data] pushData error=> ${error}`);
+      this.logger.error(`[push-data] pushData error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -213,7 +213,7 @@ export class DatabaseHelper {
       const formInfoData: FormInfo[] = await formInfoQuery.get();
       return formInfoData;
     } catch (error) {
-      this.logger.error(`[push-data] queryFormInfo error=> ${error}`);
+      this.logger.error(`[push-data] queryFormInfo error: ${JSON.stringify(error)}`);
       return undefined
     }
   }

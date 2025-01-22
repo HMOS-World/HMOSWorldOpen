@@ -43,7 +43,7 @@ export class DatabaseHelper {
       const topics: Topic[] = await this.queryTopic();
       return await this.queryResourceList(userId, type, pageNum, pageSize, topics);
     } catch (error) {
-      this.logger.error(`[resource-list] queryResource error: ${error}`);
+      this.logger.error(`[resource-list] queryResource error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -98,7 +98,7 @@ export class DatabaseHelper {
       return new ListResp(pageNum, pageSize, Math.ceil(totalCount / pageSize), totalCount,
         totalCount > pageNum * pageSize, resList);
     } catch (error) {
-      this.logger.error(`[resource-list] queryResource error: ${error}`);
+      this.logger.error(`[resource-list] queryResource error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -140,7 +140,7 @@ export class DatabaseHelper {
       }
       return resourceIds;
     } catch (error) {
-      this.logger.error(`[resource-list] queryFollowedTopicResourceIds error: ${error}`);
+      this.logger.error(`[resource-list] queryFollowedTopicResourceIds error: ${JSON.stringify(error)}`);
     }
   }
 }

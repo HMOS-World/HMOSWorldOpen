@@ -37,7 +37,7 @@ export class DatabaseHelper {
       const resList: ResourceResp[] = await this.queryResourceList(topics);
       return resList;
     } catch (error) {
-      this.logger.error(`[resource-hot] queryHotResource error: ${error}`);
+      this.logger.error(`[resource-hot] queryHotResource error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -72,7 +72,7 @@ export class DatabaseHelper {
       }
       return resList;
     } catch (error) {
-      this.logger.error(`[resource-hot] queryResourceList error: ${error}`);
+      this.logger.error(`[resource-hot] queryResourceList error: ${JSON.stringify(error)}`);
     }
   }
 

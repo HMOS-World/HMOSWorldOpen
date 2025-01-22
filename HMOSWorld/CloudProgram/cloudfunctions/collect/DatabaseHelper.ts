@@ -42,7 +42,7 @@ export class DatabaseHelper {
     try {
       const collectQuery: CloudDBZoneQuery<Collect> = this.colCollect.query().orderByDesc("collect_time").equalTo('user_id', userId);
       const collectData: Collect[] = await collectQuery.get();
-      this.logger.info(`[collect] collectQuery success collectData=>', ${collectData}`);
+      this.logger.info(`[collect] collectQuery success collectData=>', ${JSON.stringify(collectData)}`);
       if (collectData.length <= 0) {
         return resList;
       }
@@ -88,7 +88,7 @@ export class DatabaseHelper {
       }
       return resList;
     } catch (error) {
-      this.logger.error(`[collect] query resource error ${error}`);
+      this.logger.error(`[collect] query resource error ${JSON.stringify(error)}`);
     }
   }
 
@@ -103,7 +103,7 @@ export class DatabaseHelper {
       }
       return likedIds;
     } catch (error) {
-      this.logger.error(`[collect] queryLikedIds error ${error}`);
+      this.logger.error(`[collect] queryLikedIds error ${JSON.stringify(error)}`);
     }
   }
 
@@ -118,7 +118,7 @@ export class DatabaseHelper {
       }
       return collectedIds;
     } catch (error) {
-      this.logger.error(`[collect] queryCollectedIds error ${error}`);
+      this.logger.error(`[collect] queryCollectedIds error ${JSON.stringify(error)}`);
     }
   }
 

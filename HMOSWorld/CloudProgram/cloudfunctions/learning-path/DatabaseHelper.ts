@@ -56,7 +56,7 @@ export class DatabaseHelper {
       }
       return pathList;
     } catch (error) {
-      this.logger.error(`[learning-path] queryLearningPath error: ${error}`);
+      this.logger.error(`[learning-path] queryLearningPath error: ${JSON.stringify(error)}`);
     }
   }
 
@@ -71,7 +71,7 @@ export class DatabaseHelper {
       }
       return learnedPathIds;
     } catch (error) {
-      this.logger.error(`[learning-path] queryLearnedPathIds error: ${error}`);
+      this.logger.error(`[learning-path] queryLearnedPathIds error: ${JSON.stringify(error)}`);
     }
   }
 }
