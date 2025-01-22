@@ -245,8 +245,6 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 5. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云函数”，选择“push-data”，点击“操作”中的的测试，然后点击“测试函数”中的“测试”，即可推送卡片。在完成卡片推送后，您可以看到手机桌面上HMOS世界卡片内容发生变化。
 
-    如果显示推送卡片失败，可退出应用进程后，再次打开应用，因为应用打开时会上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)用于推送，此时再等待几分钟，确保Push Token上传成功后，可再次尝试。
- 
     ![image](screenshots/cloud/push_data3.jpg)
 
 6. 至此，已完成HMOS世界卡片推送功能实现。
