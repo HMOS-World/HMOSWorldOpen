@@ -8,7 +8,7 @@ HMOS世界涉及端云一体化开发，[开源代码](https://github.com/HMOS-W
 
 1. 注册华为账号
 
-   HMOS世界端云一体化搭建依托于[AppGallery Connect（AGC）](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)平台，使用AGC平台需要前往[华为开发者联盟官网](https://developer.huawei.com/consumer/cn/)进行华为账号注册，具体请参见[注册账号](https://developer.huawei.com/consumer/cn/doc/start/registration-and-verification-0000001053628148)。如果您已经拥有华为账号，可跳过本步骤。
+   HMOS世界端云一体化搭建依托于[AppGallery Connect（AGC）](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)平台，使用AGC平台需要前往[华为开发者联盟官网](https://developer.huawei.com/consumer/cn/)进行华为账号注册，并完成实名认证，具体请参见[注册账号](https://developer.huawei.com/consumer/cn/doc/start/registration-and-verification-0000001053628148)。如果您已经拥有华为账号，并已完成实名认证，可跳过本步骤。
 
 2. 项目打开
 
@@ -56,7 +56,7 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
 
     ![image](screenshots/cloud/add_apply4.jpg)
 
-8. 点击“确认”后，页面下发会出现多个API的开放能力，将“定位服务”、“位置服务”、“地图服务”和“推送服务”开放能力打开，再点击最下方的“确认”。
+8. 点击“确认”后，页面下会出现多个API的开放能力，将“定位服务”、“位置服务”、“地图服务”和“推送服务”开放能力打开，再点击最下方的“确认”。
 
     ![image](screenshots/cloud/add_apply5.jpg)
 
@@ -100,7 +100,11 @@ HMOS世界端云一体化配置，需要修改客户端项目中的部分配置�
 
 4. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“我的项目”，选择“项目设置”中的“常规”，并点击下载“agconnect-services.json”，存放在掉客户端工程products > phone > src > main > resources > rawfile下。
 
-    ![image](screenshots/client/agconnect_services.jpg) 
+    ![image](screenshots/client/agconnect_services.jpg)
+
+5. 在DevEco Studio主菜单栏File > Project Structure > Project > Signing Configs窗口中，勾选“Automatically generate signature”，然后点击“Sign in”，登录华为账号后，点击“OK”，即可完成自动签名。
+
+   ![image](screenshots/client/auto_signature.jpg)
 
 至此，已完成HMOS世界客户端适配。
 
@@ -126,17 +130,13 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
     ![image](screenshots/client/check_signature.jpg)
 
-4. 在DevEco Studio主菜单栏File > Project Structure > Project > Signing Configs窗口中，勾选“Automatically generate signature”，然后点击“Sign in”，登录华为账号后，点击“OK”，即可完成自动签名。
-
-    ![image](screenshots/client/auto_signature.jpg)
-
 至此，已完成HMOS世界服务端适配，可以体验除地图服务、华为账号登录、消息推送和卡片推送之外的所有基本功能。
 
 ### 6.特殊功能配置
 
 #### 6.1手动签名
 
-在开启消息推送服务后，为确保地图服务、华为账号登录、消息推送和卡片推送功能正常运行，客户端工程需进行手动签名。地图服务和华为账号登录在完成手动签名后重新卸载安装应用即可使用。步骤如下：
+在开启消息推送服务和地图服务后，为确保地图服务、华为账号登录、消息推送和卡片推送功能正常运行，客户端工程需进行手动签名。地图服务和华为账号登录在完成手动签名后重新卸载安装应用即可使用。步骤如下：
 
 1. 生成密钥（.p12文件），详见[手动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-signing-V5#section297715173233)。
 
@@ -225,8 +225,6 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
  
 6. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云函数”，选择“push-message”，点击“操作”中的的测试，然后点击“测试函数”中的“测试”，即可推送消息。在完成消息推送后，您可以在手机通知栏中看到HMOS世界的推送消息。
 
-    如果显示推送消息失败，可退出应用进程后，再次打开应用，因为应用打开时会上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)用于推送，此时再等待几分钟，确保Push Token上传成功后，可再次尝试。
-
     ![image](screenshots/cloud/push_message5.jpg)
 
 7. 至此，已完成HMOS世界消息推送功能实现。
@@ -257,7 +255,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 #### 7.1完成消息推送所述配置后，仍无法实现消息推送功能？
 
-请先排查是否成功上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)，登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“user_push_token”，点击“查询”。如果该表中存在数据，则证明端侧已经成功上传Push。如未成功可多次关闭启动应用，如仍未成功，可重新安装HMOS世界应用，并选择同意用户协议，后台打开消息推送授权后，再次关闭启动应用并等待几分钟。
+请先排查是否成功上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)，登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“user_push_token”，点击“查询”。如果该表中存在数据，则证明端侧已经成功上传Push。如未成功上传Push Token，可重新安装HMOS世界应用，并选择同意用户协议，后台打开消息推送授权后，再等待几分钟再进行消息推送。
 
 ![image](screenshots/cloud/FAQ_push_message.jpg)
 
@@ -265,10 +263,6 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 #### 7.2完成卡片推送所述配置后，仍无法实现卡片推送功能？
 
-请先排查是否成功上传用户的[Push Token](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-get-token-V5)，登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“user_push_token”，点击“查询”。如果该表中存在数据，则证明端侧已经成功上传Push。如未成功可多次关闭启动应用，如仍未成功，可重新安装HMOS世界应用，并选择同意用户协议，后台打开消息推送授权后，再次关闭启动应用并等待几分钟。
-
-![image](screenshots/cloud/FAQ_push_message.jpg)
-
-如果成功上传用户的Push Token仍然推送消息失败，可登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“form_info”点击“查询”。如果该表中存在数据，可点击“删除”后删除数据，再重新进行尝试。
+如果完成卡片推送所述配置后仍然推送卡片失败，可登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“form_info”点击“查询”。如果该表中存在数据，可点击“删除”后删除数据，再重新进行尝试。如仍然推送卡片失败可重新安装应用后，再重新进行尝试。
 
 ![image](screenshots/cloud/FAQ_push_data.jpg)
