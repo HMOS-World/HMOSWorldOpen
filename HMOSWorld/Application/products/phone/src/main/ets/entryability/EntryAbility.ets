@@ -13,26 +13,16 @@
  * limitations under the License.
  */
 
-import {
-  abilityAccessCtrl,
-  AbilityConstant,
-  bundleManager,
-  common,
-  Permissions,
-  UIAbility,
-  Want
-} from '@kit.AbilityKit';
+import { AbilityConstant, common, UIAbility, Want } from '@kit.AbilityKit';
 import { buffer } from '@kit.ArkTS';
 import { webview } from '@kit.ArkWeb';
 import { window } from '@kit.ArkUI';
-import { BusinessError } from '@kit.BasicServicesKit';
 import { formInfo } from '@kit.FormKit';
-import { notificationManager } from '@kit.NotificationKit';
 import { initialize } from '@hw-agconnect/hmcore';
+import { IndexAspect } from '@ohos/aspect';
 import { AudioRenderService, SpeechPlayerService } from '@ohos/audioplayer';
 import { CData, ContinueModel, GlobalContext, Logger, WindowUtil } from '@ohos/utils';
 import { AppConstants } from '../constants/AppConstants';
-import { IndexAspect } from '@ohos/aspect';
 
 const TAG = '[EntryAbility]';
 let localStorage: LocalStorage = new LocalStorage();
@@ -43,22 +33,12 @@ export default class EntryAbility extends UIAbility {
     this.initAgc();
     this.handleParams(want);
     this.restoringData(want, launchParam);
-    this.requestNotification();
     this.initWebEngine();
     AppStorage.setOrCreate('systemColorMode', this.context.config.colorMode);
     this.onConfigurationUpdate(this.context.config);
     WindowUtil.setMissionContinueActive(this.context, false);
   }
 
-  requestNotification() {
-    notificationManager.requestEnableNotification(this.context).then(() => {
-      Logger.info('requestEnableNotification success');
-      this.checkPermissions();
-    }).catch((err: BusinessError) => {
-      this.checkPermissions();
-      Logger.error(`requestEnableNotification fail: ${JSON.stringify(err)}`);
-    });
-  }
 
   handleParams(want: Want): void {
     // Parameters for updating cards and pushing messages
@@ -95,7 +75,7 @@ export default class EntryAbility extends UIAbility {
     AppStorage.setOrCreate<window.WindowStage>('windowStage', windowStage);
     AppStorage.setOrCreate<common.UIAbilityContext>('uiAbilityContext', this.context);
     WindowUtil.requestFullScreen(windowStage, this.context);
-    windowStage.loadContent('pages/SplashPage', localStorage,()=>{
+    windowStage.loadContent('pages/SplashPage', localStorage, () => {
       IndexAspect.initAspect();
     });
   }
@@ -126,22 +106,6 @@ export default class EntryAbility extends UIAbility {
   onBackground(): void {
     // Ability has back to background.
     Logger.info(TAG, 'Ability onBackground');
-  }
-
-  async checkPermissions(): Promise<void> {
-    const permissions: Array<Permissions> = ["ohos.permission.DISTRIBUTED_DATASYNC"];
-    const accessManager = abilityAccessCtrl.createAtManager();
-    try {
-      const bundleFlags = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
-      const bundleInfo = await bundleManager.getBundleInfoForSelf(bundleFlags);
-      const grantStatus = await accessManager.checkAccessToken(bundleInfo.appInfo.accessTokenId, permissions[0]);
-      if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
-        accessManager.requestPermissionsFromUser(this.context, permissions)
-      }
-    } catch (err) {
-      Logger.error('EntryAbility', 'checkPermissions', `Catch err: ${err}`);
-      return;
-    }
   }
 
   onContinue(wantParam: Record<string, Object>): AbilityConstant.OnContinueResult {
