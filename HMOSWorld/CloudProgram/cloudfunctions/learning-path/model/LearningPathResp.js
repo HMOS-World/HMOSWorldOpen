@@ -14,7 +14,7 @@
  */
 
 class LearningPathResp {
-    constructor(id, tag, title, zone, url,brief, isLearned) {
+    constructor(id, tag, title, zone, url, brief, isLearned) {
         this.id = id;
         this.tag = tag;
         this.title = title;
@@ -25,4 +25,4 @@ class LearningPathResp {
     }
 }
 
-module.exports = { LearningPathResp }
+module.exports = { LearningPathResp };

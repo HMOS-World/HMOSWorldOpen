@@ -18,7 +18,7 @@ import { comment as Comment } from './model/comment';
 import { CommentResp } from './model/CommentResp';
 import { ListResp } from './model/ListResp';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;

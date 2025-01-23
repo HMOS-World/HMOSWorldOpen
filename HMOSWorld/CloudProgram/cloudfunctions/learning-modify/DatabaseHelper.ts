@@ -16,7 +16,7 @@
 import { cloud, CloudDBCollection} from '@hw-agconnect/cloud-server';
 import { user_learning as UserLearning } from './model/user_learning';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -31,14 +31,14 @@ export class DatabaseHelper {
     try {
       const userLearningObj: UserLearning = new UserLearning();
       userLearningObj.setPath_id(pathId);
-      userLearningObj.setUser_id(userId)
-      userLearningObj.setLearned_time(new Date())
-      userLearningObj.setId(userId + pathId)
+      userLearningObj.setUser_id(userId);
+      userLearningObj.setLearned_time(new Date());
+      userLearningObj.setId(userId + pathId);
       return await this.colUserLearning.upsert(userLearningObj);
     }
     catch (error) {
       this.logger.error(`[learning-modify] insertUserLearning error: ${JSON.stringify(error)}`);
-      return -1
+      return -1;
     }
   }
 }

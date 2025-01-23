@@ -18,7 +18,7 @@ import { learning_path as LearningPath} from './model/learning_path';
 import { LearningPathResp } from './model/LearningPathResp.js';
 import { user_learning as UserLearning} from './model/user_learning.js';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -51,7 +51,7 @@ export class DatabaseHelper {
             dataQ.getUrl(),
             dataQ.getBrief(),
             learnedPathIds.indexOf(dataQ.getId()) !== -1,
-          ))
+          ));
         }
       }
       return pathList;

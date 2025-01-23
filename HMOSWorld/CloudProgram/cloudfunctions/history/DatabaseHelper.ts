@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
-import { collect as Collect} from './model/collect';
-import { resource as Resource} from './model/resource';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { collect as Collect } from './model/collect';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
-import { topic as Topic} from './model/topic';
-import { user_history as UserHistory} from './model/user_history';
-import { user_like as UserLike} from './model/user_like';
+import { topic as Topic } from './model/topic';
+import { user_history as UserHistory } from './model/user_history';
+import { user_like as UserLike } from './model/user_like';
 
 const ZONE_NAME = 'HMOSWorld';
 
@@ -33,17 +33,18 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colCollect = cloud.database({zoneName: ZONE_NAME}).collection(Collect);
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colTopic = cloud.database({zoneName: ZONE_NAME}).collection(Topic);
-    this.colUserHistory = cloud.database({zoneName: ZONE_NAME}).collection(UserHistory);
-    this.colUserLike = cloud.database({zoneName: ZONE_NAME}).collection(UserLike);
+    this.colCollect = cloud.database({ zoneName: ZONE_NAME }).collection(Collect);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colTopic = cloud.database({ zoneName: ZONE_NAME }).collection(Topic);
+    this.colUserHistory = cloud.database({ zoneName: ZONE_NAME }).collection(UserHistory);
+    this.colUserLike = cloud.database({ zoneName: ZONE_NAME }).collection(UserLike);
   }
 
   async queryResource(userId: string): Promise<ResourceResp[]> {
     const resList: ResourceResp[] = [];
     try {
-      const historyQuery: CloudDBZoneQuery<UserHistory> = this.colUserHistory.query().orderByDesc("browse_time").equalTo('user_id', userId);
+      const historyQuery: CloudDBZoneQuery<UserHistory> =
+        this.colUserHistory.query().orderByDesc("browse_time").equalTo('user_id', userId);
       const historyData: UserHistory[] = await historyQuery.get();
       if (historyData.length <= 0) {
         return resList;

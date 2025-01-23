@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server'
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import { HomeResp } from './model/HomeResp';
 import { ListResp } from './model/ListResp';
-import { resource as Resource} from './model/resource';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
-import { topic as Topic} from './model/topic';
-import { topic_resource as TopicResource} from './model/topic_resource';
-import { user_topic as UserTopic} from './model/user_topic';
+import { topic as Topic } from './model/topic';
+import { topic_resource as TopicResource } from './model/topic_resource';
+import { user_topic as UserTopic } from './model/user_topic';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -33,10 +33,10 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colTopic = cloud.database({zoneName: ZONE_NAME}).collection(Topic);
-    this.colTopicResource = cloud.database({zoneName: ZONE_NAME}).collection(TopicResource);
-    this.colUserTopic = cloud.database({zoneName: ZONE_NAME}).collection(UserTopic);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colTopic = cloud.database({ zoneName: ZONE_NAME }).collection(Topic);
+    this.colTopicResource = cloud.database({ zoneName: ZONE_NAME }).collection(TopicResource);
+    this.colUserTopic = cloud.database({ zoneName: ZONE_NAME }).collection(UserTopic);
   }
 
   async queryResource(userId: string): Promise<HomeResp> {
@@ -45,7 +45,7 @@ export class DatabaseHelper {
       const feedList: ListResp = await this.queryResourceByePage(userId, "feed", topics);
       const article: ListResp = await this.queryResourceByePage(userId, "article", topics);
       const bannerList: ResourceResp[] = await this.queryBannerResource(topics);
-      return new HomeResp(bannerList, feedList, article)
+      return new HomeResp(bannerList, feedList, article);
     } catch (error) {
       this.logger.error(`[home-resource] query resource error: ${JSON.stringify(error)}`);
     }
@@ -65,7 +65,7 @@ export class DatabaseHelper {
     try {
       const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query().equalTo('tag', 2);
       const resourceData: Resource[] = await resourceQuery.get();
-      return this.getResourceList(resourceData, topics)
+      return this.getResourceList(resourceData, topics);
     } catch (error) {
       this.logger.error(`[home-resource] queryBannerResource error: ${JSON.stringify(error)}`);
     }
@@ -92,8 +92,8 @@ export class DatabaseHelper {
         dataQ.getMedia_src(),
         null, // isLiked
         null, // isCollected
-        null // isViewed
-      ))
+        null// isViewed
+      ));
     }
     return resList;
   }
@@ -130,12 +130,12 @@ export class DatabaseHelper {
   }
 
   getTopicNames(topics: Topic[], tidStr: string): string[] {
-    const topicNames = []
+    const topicNames = [];
     const topicIds: string[] = tidStr.split(',');
     for (let index = 0; index < topicIds.length; index++) {
       const tid = topicIds[index];
       const name: Topic[] = topics.filter(tp => tp.getId() === tid);
-      topicNames.push(name[0].getName())
+      topicNames.push(name[0].getName());
     }
     return topicNames;
   }
