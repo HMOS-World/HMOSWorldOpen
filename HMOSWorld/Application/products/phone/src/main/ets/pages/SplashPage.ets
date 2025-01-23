@@ -236,11 +236,8 @@ struct SplashPage {
       Stack({ alignContent: Alignment.Bottom }) {
         Swiper(this.swiperController) {
           LazyForEach(this.data, (item: Resource) => {
-            Image(item)
-              .width(CommonConstants.FULL_PERCENT)
-              .height(CommonConstants.FULL_PERCENT)
-              .objectFit(ImageFit.Cover)
-          })
+            ImgItem({ item })
+          }, (item: Resource) => item.id.toString())
         }
         .cachedCount(this.data.totalCount() - 1)
         .visibility(this.showSwiper ? Visibility.Visible : Visibility.Hidden)
@@ -262,6 +259,9 @@ struct SplashPage {
         } : false)
         .onChange((index: number) => {
           this.current_swiper.index = index;
+        })
+        .onAnimationStart(() => {
+          Logger.info(TAG, 'Swiper animation start.');
         })
         .curve(Curve.Linear)
 
@@ -345,5 +345,18 @@ struct SplashPage {
     }
     .height(CommonConstants.FULL_PERCENT)
     .width(CommonConstants.FULL_PERCENT)
+  }
+}
+
+@Reusable
+@Component
+struct ImgItem {
+  @Prop item: Resource;
+
+  build() {
+    Image(this.item)
+      .width(CommonConstants.FULL_PERCENT)
+      .height(CommonConstants.FULL_PERCENT)
+      .objectFit(ImageFit.Cover)
   }
 }

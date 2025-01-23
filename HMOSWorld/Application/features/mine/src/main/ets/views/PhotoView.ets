@@ -80,6 +80,7 @@ export struct PhotoView {
       imageSource.createPixelMap().then((pixelMap) => {
         AppStorage.setOrCreate('profilePixelMap', pixelMap);
       })
+      imageSource.release();
     }
   }
 

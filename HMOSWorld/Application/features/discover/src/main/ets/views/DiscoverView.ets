@@ -373,6 +373,9 @@ struct HotFeeds {
           }).getValue(this.currentBreakpoint))
         }, (item: LearningResource) => item.id)
       }
+      .width('100%')
+      .height(undefined)
+      .cachedCount(10)
       .edgeEffect(EdgeEffect.None)
       .scrollBar(BarState.Off)
       .listDirection(Axis.Horizontal)
@@ -439,7 +442,7 @@ export struct TechArticles {
             }
           })
           .padding({ right: $r('app.float.md_padding_margin') })
-        }, (item: LearningResource, index: number) => JSON.stringify(item) + index)
+        }, (item: LearningResource, index: number) => index.toString() + item.id + item.isLiked + item.isCollected)
 
         if (this.discoverModel.loadingArticleStatus === LoadingStatus.LOADING) {
           ListItemGroup({ header: LoadingMore() }) {
@@ -450,6 +453,8 @@ export struct TechArticles {
           }
         }
       }
+      .width('100%')
+      .height(undefined)
       .layoutWeight(1)
       .scrollBar(BarState.Off)
       .nestedScroll({

@@ -58,7 +58,7 @@ export { BackgroundTaskManager } from './src/main/ets/utils/BackgroundTaskManage
 
 export { PermissionUtil } from './src/main/ets/utils/PermissionUtil';
 
-export * as WebUtil from './src/main/ets/utils/WebUtil';
+export { WebUtil, WebUrls } from './src/main/ets/utils/WebUtil';
 
 export { ImageUtil } from './src/main/ets/utils/ImageUtil';
 

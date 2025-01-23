@@ -63,7 +63,7 @@ export struct SearchHistory {
             }).getValue(this.currentBreakpoint)
           })
           .onClick(() => this.onClickText(item))
-        })
+        }, (item: string) => item)
       }
       .width(CommonConstants.FULL_PERCENT)
     }

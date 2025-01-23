@@ -178,6 +178,7 @@ struct ThemeConfigView {
           }
         }
         .width(CommonConstants.FULL_PERCENT)
+        .height(undefined)
         .layoutWeight(1)
       }
       .layoutWeight(1)

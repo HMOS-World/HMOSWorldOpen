@@ -125,52 +125,48 @@ export class MyNodeController extends NodeController {
   }
 }
 
-
-function createNWeb(url: string, uiContext?: UIContext) {
-  if (nodeMap.has(url)) {
-    return;
+export class WebUtil {
+  public static createNWeb(url: string, uiContext?: UIContext) {
+    if (nodeMap.has(url)) {
+      return;
+    }
+    if (!context && uiContext) {
+      context = uiContext;
+    }
+    let baseNode = new MyNodeController();
+    let controller = new webview.WebviewController();
+    baseNode.initWeb(url, context, controller);
+    // Save the controller of the web page to the map so that the controller can be used when the web page is returned.
+    controllerMap.set(url, controller)
+    nodeMap.set(url, baseNode);
   }
-  if (!context && uiContext) {
-    context = uiContext;
+
+  public static getNWeb = (url: string): MyNodeController | undefined => {
+    return nodeMap.get(url);
   }
-  let baseNode = new MyNodeController();
-  let controller = new webview.WebviewController();
-  baseNode.initWeb(url, context, controller);
-  // Save the controller of the web page to the map so that the controller can be used when the web page is returned.
-  controllerMap.set(url, controller)
-  nodeMap.set(url, baseNode);
+  public static getController = (url: string): WebviewController | undefined => {
+    return controllerMap.get(url);
+  }
+  public static setOnPageEndAction = (url: string, onPageEndAction: Function): void => {
+    onPageEndMap.set(url, onPageEndAction);
+  }
+  public static setOnProgressChangeAction = (url: string, onProgressChangeAction: Function): void => {
+    onProgressChangeMap.set(url, onProgressChangeAction);
+  }
+  public static setOnResourceLoadAction = (url: string, onResourceLoadAction: Function): void => {
+    onResourceLoadMap.set(url, onResourceLoadAction);
+  }
+  // Destruct the created node.
+  public static deleteNode = (url: string) => {
+    let nodeController = nodeMap.get(url);
+    nodeController?.disposeNode();
+    nodeMap.delete(url);
+    controllerMap.delete(url);
+    onPageEndMap.delete(url);
+  }
 }
 
-const getNWeb = (url: string): MyNodeController | undefined => {
-  return nodeMap.get(url);
-}
-
-const getController = (url: string): WebviewController | undefined => {
-  return controllerMap.get(url);
-}
-
-const setOnPageEndAction = (url: string, onPageEndAction: Function): void => {
-  onPageEndMap.set(url, onPageEndAction);
-}
-
-const setOnProgressChangeAction = (url: string, onProgressChangeAction: Function): void => {
-  onProgressChangeMap.set(url, onProgressChangeAction);
-}
-
-const setOnResourceLoadAction = (url: string, onResourceLoadAction: Function): void => {
-  onResourceLoadMap.set(url, onResourceLoadAction);
-}
-
-// Destruct the created node.
-export const deleteNode = (url: string) => {
-  let nodeController = nodeMap.get(url);
-  nodeController?.disposeNode();
-  nodeMap.delete(url);
-  controllerMap.delete(url);
-  onPageEndMap.delete(url);
-}
-
-class WebUrls {
+export class WebUrls {
   public static ACTIVITY_URL: string = 'https://developer.huawei.com/home/hdc/hdc2024.html';
   public static CHALLENGE_URL: string = 'https://developer.huawei.com/home/hdc/codelabs?type=subject002';
   public static LEARNING_P001: string =
@@ -190,13 +186,3 @@ class WebUrls {
   public static LEARNING_P008: string =
     'https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101717498132814493';
 }
-
-export {
-  createNWeb,
-  getNWeb,
-  WebUrls,
-  getController,
-  setOnPageEndAction,
-  setOnProgressChangeAction,
-  setOnResourceLoadAction
-};

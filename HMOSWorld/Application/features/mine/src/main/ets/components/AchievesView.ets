@@ -86,6 +86,7 @@ export struct AchievesView {
         lg: Constants.ACHIEVEMENT_LIST_LANES_LG
       }).getValue(this.currentBreakpoint))
       .width(CommonConstants.FULL_PERCENT)
+      .height(undefined)
       .edgeEffect(EdgeEffect.None)
       .scrollBar(BarState.Off)
       .bindContentCover(

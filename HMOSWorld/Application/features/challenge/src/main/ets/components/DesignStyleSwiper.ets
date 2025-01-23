@@ -73,7 +73,7 @@ export default struct DesignStyleSwiper {
     } else if (tempOffset === Const.HALF_COUNT) {
       offsetX = -Const.IMAGE_x_OFFSET_MIN * offsetIndex;
     }
-    let scale: number = 1;
+    let scale: number = 1.0;
     if (this.currentBreakpoint === BreakpointTypeEnum.MD) {
       scale = 1.2;
     } else if (this.currentBreakpoint === BreakpointTypeEnum.LG) {
@@ -120,7 +120,7 @@ export default struct DesignStyleSwiper {
             });
           })
         }
-      })
+      }, (item: ResourceStr, index: number) => index.toString())
     }
     .width(new BreakpointType<Length>({
       sm: Const.PERCENT_86,

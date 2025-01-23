@@ -85,6 +85,8 @@ struct WidgetCard {
           })
         }
       }
+      .width('100%')
+      .height(undefined)
       .listDirection(Axis.Vertical) // Arrange direction
       .scrollBar(BarState.Off)
       .divider({ strokeWidth: 1, color: $r('app.color.tab_border_color'), }) // The dividing line between each row

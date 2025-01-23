@@ -64,6 +64,7 @@ export struct ConfirmView {
       this.appPathStack.pop();
       Logger.error(TAG, `createPixelMap error: ${err}`)
     });
+    await imageSource.release();
   }
 
   checkBackAction(isCenter?: boolean) {
