@@ -23,7 +23,6 @@
 │     ├──clouddb（云数据库数据）
 │     └──cloudfunvtions（云函数）
 ├──README.md（HMOS世界项目介绍）
-├──README.en.md（HMOS世界项目英文介绍）
 ├──SETUP.md（HMOS世界端云一体化搭建指导文档）
 └──screenshots（README.md和SETUP.md图片资源文件）
   
