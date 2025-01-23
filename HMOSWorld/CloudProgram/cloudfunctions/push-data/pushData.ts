@@ -29,7 +29,7 @@ let myHandler = async function (_event, context, callback, logger) {
     if (formInfos !== undefined) {
       for (let index = 0; index < formInfos.length; index++) {
         databaseHelper.pushData(resultList, formInfos[index], credential, authorization).then(() => {
-        })
+        });
       }
       callback({
         code: 0,
@@ -47,6 +47,6 @@ let myHandler = async function (_event, context, callback, logger) {
       message: '[push-data] operation exception'
     });
   }
-};
+}
 
 export { myHandler };

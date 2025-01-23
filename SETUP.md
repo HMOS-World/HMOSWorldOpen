@@ -78,7 +78,7 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
 
     HMOS世界暂未涉及自分类消息推送，点击弹窗“不在提醒”。
 
-    ![image](screenshots/cloud/push_message2.jpg) 
+    ![image](screenshots/cloud/push_message2.jpg)
 
 至此，已完成HMOS世界AGC基本环境搭建。
 
@@ -278,7 +278,7 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 #### 8.2完成卡片推送所述配置后，仍无法实现卡片推送功能？
 
-1. 清楚“form_info”对象数据
+1. 清除“form_info”对象数据
 
     登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，选择“云数据库”，选择“数据”，存储区名称选择“HMOSWorld”，对象类型选择“form_info”点击“查询”。如果该表中存在数据，可点击“删除”后删除数据，再删除桌面现有卡片后，重新添加卡片进行尝试。
 

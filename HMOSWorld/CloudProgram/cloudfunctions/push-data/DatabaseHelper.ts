@@ -14,10 +14,10 @@
  */
 
 const axios = require('axios').default;
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import request from 'request';
 import { form_info as FormInfo } from './model/form_info';
-import { resource as Resource} from './model/resource';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
 
 const ZONE_NAME = 'HMOSWorld';
@@ -31,8 +31,8 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colFormInfo = cloud.database({zoneName: ZONE_NAME}).collection(FormInfo);
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
+    this.colFormInfo = cloud.database({ zoneName: ZONE_NAME }).collection(FormInfo);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
   }
 
   async getToken(): Promise<string> {
@@ -43,7 +43,7 @@ export class DatabaseHelper {
     };
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
-    }
+    };
     let logger2 = this.logger;
     const url = 'https://oauth-login.cloud.huawei.com/oauth2/v3/token';
     return new Promise((resolve, reject) => {
@@ -57,13 +57,13 @@ export class DatabaseHelper {
           const result = JSON.parse(body);
           logger2.info(`[push-data] getToken success:${JSON.stringify(body)}`);
           const tokenData = result.token_type + " " + result.access_token;
-          resolve(tokenData);;
+          resolve(tokenData);
         } else {
           logger2.error(`[push-data] getToken error:${JSON.stringify(err)}`);
           reject(err);
         }
       })
-    })
+    });
   }
 
   async queryResData(): Promise<ResourceResp[]> {
@@ -81,7 +81,7 @@ export class DatabaseHelper {
             dataQ.getBrief(),
             dataQ.getType(),
             dataQ.getHeader_src()
-          ))
+          ));
         }
       }
       return resList;
@@ -113,11 +113,11 @@ export class DatabaseHelper {
       const api: string = 'https://push-api.cloud.huawei.com/v2/' + credential.project_id + '/images:verify';
       const params = {
         "imageUrl": resData[index].headerImageUrl
-      }
+      };
 
       await axios.post(api, params, config)
         .then(response => {
-          resData[index].headerImageUrl = response.data.downloadUrl
+          resData[index].headerImageUrl = response.data.downloadUrl;
         })
         .catch(error => {
           this.logger.error(`[push-data] convertUrl error: ${JSON.stringify(error)}`);
@@ -136,41 +136,43 @@ export class DatabaseHelper {
       };
       const api: string = 'https://push-api.cloud.huawei.com/v3/' + credential.project_id + '/messages:send';
       const arr = [0, 1, 2, 3, 4];
-      arr.sort(function(){return Math.random() - 0.5})
+      arr.sort(function () {
+        return Math.random() - 0.5
+      });
       const data = [
         {
           card0: resData[arr[0]],
-        },{
-          card1: resData[arr[1]],
-        },{
-          card2: resData[arr[2]],
-        },{
-          card3: resData[arr[3]],
-        },{
-          card4: resData[arr[4]],
-        }]
+        }, {
+        card1: resData[arr[1]],
+      }, {
+        card2: resData[arr[2]],
+      }, {
+        card3: resData[arr[3]],
+      }, {
+        card4: resData[arr[4]],
+      }];
       const image_data = [
         {
           "keyName": "image0",
           "url": resData[arr[0]].headerImageUrl,
           "require": 0
-        },{
+        }, {
         "keyName": "image1",
         "url": resData[arr[1]].headerImageUrl,
         "require": 0
-      },{
+      }, {
         "keyName": "image2",
         "url": resData[arr[2]].headerImageUrl,
         "require": 0
-      },{
+      }, {
         "keyName": "image3",
         "url": resData[arr[3]].headerImageUrl,
         "require": 0
-      },{
+      }, {
         "keyName": "image4",
         "url": resData[arr[4]].headerImageUrl,
         "require": 0
-      }]
+      }];
       for (let index = 0; index < resData.length; index++) {
         const params = {
           "payload": {
@@ -191,7 +193,7 @@ export class DatabaseHelper {
           "target": {
             "token": [formInfo.getToken()]
           }
-        }
+        };
 
         await axios.post(api, params, config)
           .then(response => {
@@ -199,7 +201,7 @@ export class DatabaseHelper {
           })
           .catch(error => {
             this.logger.error(`[push-data] sendMessage error: ${JSON.stringify(error)}`);
-          })
+          });
       }
       this.logger.info(`[push-data] end post`);
     } catch (error) {
@@ -214,7 +216,7 @@ export class DatabaseHelper {
       return formInfoData;
     } catch (error) {
       this.logger.error(`[push-data] queryFormInfo error: ${JSON.stringify(error)}`);
-      return undefined
+      return undefined;
     }
   }
 }

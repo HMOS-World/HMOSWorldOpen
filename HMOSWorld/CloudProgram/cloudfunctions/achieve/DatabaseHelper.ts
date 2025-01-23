@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server'
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import { AchieveResp } from './model/AchieveResp';
 import { learning_path as LearningPath } from './model/learning_path';
 import { user_learning as UserLearning } from './model/user_learning';
