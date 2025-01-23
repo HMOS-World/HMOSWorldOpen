@@ -37,16 +37,17 @@ export class DatabaseHelper {
       const learningPathQuery: CloudDBZoneQuery<LearningPath> = this.colLearningPath.query().orderByAsc("id");
       const learningPathData: LearningPath[] = await learningPathQuery.get();
       this.logger.info(`[achieve] query learning path success. pathData=> ${learningPathData.length}`);
-      if (learningPathData.length > 0) {
-        const learnedPaths: UserLearning[] = await this.queryLearnedPaths(userId);
-        for (let i = 0; i < learningPathData.length; i++) {
-          let learningPath: LearningPath = learningPathData[i];
-          let top: UserLearning[] = learnedPaths.filter(tp => tp.getPath_id() === learningPath.getId());
-          if (top.length > 0) {
-            pathList.push(new AchieveResp(learningPath.getId(), true, top[0].getLearned_time()));
-          } else {
-            pathList.push(new AchieveResp(learningPath.getId(), false, null));
-          }
+      if (learningPathData.length <= 0) {
+        return pathList;
+      }
+      const learnedPaths: UserLearning[] = await this.queryLearnedPaths(userId);
+      for (let i = 0; i < learningPathData.length; i++) {
+        let learningPath: LearningPath = learningPathData[i];
+        let top: UserLearning[] = learnedPaths.filter(tp => tp.getPath_id() === learningPath.getId());
+        if (top.length > 0) {
+          pathList.push(new AchieveResp(learningPath.getId(), true, top[0].getLearned_time()));
+        } else {
+          pathList.push(new AchieveResp(learningPath.getId(), false, null));
         }
       }
       return pathList;

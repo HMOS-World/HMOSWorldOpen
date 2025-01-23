@@ -34,21 +34,21 @@ export class DatabaseHelper {
     return new Promise((resolve, reject) => {
       this.lock.acquire('set-push-token', async () => {
         let userPushToken: UserPushToken | undefined = await this.queryPushToken(deviceId);
-        if (userPushToken) {
-          if (pushToken === userPushToken.getPush_token()) {
-            result = 1;
-            resolve(result);
-          } else {
-            result = await this.updatePushToken(userId, userPushToken, pushToken);
-            resolve(result);
-          }
-        } else {
+        if (!userPushToken) {
           result = await this.createPushToken(userId, deviceId, pushToken);
+          resolve(result);
+          return;
+        }
+        if (pushToken === userPushToken.getPush_token()) {
+          result = 1;
+          resolve(result);
+        } else {
+          result = await this.updatePushToken(userId, userPushToken, pushToken);
           resolve(result);
         }
       }, (err) => {
         if (err) {
-          this.logger.error(`[set-push-token] Upsert set-push-token async-lock error: ${JSON.stringify(err)}`);
+          this.logger.error(`[set-push-token] set-push-token async-lock error: ${JSON.stringify(err)}`);
           reject(result);
         }
       }, null)

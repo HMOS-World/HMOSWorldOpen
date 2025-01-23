@@ -26,20 +26,21 @@ let myHandler = async function (_event, context, callback, logger) {
     const authorization: string = await databaseHelper.getToken();
     await databaseHelper.convertUrl(resultList, credential, authorization);
     const formInfos: FormInfo[] = await databaseHelper.queryFormInfo();
-    if (formInfos !== undefined) {
-      for (let index = 0; index < formInfos.length; index++) {
-        databaseHelper.pushData(resultList, formInfos[index], credential, authorization).then(() => {
-        });
-      }
+    if (formInfos === undefined) {
       callback({
-        code: 0,
-        message: '[push-data] operation successful'
+        code: 1,
+        message: '[push-data] operation failed'
+      });
+    }
+    for (let index = 0; index < formInfos.length; index++) {
+      databaseHelper.pushData(resultList, formInfos[index], credential, authorization).then(() => {
       });
     }
     callback({
-      code: 1,
-      message: '[push-data] operation failed'
+      code: 0,
+      message: '[push-data] operation successful'
     });
+
   } catch (err) {
     logger.error(`[push-message] func error: ${err.message}`);
     callback({
