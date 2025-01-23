@@ -36,4 +36,4 @@ class ResourceResp {
     }
 }
 
-module.exports = { ResourceResp }
+module.exports = { ResourceResp };
