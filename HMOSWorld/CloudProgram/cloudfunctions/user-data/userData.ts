@@ -29,7 +29,7 @@ let myHandler = async function (event, _context, callback, logger) {
 
   try {
     const databaseHelper: DatabaseHelper = new DatabaseHelper(logger);
-    const userData : UserDataResp = await databaseHelper.queryUser(userId);
+    const userData: UserDataResp = await databaseHelper.queryUser(userId);
     if (userData) {
       callback({
         code: 0,

@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
-import { resource as Resource} from './model/resource';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
-import { topic as Topic} from './model/topic';
+import { topic as Topic } from './model/topic';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -27,8 +27,8 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colTopic = cloud.database({zoneName: ZONE_NAME}).collection(Topic);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colTopic = cloud.database({ zoneName: ZONE_NAME }).collection(Topic);
   }
 
   async queryHotResource(): Promise<ResourceResp[]> {
@@ -66,8 +66,8 @@ export class DatabaseHelper {
             dataQ.getMedia_src(),
             null, // isLiked
             null, // isCollected
-            null // isViewed
-          ))
+            null// isViewed
+          ));
         }
       }
       return resList;
@@ -78,16 +78,16 @@ export class DatabaseHelper {
 
   async queryTopic(): Promise<Topic[]> {
     const cloudDBZoneQuery: CloudDBZoneQuery<Topic> = this.colTopic.query();
-    return await cloudDBZoneQuery.get();;
+    return await cloudDBZoneQuery.get();
   }
 
   getTopicNames(topics: Topic[], tidStr: string): string[] {
-    const topicNames: string[] = []
+    const topicNames: string[] = [];
     const topicIds: string[] = tidStr.split(',');
     for (let index = 0; index < topicIds.length; index++) {
       const tid: string = topicIds[index];
       const name: Topic[] = topics.filter(tp => tp.getId() === tid);
-      topicNames.push(name[0].getName())
+      topicNames.push(name[0].getName());
     }
     return topicNames;
   }

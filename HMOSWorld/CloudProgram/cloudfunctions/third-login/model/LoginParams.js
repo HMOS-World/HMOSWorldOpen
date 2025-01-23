@@ -24,4 +24,4 @@ class LoginParams {
     }
 }
 
-module.exports = { LoginParams }
+module.exports = { LoginParams };

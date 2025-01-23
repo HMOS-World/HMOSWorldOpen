@@ -13,17 +13,17 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import * as jsrsasign from 'jsrsasign';
 import request from 'request';
-import { resource as Resource} from './model/resource';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
-import { user_push_token as UserPushToken} from './model/user_push_token';
+import { user_push_token as UserPushToken } from './model/user_push_token';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 const SEND_URL = 'https://api.push.hicloud.com/v3/project_id/messages:send';
-const PRIVATE_KEY = 'private_key'
+const PRIVATE_KEY = 'private_key';
 const ISS = 'sub_account';
 const KID = 'key_id';
 
@@ -34,8 +34,8 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colUserPushToken = cloud.database({zoneName: ZONE_NAME}).collection(UserPushToken);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colUserPushToken = cloud.database({ zoneName: ZONE_NAME }).collection(UserPushToken);
   }
 
   async pushMessage(): Promise<string | undefined> {
@@ -96,7 +96,7 @@ export class DatabaseHelper {
       "pushOptions": {
         "testMessage": true
       }
-    }
+    };
     return new Promise((resolve, reject) => {
       // send post request
       request.post({
@@ -106,7 +106,7 @@ export class DatabaseHelper {
       }, function (err, httpResponse, body) {
         logger2.info(`sendMessage request: ${JSON.stringify(httpResponse)}`);
         const result = JSON.parse(body);
-        if (httpResponse.statusCode == 200 &&( result.code === "80000000"|| result.code === "80100000")) {
+        if (httpResponse.statusCode == 200 && (result.code === "80000000" || result.code === "80100000")) {
           logger2.info(`sendMessage success: ${JSON.stringify(body)}`);
           resolve(result.msg);
         } else {
@@ -120,11 +120,14 @@ export class DatabaseHelper {
   async getRandomResource(): Promise<ResourceResp | undefined> {
     let randomResource: ResourceResp | undefined;
     try {
-      const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query().orderByDesc("views_count").notEqualTo('brief', '').limit(5);
+      const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query()
+        .orderByDesc("views_count")
+        .notEqualTo('brief', '')
+        .limit(5);
       const resourceData: Resource[] = await resourceQuery.get();
       if (resourceData.length > 0) {
         const randomElement: Resource = resourceData[Math.floor(Math.random() * resourceData.length)];
-        randomResource = this.getResource(randomElement)
+        randomResource = this.getResource(randomElement);
       }
       return randomResource;
     } catch (error) {
@@ -150,8 +153,8 @@ export class DatabaseHelper {
       dataQ.getMedia_src(),
       null, // isLiked
       null, // isCollected
-      null // isViewed
-    )
+      null// isViewed
+    );
   }
 
   getAuthorization(): string {

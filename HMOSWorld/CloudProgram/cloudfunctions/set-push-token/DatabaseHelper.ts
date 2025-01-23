@@ -17,7 +17,7 @@ import AsyncLock from 'async-lock/lib/index.js';
 import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import { user_push_token as UserPushToken } from './model/user_push_token';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;

@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
-import { resource as Resource} from './model/resource';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
-import { topic as Topic} from './model/topic';
-import { topic_resource as TopicResource} from './model/topic_resource';
+import { topic as Topic } from './model/topic';
+import { topic_resource as TopicResource } from './model/topic_resource';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -29,9 +29,9 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colTopic = cloud.database({zoneName: ZONE_NAME}).collection(Topic);
-    this.colTopicResource = cloud.database({zoneName: ZONE_NAME}).collection(TopicResource);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colTopic = cloud.database({ zoneName: ZONE_NAME }).collection(Topic);
+    this.colTopicResource = cloud.database({ zoneName: ZONE_NAME }).collection(TopicResource);
   }
 
   async queryResource(keyWords: string): Promise<ResourceResp[]> {
@@ -45,8 +45,10 @@ export class DatabaseHelper {
 
   async queryResourceList(keyWords: string, topics: Topic[]): Promise<ResourceResp[]> {
     try {
-      const resourceQuery1: CloudDBZoneQuery<Resource> = await this.colResource.query().contains("title", keyWords).orderByDesc("publish_date");
-      const resourceQuery2: CloudDBZoneQuery<Resource> = await this.colResource.query().contains("brief", keyWords).orderByDesc("publish_date");
+      const resourceQuery1: CloudDBZoneQuery<Resource> =
+        await this.colResource.query().contains("title", keyWords).orderByDesc("publish_date");
+      const resourceQuery2: CloudDBZoneQuery<Resource> =
+        await this.colResource.query().contains("brief", keyWords).orderByDesc("publish_date");
       const resourceData1: Resource[] = await resourceQuery1.get();
       const resourceData2: Resource[] = await resourceQuery2.get();
       let resourceData3: Resource[] = [];
@@ -90,8 +92,8 @@ export class DatabaseHelper {
         dataQ.getMedia_src(),
         null, // isLiked
         null, // isCollected
-        null // isViewed
-      ))
+        null// isViewed
+      ));
     }
     return resList;
   }
@@ -122,7 +124,7 @@ export class DatabaseHelper {
   }
 
   getTopicIdsByName(topicName: string, topics: Topic[]): string[] {
-    const topicIds: string[] = []
+    const topicIds: string[] = [];
     for (let index = 0; index < topics.length; index++) {
       const top: Topic = topics[index];
       const name: string = top.getName();
@@ -134,12 +136,12 @@ export class DatabaseHelper {
   }
 
   getTopicNames(topics: Topic[], tidStr: string): string[] {
-    const topicNames: string[] = []
+    const topicNames: string[] = [];
     const topicIds: string[] = tidStr.split(',');
     for (let index = 0; index < topicIds.length; index++) {
       const tid = topicIds[index];
       const name: Topic[] = topics.filter(tp => tp.getId() === tid);
-      topicNames.push(name[0].getName())
+      topicNames.push(name[0].getName());
     }
     return topicNames;
   }
