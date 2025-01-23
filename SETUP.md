@@ -78,7 +78,7 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
 
     HMOS世界暂未涉及自分类消息推送，点击弹窗“不在提醒”。
 
-    ![image](screenshots/cloud/push_message2.jpg)
+    ![image](screenshots/cloud/push_message2.jpg) 
 
 至此，已完成HMOS世界AGC基本环境搭建。
 
