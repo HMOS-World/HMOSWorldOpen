@@ -14,7 +14,7 @@
  */
 
 class ListResp {
-    constructor(currentPage, pageSize, pageCount,total,hasNext,resourceList) {
+    constructor(currentPage, pageSize, pageCount, total, hasNext, resourceList) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.pageCount = pageCount;
@@ -24,4 +24,4 @@ class ListResp {
     }
 }
 
-module.exports = { ListResp }
+module.exports = { ListResp };

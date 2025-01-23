@@ -16,7 +16,7 @@
 import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
 import { user_topic as UserTopic} from './model/user_topic';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -28,7 +28,7 @@ export class DatabaseHelper {
   }
 
   async modifyTopic(followIds: string, userId: string): Promise<number> {
-    const ids: string[] = followIds.split(',')
+    const ids: string[] = followIds.split(',');
     try {
       const userTopicQuery: CloudDBZoneQuery<UserTopic> = this.colUserTopic.query().equalTo("user_id", userId);
       const userTopics: UserTopic[] = await userTopicQuery.get();

@@ -23,4 +23,4 @@ class TopicResponse {
     }
 }
 
-module.exports = { TopicResponse }
+module.exports = { TopicResponse };

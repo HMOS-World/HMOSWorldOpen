@@ -16,7 +16,7 @@
 import { cloud, CloudDBCollection} from '@hw-agconnect/cloud-server';
 import { aspect_info as AspectInfo } from './model/aspect_info';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;

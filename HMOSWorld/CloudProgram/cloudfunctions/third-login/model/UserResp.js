@@ -24,4 +24,4 @@ class UserResp {
     }
 }
 
-module.exports = { UserResp }
+module.exports = { UserResp };

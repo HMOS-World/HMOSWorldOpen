@@ -26,7 +26,8 @@ let myHandler = async function (event, _context, callback, logger) {
 
   try {
     const databaseHelper: DatabaseHelper = new DatabaseHelper(logger);
-    const result: number = await databaseHelper.insertAspectInfo(versionName, methodClassName, methodName, time, isStatic, params, type);
+    const result: number =
+      await databaseHelper.insertAspectInfo(versionName, methodClassName, methodName, time, isStatic, params, type);
     if (result > 0) {
       callback({
         code: 0,

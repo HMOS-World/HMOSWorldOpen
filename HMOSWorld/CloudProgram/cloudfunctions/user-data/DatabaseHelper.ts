@@ -19,7 +19,7 @@ import { user as User} from './model/user';
 import { UserDataResp } from './model/UserDataResp';
 import { user_like as UserLike} from './model/user_like';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;

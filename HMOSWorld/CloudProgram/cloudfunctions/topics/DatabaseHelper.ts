@@ -18,7 +18,7 @@ import { topic as Topic} from './model/topic';
 import { TopicResponse } from './model/TopicResponse';
 import { user_topic as UserTopic} from './model/user_topic';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -32,12 +32,12 @@ export class DatabaseHelper {
   }
 
   async queryTopics(userId: string): Promise<TopicResponse[]> {
-    const userTopicsIds: string[] = []
+    const userTopicsIds: string[] = [];
     const userTopicQuery: CloudDBZoneQuery<UserTopic> = this.colUserTopic.query().equalTo("user_id",userId);
     const userTopics: UserTopic[] = await userTopicQuery.get();
     if (userTopics.length > 0) {
       for (let i = 0; i < userTopics.length; i++) {
-        userTopicsIds.push(userTopics[i].getTopic_id())
+        userTopicsIds.push(userTopics[i].getTopic_id());
       }
     }
 
@@ -51,6 +51,6 @@ export class DatabaseHelper {
         responseList.push(new TopicResponse(topic.getId(), topic.getName(), topic.getType(), topic.getIcon(), flag));
       }
     }
-    return responseList
+    return responseList;
   }
 }

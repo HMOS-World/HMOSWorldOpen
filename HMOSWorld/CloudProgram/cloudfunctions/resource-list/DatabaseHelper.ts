@@ -21,7 +21,7 @@ import { topic as Topic } from './model/topic';
 import { topic_resource as TopicResource } from './model/topic_resource';
 import { user_topic as UserTopic } from './model/user_topic';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;

@@ -18,7 +18,7 @@ import { LoginParams } from './model/LoginParams';
 import { user as User } from './model/user';
 import { UserResp } from './model/UserResp';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 const HW_ACCOUNT_LOGIN = 2;
 
 export class DatabaseHelper {

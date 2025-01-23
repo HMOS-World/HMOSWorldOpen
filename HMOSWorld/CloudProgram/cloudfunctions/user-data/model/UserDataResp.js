@@ -26,4 +26,4 @@ class UserDataResp {
     }
 }
 
-module.exports = { UserDataResp }
+module.exports = { UserDataResp };
