@@ -58,7 +58,7 @@ export struct DiscoverSkeletonView {
               .aspectRatio(SWIPER_ASPECT_RATIO)
               .width(CommonConstants.FULL_PERCENT)
               .padding({ right: $r('app.float.md_padding_margin') })
-            })
+            }, (item: number) => item.toString())
           }
           .width(CommonConstants.FULL_PERCENT)
           .displayCount(new BreakpointType({ sm: 1, md: 1, lg: COUNT_TWO }).getValue(this.currentBreakpoint))
@@ -124,6 +124,8 @@ export struct DiscoverSkeletonView {
                 }).getValue(this.currentBreakpoint))
               }, (item: number) => item.toString())
             }
+            .width('100%')
+            .height(undefined)
             .scrollBar(BarState.Off)
             .listDirection(Axis.Horizontal)
 
@@ -149,6 +151,8 @@ export struct DiscoverSkeletonView {
                 .padding({ right: $r('app.float.md_padding_margin') })
               }, (item: number) => item.toString())
             }
+            .width('100%')
+            .height(undefined)
             .padding({
               left: this.currentBreakpoint === BreakpointTypeEnum.SM ? $r('app.float.md_padding_margin') :
               $r('app.float.xxl_padding_margin'),
@@ -159,6 +163,8 @@ export struct DiscoverSkeletonView {
           .alignItems(HorizontalAlign.Start)
         }
       }
+      .width('100%')
+      .height('100%')
       .scrollBar(BarState.Off)
     }
     .height(CommonConstants.FULL_PERCENT)

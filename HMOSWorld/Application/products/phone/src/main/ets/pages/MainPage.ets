@@ -31,6 +31,7 @@ import {
   GlobalContext,
   Logger,
   ResourcesType,
+  WebUrls,
   WebUtil,
   WindowUtil
 } from '@ohos/utils';
@@ -56,8 +57,8 @@ struct MainPage {
   @Provide('settingPathStack') settingPathStack: NavPathStack = new NavPathStack();
 
   aboutToAppear() {
-    WebUtil.createNWeb(WebUtil.WebUrls.ACTIVITY_URL, this.getUIContext());
-    WebUtil.createNWeb(WebUtil.WebUrls.CHALLENGE_URL, this.getUIContext());
+    WebUtil.createNWeb(WebUrls.ACTIVITY_URL, this.getUIContext());
+    WebUtil.createNWeb(WebUrls.CHALLENGE_URL, this.getUIContext());
     this.breakpointSystem.register();
     try {
       if (canIUse('SystemCapability.Window.SessionManager')) {
@@ -97,6 +98,7 @@ struct MainPage {
         }
         Logger.error(TAG, `LOCAL_PROFILE_PATH : ${JSON.stringify(err)}`);
       });
+      await imageSource.release();
     }
   }
 
@@ -153,7 +155,7 @@ struct MainPage {
 
   onBackPress(): boolean | void {
     if (this.currentIndex === TabBarType.ACTIVITY) {
-      let webview = WebUtil.getController(WebUtil.WebUrls.ACTIVITY_URL);
+      let webview = WebUtil.getController(WebUrls.ACTIVITY_URL);
       if (webview?.accessBackward()) {
         webview.backward();
       }

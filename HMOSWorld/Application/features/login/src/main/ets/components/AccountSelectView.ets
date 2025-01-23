@@ -52,8 +52,10 @@ export struct AccountSelectView {
                 .combine(TransitionEffect.translate({ y: Constants.ACCOUNT_LIST_TRANSLATE_Y }))
             )
           }
-        })
+        }, (item: string) => item)
       }
+      .width('100%')
+      .height(undefined)
       .divider({
         strokeWidth: $r('app.float.line_height'),
         color: $r('app.color.account_line_background_color'),

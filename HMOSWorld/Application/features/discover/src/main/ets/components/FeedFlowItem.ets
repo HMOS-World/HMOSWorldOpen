@@ -41,7 +41,7 @@ export struct FeedFlowItem {
           })
           .width(CommonConstants.FULL_PERCENT)
           .height(CommonConstants.FULL_PERCENT)
-        ViewsCountLabel({ viewsCount: this.feedItem.viewsCount })
+        ViewsCountLabel(this.feedItem.viewsCount)
       }
       .width(CommonConstants.FULL_PERCENT)
       .aspectRatio(this.feedItem.headerImageUrl.includes(AGC_SERVICE) ? 1.4 : 1.8)
@@ -86,27 +86,23 @@ export struct FeedFlowItem {
   }
 }
 
-@Component
-struct ViewsCountLabel {
-  @Prop viewsCount: number = 0;
+@Builder
+function ViewsCountLabel(viewsCount: number) {
+  Row() {
+    Image($r('app.media.ic_eye_open'))
+      .size({ width: $r('app.float.icon_size'), height: $r('app.float.icon_size') })
+      .fillColor(Color.White)
+      .margin({ right: $r('app.float.xs_padding_margin') })
 
-  build() {
-    Row() {
-      Image($r('app.media.ic_eye_open'))
-        .size({ width: $r('app.float.icon_size'), height: $r('app.float.icon_size') })
-        .fillColor(Color.White)
-        .margin({ right: $r('app.float.xs_padding_margin') })
-
-      Text(CommonUtil.transNumberOverOneThousand(this.viewsCount))
-        .fontSize($r('app.float.sm_font_size'))
-        .textAlign(TextAlign.Center)
-        .fontColor(Color.White)
-        .opacity(CommonConstants.FIRST_LEVEL_OPACITY)
-    }
-    .height($r('app.float.view_count_height'))
-    .padding({ left: $r('app.float.xs_padding_margin'), right: $r('app.float.xs_padding_margin') })
-    .backgroundColor($r('app.color.view_counts_bg_color'))
-    .borderRadius($r('app.float.md_border_radius'))
-    .margin({ right: $r('app.float.sm_padding_margin'), bottom: $r('app.float.sm_padding_margin') })
+    Text(CommonUtil.transNumberOverOneThousand(viewsCount))
+      .fontSize($r('app.float.sm_font_size'))
+      .textAlign(TextAlign.Center)
+      .fontColor(Color.White)
+      .opacity(CommonConstants.FIRST_LEVEL_OPACITY)
   }
+  .height($r('app.float.view_count_height'))
+  .padding({ left: $r('app.float.xs_padding_margin'), right: $r('app.float.xs_padding_margin') })
+  .backgroundColor($r('app.color.view_counts_bg_color'))
+  .borderRadius($r('app.float.md_border_radius'))
+  .margin({ right: $r('app.float.sm_padding_margin'), bottom: $r('app.float.sm_padding_margin') })
 }

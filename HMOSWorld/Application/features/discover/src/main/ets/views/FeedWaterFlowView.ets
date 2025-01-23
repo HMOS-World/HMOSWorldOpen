@@ -127,13 +127,13 @@ struct HotFeeds {
             FeedFlowItem({ feedItem: item })
               .reuseId('feedFlowItem')
           }
-          .onClick(() => this.jumpDetail(item))
           .onAppear(() => {
             // Prematurely increasing data when bottoming is about to occur.
             if ((index + this.cacheCount) === this.hotFeedDataSource.totalCount()) {
               this.discoverModel.loadMoreFeed();
             }
           })
+          .onClick(() => this.jumpDetail(item))
           .width(CommonConstants.FULL_PERCENT)
         }, (item: LearningResource) => item.id)
       }

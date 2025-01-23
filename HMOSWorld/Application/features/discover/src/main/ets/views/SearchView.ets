@@ -170,6 +170,7 @@ export struct SearchView {
           }
         }
         .width(CommonConstants.FULL_PERCENT)
+        .height(undefined)
         .layoutWeight(1)
         .scrollBar(BarState.Off)
         .margin({ bottom: $r('app.float.lg_padding_margin') })
@@ -214,8 +215,10 @@ function searchDiscover(currentBreakpoint: BreakpointTypeEnum, onClickText: (tex
           bottom: $r('app.float.md_padding_margin')
         })
         .onClick(() => onClickText(item))
-      })
+      }, (item: string) => item)
     }
+    .width('100%')
+    .height(undefined)
     .lanes(new BreakpointType({
       sm: CommonConstants.MD_COLUMN_COUNT,
       md: CommonConstants.MD_COLUMN_COUNT,
@@ -289,6 +292,8 @@ function hotCard(list: HotListItem[], currentBreakpoint: BreakpointTypeEnum, jum
       .padding({ right: $r('app.float.lg_padding_margin') })
     }, (item: LearningResource) => item.id)
   }
+  .width('100%')
+  .height(undefined)
   .scrollBar(BarState.Off)
   .lanes(new BreakpointType({
     sm: CommonConstants.SM_COLUMN_COUNT,

@@ -36,7 +36,7 @@ export struct LoadingView {
           ListItem() {
             ArticleLoadingSkeleton(item.isMine, item.isFeed)
           }
-        })
+        }, (item: SkeType, index: number) => index.toString() + item.isMine)
       }
       .padding({
         left: new BreakpointType({
@@ -51,6 +51,8 @@ export struct LoadingView {
         }).getValue(this.currentBreakpoint)
       })
       .lanes(new BreakpointType({ sm: 1, md: 2, lg: 1 }).getValue(this.currentBreakpoint))
+      .width(undefined)
+      .height(undefined)
       .layoutWeight(4)
       .scrollBar(BarState.Off)
       .padding({

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { LazyDataSource, LoadingStatus, Logger, ObservedArray, ResponseData, WebUtil } from '@ohos/utils';
+import { LazyDataSource, LoadingStatus, Logger, ObservedArray, ResponseData, WebUrls } from '@ohos/utils';
 import { LearningNetFunc } from '../service/LearningNetFunc';
 import { LearningPath } from './LearningPath';
 import { LearningComment } from './LearningComment';
@@ -146,7 +146,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p001',
     'HarmonyOS介绍',
-    WebUtil.WebUrls.LEARNING_P001,
+    WebUrls.LEARNING_P001,
     '初识HarmonyOS特性，开启HarmonyOS学习之旅。',
     $r('app.media.ic_achieve_1'),
     $r('app.media.ic_learning_1'),
@@ -155,7 +155,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p002',
     'DevEco Studio的使用',
-    WebUtil.WebUrls.LEARNING_P002,
+    WebUrls.LEARNING_P002,
     '安装体验DevEco Studio，运行您的第一个HarmonyOS应用。',
     $r('app.media.ic_achieve_2'),
     $r('app.media.ic_learning_2'),
@@ -164,7 +164,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p003',
     'ArkTS语法介绍',
-    WebUtil.WebUrls.LEARNING_P003,
+    WebUrls.LEARNING_P003,
     '掌握基于TS扩展的ArkTS语言，以接近自然语义快速开发应用。',
     $r('app.media.ic_achieve_3'),
     $r('app.media.ic_learning_3'),
@@ -173,7 +173,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p004',
     '应用程序框架基础',
-    WebUtil.WebUrls.LEARNING_P004,
+    WebUrls.LEARNING_P004,
     '从应用入口开始，了解用户如何与应用交互，理解应用的生命周期。',
     $r('app.media.ic_achieve_4'),
     $r('app.media.ic_learning_4'),
@@ -182,7 +182,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p005',
     '从简单的页面开始',
-    WebUtil.WebUrls.LEARNING_P005,
+    WebUrls.LEARNING_P005,
     '了解基础组件、常用容器，并学习如何构建列表、页签切换等常用场景。',
     $r('app.media.ic_achieve_5'),
     $r('app.media.ic_learning_5'),
@@ -191,7 +191,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p006',
     '构建更加丰富的页面',
-    WebUtil.WebUrls.LEARNING_P006,
+    WebUrls.LEARNING_P006,
     '了解组件状态管理，并学习一些常用组件以构建更加丰富的页面。',
     $r('app.media.ic_achieve_6'),
     $r('app.media.ic_learning_6'),
@@ -200,7 +200,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p007',
     '从网络获取数据',
-    WebUtil.WebUrls.LEARNING_P007,
+    WebUrls.LEARNING_P007,
     '了解如何使用HTTP从网络获取数据，构建一个从网络实时获取数据的应用。',
     $r('app.media.ic_achieve_7'),
     $r('app.media.ic_learning_7'),
@@ -209,7 +209,7 @@ const DEFAULT_PATHS: LearningPath[] = [
   new LearningPath(
     'p008',
     '保存应用数据',
-    WebUtil.WebUrls.LEARNING_P008,
+    WebUrls.LEARNING_P008,
     '存储应用的一些常用配置，以便应用可以持久化的存储数据。',
     $r('app.media.ic_achieve_8'),
     $r('app.media.ic_learning_8'),

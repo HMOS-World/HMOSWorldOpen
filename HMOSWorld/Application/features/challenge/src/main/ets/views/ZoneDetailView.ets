@@ -47,7 +47,7 @@ export struct ZoneDetailView {
   @StorageProp('currentBreakpoint') @Watch('handleBreakpointChange') currentBreakpoint: string = BreakpointTypeEnum.SM;
 
   getRatios(): number[] {
-    let ratio: number = 0;
+    let ratio: number = 0.00;
     let arr: number[] = [0];
     while (ratio < 1) {
       ratio += 0.01;
@@ -183,7 +183,7 @@ export struct ZoneDetailView {
           if (index !== undefined) {
             this.StyleTitle(item, index)
           }
-        })
+        }, (item: IconSubtitle) => item.title)
       }
     }
     .backgroundColor($r('sys.color.ohos_id_color_sub_background'))

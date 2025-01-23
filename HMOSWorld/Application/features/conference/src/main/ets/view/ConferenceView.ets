@@ -14,14 +14,14 @@
  */
 
 import { LoadingView } from '@ohos/uicomponents';
-import { CommonConstants, WebUtil } from '@ohos/utils';
+import { CommonConstants, WebUrls, WebUtil } from '@ohos/utils';
 
 @Component
 export struct ConferenceView {
   build() {
     Stack() {
       LoadingView()
-      NodeContainer(WebUtil.getNWeb(WebUtil.WebUrls.ACTIVITY_URL))
+      NodeContainer(WebUtil.getNWeb(WebUrls.ACTIVITY_URL))
         .width(CommonConstants.FULL_PERCENT)
         .height(CommonConstants.FULL_PERCENT)
     }

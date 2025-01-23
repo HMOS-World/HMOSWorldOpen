@@ -54,7 +54,7 @@ export struct CommentItem {
               .width($r('app.float.star_icon_width'))
               .margin({ right: $r('app.float.sm_padding_margin') })
               .aspectRatio(1)
-          })
+          }, (item: number) => item.toString())
           Text(this.item.score.toFixed(1))
             .fontColor($r('sys.color.ohos_id_color_text_primary'))
             .fontSize($r('app.float.font_size_normal'))

@@ -120,7 +120,7 @@ export struct RoutesSheet {
           $r('sys.color.ohos_id_color_background'))
           .height($r('app.float.sm_btn_height'))
           .layoutWeight(1)
-        })
+        }, (travelMode: TravelMode) => travelMode.mode.toString())
       }
       .margin({ top: $r('app.float.md_padding_margin') })
 
@@ -165,7 +165,7 @@ export struct RoutesSheet {
             right: $r('app.float.sm_padding_margin'),
             bottom: $r('app.float.xs_padding_margin')
           })
-        })
+        }, (route: navi.Route, index: number) => index.toString() + route.hasStairs)
       }
       .visibility(this.routePaths.length > 0 ? Visibility.Visible : Visibility.None)
       .margin({ top: $r('app.float.lg_padding_margin'), bottom: $r('app.float.lg_padding_margin') })

@@ -150,7 +150,7 @@ export struct ResourceListView {
           .borderRadius($r('app.float.xxl_border_radius'))
           .margin({ right: $r('app.float.md_padding_margin') })
           .onClick(() => this.jumpDetail(content))
-        }, (item: LearningResource, index: number) => JSON.stringify(item) + index)
+        }, (item: LearningResource) => item.id)
         ListItem() {
           NoMore()
         }

@@ -118,6 +118,7 @@ export struct SearchResultView {
       lg: CommonConstants.LG_COLUMN_COUNT
     }).getValue(this.currentBreakpoint))
     .width(CommonConstants.FULL_PERCENT)
+    .height(undefined)
     .layoutWeight(1)
     .scrollBar(BarState.Off)
   }

@@ -13,18 +13,16 @@
  * limitations under the License.
  */
 
-import { ColumnEnum, OffsetEnum, SpanEnum, WebUtil } from '@ohos/utils';
+import { ColumnEnum, OffsetEnum, SpanEnum, WebUrls, WebUtil } from '@ohos/utils';
 import { TopNavigationView } from '@ohos/uicomponents';
 import { ChallengeConstants } from '../constants/ChallengeConstants';
-
-const TAG = '[ChallengeDetailPage]';
 
 @Component
 export struct ChallengeDetailView {
   @Consume('appPathStack') appPathStack: NavPathStack;
 
   onBackPress(): boolean {
-    let webview = WebUtil.getController(WebUtil.WebUrls.ACTIVITY_URL);
+    let webview = WebUtil.getController(WebUrls.ACTIVITY_URL);
     if (webview?.accessBackward()) {
       webview.backward();
       return true;
@@ -75,7 +73,7 @@ export struct ChallengeDetailView {
               lg: OffsetEnum.LG
             }
           }) {
-            NodeContainer(WebUtil.getNWeb(WebUtil.WebUrls.CHALLENGE_URL))
+            NodeContainer(WebUtil.getNWeb(WebUrls.CHALLENGE_URL))
               .width(ChallengeConstants.FULL_PERCENT)
               .height(ChallengeConstants.FULL_PERCENT)
           }

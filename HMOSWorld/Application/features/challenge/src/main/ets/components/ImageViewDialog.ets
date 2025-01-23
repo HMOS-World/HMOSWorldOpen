@@ -188,7 +188,7 @@ export struct ImageViewDialog {
           .width(Const.FULL_PERCENT)
           .height(Const.FULL_PERCENT)
           .justifyContent(FlexAlign.Center)
-        })
+        }, (item: Resource, index?: number) => index?.toString())
       }
       .width(Const.FULL_PERCENT)
       .height(Const.FULL_PERCENT)

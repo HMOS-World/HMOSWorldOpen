@@ -107,10 +107,12 @@ export struct LearningView {
           .onClick(() => {
             this.jumpDetail(item);
           })
-        })
+        }, (item: LearningPath) => item.id)
       }
       .scrollBar(BarState.Off)
       .padding({ left: $r('app.float.md_padding_margin') })
+      .width('100%')
+      .height(undefined)
       .layoutWeight(1)
       .lanes(new BreakpointType({
         sm: LearningConstants.LEARNING_LANES_SM,
