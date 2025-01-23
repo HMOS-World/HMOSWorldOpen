@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import { LoginParams } from './model/LoginParams';
-import { user as User} from './model/user';
+import { user as User } from './model/user';
 import { UserResp } from './model/UserResp';
 
 const ZONE_NAME = "HMOSWorld";
@@ -27,7 +27,7 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colUser = cloud.database({zoneName: ZONE_NAME}).collection(User);
+    this.colUser = cloud.database({ zoneName: ZONE_NAME }).collection(User);
   }
 
   async queryUser(loginParams: LoginParams): Promise<UserResp> {
@@ -37,7 +37,7 @@ export class DatabaseHelper {
       // Huawei account login.
       if (loginParams.userType === HW_ACCOUNT_LOGIN && loginParams.unionId !== '') {
         // Run the unionId command to check whether the user exists, and create a user if the user does not exist.
-        const cloudDBZoneQuery: CloudDBZoneQuery<User> = this.colUser.query().equalTo("union_id", loginParams.unionId)
+        const cloudDBZoneQuery: CloudDBZoneQuery<User> = this.colUser.query().equalTo("union_id", loginParams.unionId);
         const userList: User[] = await cloudDBZoneQuery.get();
         if (userList.length > 0) {
           userResult = userList[0];
@@ -49,7 +49,7 @@ export class DatabaseHelper {
             const maxIdUser: User = maxIdUserData[0];
             const userId: string = maxIdUser.getId();
             const id = userId.replace('u', '');
-            newUserId= 'u' + (Number.parseInt(id) + 1);
+            newUserId = 'u' + (Number.parseInt(id) + 1);
           }
           const createResult: number = await this.createUser(loginParams, newUserId);
           if (createResult > 0) {
@@ -64,7 +64,8 @@ export class DatabaseHelper {
           }
         }
       } else {
-        const cloudDBZoneQuery: CloudDBZoneQuery<User> = this.colUser.query().equalTo("username", loginParams.username).equalTo("password", loginParams.password);
+        const cloudDBZoneQuery: CloudDBZoneQuery<User> =
+          this.colUser.query().equalTo("username", loginParams.username).equalTo("password", loginParams.password);
         const userList: User[] = await cloudDBZoneQuery.get();
         if (userList.length > 0) {
           userResult = userList[0];
@@ -97,8 +98,7 @@ export class DatabaseHelper {
       createUser.setUser_type(HW_ACCOUNT_LOGIN);
       createUser.setDescription('这个人很懒，什么也没留下');
       return await this.colUser.upsert(createUser);
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(`[third-login] createUser error: ${JSON.stringify(error)}`);
       return -1;
     }

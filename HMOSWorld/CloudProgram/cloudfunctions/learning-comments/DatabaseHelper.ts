@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server'
-import { comment as Comment} from './model/comment';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { comment as Comment } from './model/comment';
 import { CommentResp } from './model/CommentResp';
 import { ListResp } from './model/ListResp';
 
@@ -26,13 +26,14 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colComment = cloud.database({zoneName: ZONE_NAME}).collection(Comment);
+    this.colComment = cloud.database({ zoneName: ZONE_NAME }).collection(Comment);
   }
 
   async queryComment(pathId: string, pageNum: number, pageSize: number): Promise<ListResp[]> {
     const listResp: ListResp[] = [];
     try {
-      const commentQuery: CloudDBZoneQuery<Comment> = this.colComment.query().orderByDesc("create_time").equalTo('path_id', pathId);
+      const commentQuery: CloudDBZoneQuery<Comment> =
+        this.colComment.query().orderByDesc("create_time").equalTo('path_id', pathId);
       let totalCount: number = await commentQuery.countQuery('id');
       commentQuery.limit(pageSize, (pageNum - 1) * pageSize);
 

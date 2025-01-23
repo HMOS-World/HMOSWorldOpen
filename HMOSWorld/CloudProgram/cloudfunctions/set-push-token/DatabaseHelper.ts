@@ -14,8 +14,8 @@
  */
 
 import AsyncLock from 'async-lock/lib/index.js';
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
-import { user_push_token as UserPushToken} from './model/user_push_token';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { user_push_token as UserPushToken } from './model/user_push_token';
 
 const ZONE_NAME = "HMOSWorld";
 
@@ -26,7 +26,7 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colUserPushToken = cloud.database({zoneName: ZONE_NAME}).collection(UserPushToken);
+    this.colUserPushToken = cloud.database({ zoneName: ZONE_NAME }).collection(UserPushToken);
   }
 
   async setToken(userId: string, deviceId: string, pushToken: string): Promise<number> {
@@ -37,14 +37,14 @@ export class DatabaseHelper {
         if (userPushToken) {
           if (pushToken === userPushToken.getPush_token()) {
             result = 1;
-            resolve(result)
+            resolve(result);
           } else {
             result = await this.updatePushToken(userId, userPushToken, pushToken);
-            resolve(result)
+            resolve(result);
           }
         } else {
           result = await this.createPushToken(userId, deviceId, pushToken);
-          resolve(result)
+          resolve(result);
         }
       }, (err) => {
         if (err) {
@@ -59,14 +59,14 @@ export class DatabaseHelper {
   async queryPushToken(deviceId: string): Promise<UserPushToken | undefined> {
     let userPushToken: UserPushToken | undefined;
     try {
-      const cloudDBZoneQuery: CloudDBZoneQuery<UserPushToken> = this.colUserPushToken.query().equalTo("device_id", deviceId)
+      const cloudDBZoneQuery: CloudDBZoneQuery<UserPushToken> =
+        this.colUserPushToken.query().equalTo("device_id", deviceId);
       let pushTokens: UserPushToken[] = await cloudDBZoneQuery.get();
       if (pushTokens.length > 0) {
         userPushToken = pushTokens[0];
       }
-      return userPushToken
-    }
-    catch (error) {
+      return userPushToken;
+    } catch (error) {
       this.logger.error(`[set-push-token] queryPushToken error: ${JSON.stringify(error)}`);
     }
   }
@@ -79,8 +79,7 @@ export class DatabaseHelper {
       userPushToken.setDevice_id(deviceId);
       userPushToken.setCreate_time(new Date());
       return await this.colUserPushToken.insert(userPushToken);
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(`[set-push-token] insert UserPushToken error: ${JSON.stringify(error)}`);
     }
   }
@@ -91,8 +90,7 @@ export class DatabaseHelper {
       userPushToken.setPush_token(pushToken);
       userPushToken.setUpdate_time(new Date().toString());
       return await this.colUserPushToken.upsert(userPushToken);
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(`[set-push-token] update UserPushToken error:${JSON.stringify(error)}`);
     }
   }

@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import { ListResp } from './model/ListResp';
-import { resource as Resource} from './model/resource';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
-import { topic as Topic} from './model/topic';
-import { topic_resource as TopicResource} from './model/topic_resource';
-import { user_topic as UserTopic} from './model/user_topic';
+import { topic as Topic } from './model/topic';
+import { topic_resource as TopicResource } from './model/topic_resource';
+import { user_topic as UserTopic } from './model/user_topic';
 
 const ZONE_NAME = "HMOSWorld";
 
@@ -32,10 +32,10 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colTopic = cloud.database({zoneName: ZONE_NAME}).collection(Topic);
-    this.colTopicResource = cloud.database({zoneName: ZONE_NAME}).collection(TopicResource);
-    this.colUserTopic = cloud.database({zoneName: ZONE_NAME}).collection(UserTopic);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colTopic = cloud.database({ zoneName: ZONE_NAME }).collection(Topic);
+    this.colTopicResource = cloud.database({ zoneName: ZONE_NAME }).collection(TopicResource);
+    this.colUserTopic = cloud.database({ zoneName: ZONE_NAME }).collection(UserTopic);
   }
 
   async queryResource(userId: string, type: string, pageNum: number, pageSize: number): Promise<ListResp> {
@@ -52,7 +52,8 @@ export class DatabaseHelper {
     return await cloudDBZoneQuery.get();
   }
 
-  async queryResourceList(userId: string, type: string, pageNum: number, pageSize: number, topics: Topic[]): Promise<ListResp> {
+  async queryResourceList(userId: string, type: string, pageNum: number, pageSize: number,
+    topics: Topic[]): Promise<ListResp> {
     let totalCount = 0;
     try {
       const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query().equalTo('type', type);
@@ -90,7 +91,7 @@ export class DatabaseHelper {
               dataQ.getMedia_src(),
               null, // isLiked
               null, // isCollected
-              null // isViewed
+              null// isViewed
             ));
           }
         }
