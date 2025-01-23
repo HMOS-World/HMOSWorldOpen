@@ -21,4 +21,4 @@ class HomeResp {
     }
 }
 
-module.exports = { HomeResp }
+module.exports = { HomeResp };

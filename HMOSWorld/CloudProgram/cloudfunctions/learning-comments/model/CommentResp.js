@@ -25,4 +25,4 @@ class CommentResp {
     }
 }
 
-module.exports = { CommentResp }
+module.exports = { CommentResp };

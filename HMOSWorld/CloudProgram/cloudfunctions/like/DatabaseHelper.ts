@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneObjectOperator, CloudDBZoneQuery} from '@hw-agconnect/cloud-server';
-import { resource as Resource} from './model/resource';
-import { user_like as UserLike} from './model/user_like';
+import { cloud, CloudDBCollection, CloudDBZoneObjectOperator, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { resource as Resource } from './model/resource';
+import { user_like as UserLike } from './model/user_like';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -26,21 +26,20 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colUserLike = cloud.database({zoneName: ZONE_NAME}).collection(UserLike);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colUserLike = cloud.database({ zoneName: ZONE_NAME }).collection(UserLike);
   }
 
   async insertLike(userId: string, resourceId: string): Promise<number | undefined> {
     try {
       const likeObj = new UserLike();
       likeObj.setResource_id(resourceId);
-      likeObj.setUser_id(userId)
-      likeObj.setId(userId + resourceId)
+      likeObj.setUser_id(userId);
+      likeObj.setId(userId + resourceId);
       const resp: number = await this.colUserLike.upsert(likeObj);
-      this.updateLikeCount(resourceId, 1)
+      this.updateLikeCount(resourceId, 1);
       return resp;
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(`[like] insert like error: ${JSON.stringify(error)}`);
       return -1;
     }
@@ -48,10 +47,11 @@ export class DatabaseHelper {
 
   async deleteLike(userId: string, resourceId: string): Promise<number | undefined> {
     try {
-      const cloudDBZoneQuery: CloudDBZoneQuery<UserLike> = this.colUserLike.query().equalTo("user_id", userId).equalTo("resource_id", resourceId);
+      const cloudDBZoneQuery: CloudDBZoneQuery<UserLike> =
+        this.colUserLike.query().equalTo("user_id", userId).equalTo("resource_id", resourceId);
       const collectData: UserLike[] = await cloudDBZoneQuery.get();
       const resp2: number = await this.colUserLike.delete(collectData);
-      this.updateLikeCount(resourceId, -1)
+      this.updateLikeCount(resourceId, -1);
       return resp2;
     } catch (error) {
       this.logger.error(`[like] delete like error: ${JSON.stringify(error)}`);
@@ -68,8 +68,7 @@ export class DatabaseHelper {
         const operator = CloudDBZoneObjectOperator.build(updateResource).increment('likes_count', addCount);
         await this.colResource.update(operator);
       }
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(`[like] updateLikeCount error: ${JSON.stringify(error)}`);
     }
   }
