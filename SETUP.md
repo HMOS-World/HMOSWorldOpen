@@ -68,7 +68,7 @@ HMOS世界端云一体化配置，首先需要在[AGC](https://developer.huawei.
 
     ![image](screenshots/cloud/cloud_serverless.jpg)
 
-    开通“云函数”或“云数据库”服务时，因为是第一次开通服务，所以需要选择“数据处理位置”，此时选择“数据处理位置”为“中国”，并设为“默认”。
+    在首次开通服务时，需设置“数据处理位置”，选择“中国”并将其设为“默认”。
 
     ![image](screenshots/cloud/data_position.jpg)
 
@@ -102,7 +102,7 @@ HMOS世界端云一体化配置，需要修改客户端项目中的部分配置�
 
     ![image](screenshots/client/agconnect_services.jpg)
 
-5. 在DevEco Studio主菜单栏File > Project Structure > Project > Signing Configs窗口中，勾选“Automatically generate signature”，然后点击“Sign in”，登录华为账号后，点击“OK”，即可完成自动签名。
+5. 在DevEco Studio中，依次点击主菜单栏的File > Project Structure > Project > Signing Configs，勾选“Automatically generate signature”选项，随后点击“Sign in”登录华为账号，最后点击“OK”完成自动签名配置。请注意，操作过程中需确保设备已连接。
 
    ![image](screenshots/client/auto_signature.jpg)
 
