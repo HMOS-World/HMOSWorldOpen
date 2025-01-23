@@ -21,7 +21,7 @@ import { topic as Topic} from './model/topic';
 import { user_history as UserHistory} from './model/user_history';
 import { user_like as UserLike} from './model/user_like';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -52,7 +52,7 @@ export class DatabaseHelper {
       const historyIds: string[] = [];
       for (let i = 0; i < historyData.length; i++) {
         const historyItem: UserHistory = historyData[i];
-        historyIds.push(historyItem.getResource_id())
+        historyIds.push(historyItem.getResource_id());
       }
 
       const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query().in("id", historyIds);
@@ -88,7 +88,7 @@ export class DatabaseHelper {
           likedIds.indexOf(dataQ.getId()) !== -1, // isLiked
           collectedIds.indexOf(dataQ.getId()) !== -1, // isCollected
           false
-        ))
+        ));
       }
       return resList;
     } catch (error) {
@@ -133,12 +133,12 @@ export class DatabaseHelper {
   }
 
   getTopicNames(topics: Topic[], tidStr: string): string[] {
-    const topicNames: string[] = []
+    const topicNames: string[] = [];
     const topicIds: string[] = tidStr.split(',');
     for (let index = 0; index < topicIds.length; index++) {
       const tid = topicIds[index];
       const tp: Topic[] = topics.filter(tp => tp.getId() === tid);
-      topicNames.push(tp[0].getName())
+      topicNames.push(tp[0].getName());
     }
     return topicNames;
   }

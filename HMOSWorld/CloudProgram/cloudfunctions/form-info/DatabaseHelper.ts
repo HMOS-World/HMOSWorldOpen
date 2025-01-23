@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection} from '@hw-agconnect/cloud-server'
+import { cloud, CloudDBCollection} from '@hw-agconnect/cloud-server';
 import { form_info as FormInfo } from './model/form_info';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -30,10 +30,10 @@ export class DatabaseHelper {
   async insertFormInfo(formId: string, token: string) {
     try {
       const formInfo = new FormInfo();
-      const id = formId + token
+      const id = formId + token;
       formInfo.setId(id);
-      formInfo.setForm_id(formId)
-      formInfo.setToken(token)
+      formInfo.setForm_id(formId);
+      formInfo.setToken(token);
       return await this.colFormInfo.upsert(formInfo);
     } catch (error) {
       this.logger.error(`[forminfo] insertFormInfo error: ${JSON.stringify(error)}`);

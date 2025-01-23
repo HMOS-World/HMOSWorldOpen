@@ -15,7 +15,7 @@
 
 class ResourceResp {
     constructor(id, title, brief, headerImageUrl, type, webUrl, publishDate, topics, viewsCount,
-                collectionCount, likesCount, tag, bannerSrc, mediaSrc, isLiked, isCollected, isViewed) {
+        collectionCount, likesCount, tag, bannerSrc, mediaSrc, isLiked, isCollected, isViewed) {
         this.id = id;
         this.title = title;
         this.brief = brief;
@@ -36,4 +36,4 @@ class ResourceResp {
     }
 }
 
-module.exports = { ResourceResp }
+module.exports = { ResourceResp };

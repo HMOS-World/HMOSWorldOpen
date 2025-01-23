@@ -33,19 +33,19 @@ let myHandler = async function (event, _context, callback, logger) {
     if (result > 0) {
       callback({
         code: 0,
-        message: '[forminfo] operation successful',
+        message: '[form-info] operation successful',
       });
     } else {
       callback({
         code: 1,
-        message: '[forminfo] operation failed',
+        message: '[form-info] operation failed',
       });
     }
   } catch (err) {
     this.logger.error(`[forminfo] func error: ${err.message}`);
     callback({
       code: 3,
-      message: '[forminfo] operation exception',
+      message: '[form-info] operation exception',
       data: err,
     });
   }

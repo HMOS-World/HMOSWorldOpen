@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneObjectOperator, CloudDBZoneQuery} from '@hw-agconnect/cloud-server'
-import { collect as Collect} from './model/collect';
-import { resource as Resource} from './model/resource';
+import { cloud, CloudDBCollection, CloudDBZoneObjectOperator, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { collect as Collect } from './model/collect';
+import { resource as Resource } from './model/resource';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -26,36 +26,36 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colCollect = cloud.database({zoneName: ZONE_NAME}).collection(Collect);
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
+    this.colCollect = cloud.database({ zoneName: ZONE_NAME }).collection(Collect);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
   }
 
   async insertCollect(userId: string, resourceId: string): Promise<number | undefined> {
     try {
       const collectObj = new Collect();
       collectObj.setResource_id(resourceId);
-      collectObj.setUser_id(userId)
-      collectObj.setId(userId + resourceId)
-      collectObj.setCollect_time(new Date())
+      collectObj.setUser_id(userId);
+      collectObj.setId(userId + resourceId);
+      collectObj.setCollect_time(new Date());
       return await this.colCollect.upsert(collectObj);
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(`[collect-modify] insert collect error ${JSON.stringify(error)}`);
-      return -1
+      return -1;
     }
   }
 
   async deleteCollect(userId: string, resourceId: string): Promise<number | undefined> {
     try {
-      const cloudDBZoneQuery: CloudDBZoneQuery<Collect> = this.colCollect.query().equalTo("user_id", userId).equalTo("resource_id", resourceId);
+      const cloudDBZoneQuery: CloudDBZoneQuery<Collect> =
+        this.colCollect.query().equalTo("user_id", userId).equalTo("resource_id", resourceId);
       const collectData: Collect[] = await cloudDBZoneQuery.get();
       if (collectData.length > 0) {
-        this.updateCollectedCount(resourceId, -1)
+        this.updateCollectedCount(resourceId, -1);
       }
       return await this.colCollect.delete(collectData);
     } catch (error) {
       this.logger.error(`[collect-modify] delete collect error ${JSON.stringify(error)}`);
-      return -1
+      return -1;
     }
   }
 
@@ -64,12 +64,12 @@ export class DatabaseHelper {
       const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query().equalTo("id", resourceId);
       const resourceData: Resource[] = await resourceQuery.get();
       if (resourceData.length > 0) {
-        const updateResource: Resource = resourceData[0]
-        const resourceOperator: CloudDBZoneObjectOperator = CloudDBZoneObjectOperator.build(updateResource).increment('collect_count', addCount);
+        const updateResource: Resource = resourceData[0];
+        const resourceOperator: CloudDBZoneObjectOperator =
+          CloudDBZoneObjectOperator.build(updateResource).increment('collect_count', addCount);
         await this.colResource.update(resourceOperator);
       }
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(`[collect-modify] update collect error ${JSON.stringify(error)}`);
     }
   }

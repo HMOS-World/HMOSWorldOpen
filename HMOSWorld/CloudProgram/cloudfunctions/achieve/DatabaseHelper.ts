@@ -18,7 +18,7 @@ import { AchieveResp } from './model/AchieveResp';
 import { learning_path as LearningPath } from './model/learning_path';
 import { user_learning as UserLearning } from './model/user_learning';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;

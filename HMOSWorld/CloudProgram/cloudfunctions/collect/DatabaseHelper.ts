@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import { cloud, CloudDBCollection, CloudDBZoneQuery} from '@hw-agconnect/cloud-server'
-import { collect as Collect} from './model/collect';
-import { resource as Resource} from './model/resource';
+import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
+import { collect as Collect } from './model/collect';
+import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';
-import { topic as Topic} from './model/topic';
-import { user_like as UserLike} from './model/user_like';
+import { topic as Topic } from './model/topic';
+import { user_like as UserLike } from './model/user_like';
 
-const ZONE_NAME = "HMOSWorld";
+const ZONE_NAME = 'HMOSWorld';
 
 export class DatabaseHelper {
   logger;
@@ -31,27 +31,28 @@ export class DatabaseHelper {
 
   constructor(logger) {
     this.logger = logger;
-    this.colCollect = cloud.database({zoneName: ZONE_NAME}).collection(Collect);
-    this.colResource = cloud.database({zoneName: ZONE_NAME}).collection(Resource);
-    this.colTopic = cloud.database({zoneName: ZONE_NAME}).collection(Topic);
-    this.colUserLike = cloud.database({zoneName: ZONE_NAME}).collection(UserLike);
+    this.colCollect = cloud.database({ zoneName: ZONE_NAME }).collection(Collect);
+    this.colResource = cloud.database({ zoneName: ZONE_NAME }).collection(Resource);
+    this.colTopic = cloud.database({ zoneName: ZONE_NAME }).collection(Topic);
+    this.colUserLike = cloud.database({ zoneName: ZONE_NAME }).collection(UserLike);
   }
 
   async queryResource(userId: string): Promise<ResourceResp[]> {
     const resList: ResourceResp[] = [];
     try {
-      const collectQuery: CloudDBZoneQuery<Collect> = this.colCollect.query().orderByDesc("collect_time").equalTo('user_id', userId);
+      const collectQuery: CloudDBZoneQuery<Collect> =
+        this.colCollect.query().orderByDesc("collect_time").equalTo('user_id', userId);
       const collectData: Collect[] = await collectQuery.get();
       this.logger.info(`[collect] collectQuery success collectData=>', ${JSON.stringify(collectData)}`);
       if (collectData.length <= 0) {
         return resList;
       }
 
-      const rids: string[] = []
+      const rids: string[] = [];
       for (let i = 0; i < collectData.length; i++) {
         const resId: string = collectData[i].getResource_id();
         if (resId && resId.trim().length > 0) {
-          rids.push(resId)
+          rids.push(resId);
         }
       }
       const likedIds: string[] = await this.queryLikedIds(userId);
@@ -82,8 +83,8 @@ export class DatabaseHelper {
             dataQ.getMedia_src(),
             likedIds.indexOf(dataQ.getId()) !== -1, // isLiked
             collectedIds.indexOf(dataQ.getId()) !== -1, // isCollected
-            null // isViewed
-          ))
+            null// isViewed
+          ));
         }
       }
       return resList;
@@ -123,19 +124,19 @@ export class DatabaseHelper {
   }
 
   async queryTopic(): Promise<Topic[]> {
-    // 查询所有主题
+    // check all topic
     const cloudDBZoneQuery: CloudDBZoneQuery<Topic> = this.colTopic.query();
     const topicListData: Topic[] = await cloudDBZoneQuery.get();
     return topicListData;
   }
 
   getTopicNames(topics: Topic[], tidStr: string): string[] {
-    const topicNames: string[] = []
+    const topicNames: string[] = [];
     const topicIds: string[] = tidStr.split(',');
     for (let index = 0; index < topicIds.length; index++) {
       const tid: string = topicIds[index];
       const tp: Topic[] = topics.filter(tp => tp.getId() === tid);
-      topicNames.push(tp[0].getName())
+      topicNames.push(tp[0].getName());
     }
     return topicNames;
   }
