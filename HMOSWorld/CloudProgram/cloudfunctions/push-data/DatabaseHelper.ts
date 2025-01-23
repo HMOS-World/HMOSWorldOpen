@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-const axios = require('axios').default;
 import { cloud, CloudDBCollection, CloudDBZoneQuery } from '@hw-agconnect/cloud-server';
 import request from 'request';
+import axios from 'axios';
 import { form_info as FormInfo } from './model/form_info';
 import { resource as Resource } from './model/resource';
 import { ResourceResp } from './model/ResourceResp';

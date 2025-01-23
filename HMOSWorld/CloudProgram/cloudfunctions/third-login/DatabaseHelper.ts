@@ -37,32 +37,7 @@ export class DatabaseHelper {
       // Huawei account login.
       if (loginParams.userType === HW_ACCOUNT_LOGIN && loginParams.unionId !== '') {
         // Run the unionId command to check whether the user exists, and create a user if the user does not exist.
-        const cloudDBZoneQuery: CloudDBZoneQuery<User> = this.colUser.query().equalTo("union_id", loginParams.unionId);
-        const userList: User[] = await cloudDBZoneQuery.get();
-        if (userList.length > 0) {
-          userResult = userList[0];
-        } else {
-          const maxIdUserQuery: CloudDBZoneQuery<User> = this.colUser.query().orderByDesc("id").limit(1);
-          const maxIdUserData: User[] = await maxIdUserQuery.get();
-          let newUserId = 'u10000001';
-          if (maxIdUserData.length > 0) {
-            const maxIdUser: User = maxIdUserData[0];
-            const userId: string = maxIdUser.getId();
-            const id = userId.replace('u', '');
-            newUserId = 'u' + (Number.parseInt(id) + 1);
-          }
-          const createResult: number = await this.createUser(loginParams, newUserId);
-          if (createResult > 0) {
-            userResp = new UserResp(
-              newUserId, //uuid
-              '', // username
-              loginParams.portrait,
-              '这个人很懒，什么也没留下',
-              loginParams.nickname,
-              HW_ACCOUNT_LOGIN
-            );
-          }
-        }
+        userResult = await this.accountLogin(loginParams);
       } else {
         const cloudDBZoneQuery: CloudDBZoneQuery<User> =
           this.colUser.query().equalTo("username", loginParams.username).equalTo("password", loginParams.password);
@@ -86,6 +61,31 @@ export class DatabaseHelper {
     } catch (error) {
       this.logger.error(`[third-login] queryUser error: ${JSON.stringify(error)}`);
     }
+  }
+
+  async accountLogin(loginParams: LoginParams): Promise<User> {
+    let userResult: User;
+    const cloudDBZoneQuery: CloudDBZoneQuery<User> = this.colUser.query().equalTo("union_id", loginParams.unionId);
+    const userList: User[] = await cloudDBZoneQuery.get();
+    if (userList.length > 0) {
+      userResult = userList[0];
+    } else {
+      const maxIdUserQuery: CloudDBZoneQuery<User> = this.colUser.query().orderByDesc("id").limit(1);
+      const maxIdUserData: User[] = await maxIdUserQuery.get();
+      let newUserId = 'u10000001';
+      if (maxIdUserData.length > 0) {
+        const maxIdUser: User = maxIdUserData[0];
+        const userId: string = maxIdUser.getId();
+        const id = userId.replace('u', '');
+        newUserId = 'u' + (Number.parseInt(id) + 1);
+      }
+      const createResult: number = await this.createUser(loginParams, newUserId);
+      if (createResult > 0) {
+        const userList: User[] = await cloudDBZoneQuery.get();
+        userResult = userList[0];
+      }
+    }
+    return userResult;
   }
 
   async createUser(loginParams: LoginParams, newUserId: string): Promise<number> {

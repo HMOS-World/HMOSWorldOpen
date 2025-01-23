@@ -40,19 +40,20 @@ export class DatabaseHelper {
       const resList: CommentResp[] = [];
       if (pageNum <= Math.ceil(totalCount / pageSize)) {
         const commentData: Comment[] = await commentQuery.get();
-        if (commentData.length > 0) {
-          for (let i = 0; i < commentData.length; i++) {
-            let dataQ: Comment = commentData[i];
-            resList.push(new CommentResp(
-              dataQ.getId(),
-              dataQ.getPath_id(),
-              dataQ.getPath_name(),
-              dataQ.getUsername(),
-              dataQ.getCreate_time(),
-              dataQ.getComment(),
-              dataQ.getScore()
-            ));
-          }
+        if (commentData.length <= 0) {
+          return listResp;
+        }
+        for (let i = 0; i < commentData.length; i++) {
+          let dataQ: Comment = commentData[i];
+          resList.push(new CommentResp(
+            dataQ.getId(),
+            dataQ.getPath_id(),
+            dataQ.getPath_name(),
+            dataQ.getUsername(),
+            dataQ.getCreate_time(),
+            dataQ.getComment(),
+            dataQ.getScore()
+          ));
         }
       }
       listResp.push(new ListResp(pageNum, pageSize, Math.ceil(totalCount / pageSize),
