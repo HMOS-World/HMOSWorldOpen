@@ -42,7 +42,7 @@ let myHandler = async function (event, _context, callback, logger) {
       });
     }
   } catch (err) {
-    this.logger.error(`[forminfo] func error: ${err.message}`);
+    logger.error(`[form-info] func error: ${err.message}`);
     callback({
       code: 3,
       message: '[form-info] operation exception',

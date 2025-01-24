@@ -89,7 +89,7 @@ export class DatabaseHelper {
       }
       return resList;
     } catch (error) {
-      this.logger.error(`[collect] query resource error ${JSON.stringify(error)}`);
+      this.logger.error(`[collect] query resource error ${error}`);
     }
   }
 
@@ -104,7 +104,7 @@ export class DatabaseHelper {
       }
       return likedIds;
     } catch (error) {
-      this.logger.error(`[collect] queryLikedIds error ${JSON.stringify(error)}`);
+      this.logger.error(`[collect] queryLikedIds error ${error}`);
     }
   }
 
@@ -119,7 +119,7 @@ export class DatabaseHelper {
       }
       return collectedIds;
     } catch (error) {
-      this.logger.error(`[collect] queryCollectedIds error ${JSON.stringify(error)}`);
+      this.logger.error(`[collect] queryCollectedIds error ${error}`);
     }
   }
 

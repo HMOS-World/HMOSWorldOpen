@@ -37,7 +37,7 @@ export class DatabaseHelper {
       return await this.colUserLearning.upsert(userLearningObj);
     }
     catch (error) {
-      this.logger.error(`[learning-modify] insertUserLearning error: ${JSON.stringify(error)}`);
+      this.logger.error(`[learning-modify] insertUserLearning error: ${error}`);
       return -1;
     }
   }

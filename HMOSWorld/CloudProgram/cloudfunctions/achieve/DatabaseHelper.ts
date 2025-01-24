@@ -69,7 +69,7 @@ export class DatabaseHelper {
       }
       return learnedPaths;
     } catch (error) {
-      this.logger.error(`[achieve] query learnedPathIds error: ${JSON.stringify(error)}`);
+      this.logger.error(`[achieve] query learnedPathIds error: ${error}`);
     }
   }
 }

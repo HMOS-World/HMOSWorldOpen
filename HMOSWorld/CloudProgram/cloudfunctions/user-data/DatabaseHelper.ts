@@ -55,7 +55,7 @@ export class DatabaseHelper {
         return undefined;
       }
     } catch (error) {
-      this.logger.error(`[user-data] queryUser error: ${JSON.stringify(error)}`);
+      this.logger.error(`[user-data] queryUser error: ${error}`);
     }
   }
 
@@ -70,7 +70,7 @@ export class DatabaseHelper {
       }
       return likedIds;
     } catch (error) {
-      this.logger.error(`[user-data] queryLikedIds error: ${JSON.stringify(error)}`);
+      this.logger.error(`[user-data] queryLikedIds error: ${error}`);
     }
   }
 
@@ -85,7 +85,7 @@ export class DatabaseHelper {
       }
       return collectedIds;
     } catch (error) {
-      this.logger.error(`[user-data] queryCollectedIds error: ${JSON.stringify(error)}`);
+      this.logger.error(`[user-data] queryCollectedIds error: ${error}`);
     }
   }
 }

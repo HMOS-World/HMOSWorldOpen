@@ -45,7 +45,7 @@ let myHandler = async function (event, _context, callback, logger) {
       });
     }
   } catch (err) {
-    this.logger.error(`[learning-modify] func error: ${err.message}`);
+    logger.error(`[learning-modify] func error: ${err.message}`);
     callback({
       code: 3,
       message: '[learning-modify] operation exception',

@@ -48,7 +48,7 @@ export class DatabaseHelper {
         }
       }, (err) => {
         if (err) {
-          this.logger.error(`[set-push-token] set-push-token async-lock error: ${JSON.stringify(err)}`);
+          this.logger.error(`[set-push-token] set-push-token async-lock error: ${err}`);
           reject(result);
         }
       }, null)
