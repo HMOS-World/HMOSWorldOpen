@@ -19,7 +19,8 @@ class ResourceResp {
         this.title = title;
         this.brief = brief;
         this.type = type;
-        this.headerImageUrl = headerImageUrl
+        this.headerImageUrl = headerImageUrl;
+        this.webUrl = webUrl
     }
 }
 
