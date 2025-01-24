@@ -36,7 +36,7 @@ export class DatabaseHelper {
       formInfo.setToken(token);
       return await this.colFormInfo.upsert(formInfo);
     } catch (error) {
-      this.logger.error(`[forminfo] insertFormInfo error: ${JSON.stringify(error)}`);
+      this.logger.error(`[forminfo] insertFormInfo error: ${error}`);
       return -1;
     }
   }

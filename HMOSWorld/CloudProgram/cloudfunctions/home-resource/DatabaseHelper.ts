@@ -47,7 +47,7 @@ export class DatabaseHelper {
       const bannerList: ResourceResp[] = await this.queryBannerResource(topics);
       return new HomeResp(bannerList, feedList, article);
     } catch (error) {
-      this.logger.error(`[home-resource] query resource error: ${JSON.stringify(error)}`);
+      this.logger.error(`[home-resource] query resource error: ${error}`);
     }
   }
 
@@ -67,7 +67,7 @@ export class DatabaseHelper {
       const resourceData: Resource[] = await resourceQuery.get();
       return this.getResourceList(resourceData, topics);
     } catch (error) {
-      this.logger.error(`[home-resource] queryBannerResource error: ${JSON.stringify(error)}`);
+      this.logger.error(`[home-resource] queryBannerResource error: ${error}`);
     }
   }
 
@@ -119,7 +119,7 @@ export class DatabaseHelper {
       }
       return new ListResp(1, 10, Math.ceil(totalCount / 10), totalCount, totalCount > 10, resList);
     } catch (error) {
-      this.logger.error(`[home-resource] queryResourceByePage error: ${JSON.stringify(error)}`);
+      this.logger.error(`[home-resource] queryResourceByePage error: ${error}`);
     }
   }
 
@@ -157,7 +157,7 @@ export class DatabaseHelper {
       }
       return resourceIds;
     } catch (error) {
-      this.logger.error(`[home-resource] queryFollowedTopicResourceIds error: ${JSON.stringify(error)}`);
+      this.logger.error(`[home-resource] queryFollowedTopicResourceIds error: ${error}`);
     }
   }
 }

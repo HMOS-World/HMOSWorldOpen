@@ -45,7 +45,7 @@ let myHandler = async function (event, _context, callback, logger) {
       });
     }
   } catch (err) {
-    this.logger.error(`[set-push-token] func error: ${err.message}`);
+    logger.error(`[set-push-token] func error: ${err.message}`);
     callback({
       code: 3,
       message: '[set-push-token] operation exception',

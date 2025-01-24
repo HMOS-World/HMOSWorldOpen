@@ -18,7 +18,7 @@ let myHandler = async function (_event, _context, callback, logger) {
       });
     }
   } catch (err) {
-    logger.error(`[push-message] func error: ${err.message}, stack: ${err.stack}`);
+    logger.error(`[push-message] func error: ${err.message}`);
     callback({
       code: 3,
       message: '[push-message] operation exception',

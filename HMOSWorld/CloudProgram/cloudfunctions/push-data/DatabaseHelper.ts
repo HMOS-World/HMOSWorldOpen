@@ -59,7 +59,6 @@ export class DatabaseHelper {
           const tokenData = result.token_type + " " + result.access_token;
           resolve(tokenData);
         } else {
-          logger2.error(`[push-data] getToken error:${JSON.stringify(err)}`);
           reject(err);
         }
       })
@@ -86,7 +85,7 @@ export class DatabaseHelper {
       }
       return resList;
     } catch (error) {
-      this.logger.error(`[push-data] queryResData error: ${JSON.stringify(error)}`);
+      this.logger.error(`[push-data] queryResData error: ${error}`);
     }
   }
 
@@ -120,7 +119,7 @@ export class DatabaseHelper {
           resData[index].headerImageUrl = response.data.downloadUrl;
         })
         .catch(error => {
-          this.logger.error(`[push-data] convertUrl error: ${JSON.stringify(error)}`);
+          this.logger.error(`[push-data] convertUrl error: ${error.message}`);
         })
     }
   }
@@ -197,15 +196,15 @@ export class DatabaseHelper {
 
         await axios.post(api, params, config)
           .then(response => {
-            this.logger.info(`push-data success: ${JSON.stringify(response)}`);
+            this.logger.info(`push-data success: ${JSON.stringify(response.data)}`);
           })
           .catch(error => {
-            this.logger.error(`[push-data] sendMessage error: ${JSON.stringify(error)}`);
+            this.logger.error(`[push-data] sendMessage error: ${error.message}`);
           });
       }
       this.logger.info(`[push-data] end post`);
     } catch (error) {
-      this.logger.error(`[push-data] pushData error: ${JSON.stringify(error)}`);
+      this.logger.error(`[push-data] pushData error: ${error}`);
     }
   }
 
@@ -215,7 +214,7 @@ export class DatabaseHelper {
       const formInfoData: FormInfo[] = await formInfoQuery.get();
       return formInfoData;
     } catch (error) {
-      this.logger.error(`[push-data] queryFormInfo error: ${JSON.stringify(error)}`);
+      this.logger.error(`[push-data] queryFormInfo error: ${error}`);
       return undefined;
     }
   }

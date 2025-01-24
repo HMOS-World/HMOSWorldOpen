@@ -60,7 +60,7 @@ export class DatabaseHelper {
         totalCount, totalCount > pageNum * pageSize, resList));
       return listResp;
     } catch (error) {
-      this.logger.error(`[learning-comments] queryComment error: ${JSON.stringify(error)}`);
+      this.logger.error(`[learning-comments] queryComment error: ${error}`);
     }
   }
 }

@@ -59,7 +59,7 @@ export class DatabaseHelper {
       }
       return userResp;
     } catch (error) {
-      this.logger.error(`[third-login] queryUser error: ${JSON.stringify(error)}`);
+      this.logger.error(`[third-login] queryUser error: ${error}`);
     }
   }
 
@@ -99,7 +99,7 @@ export class DatabaseHelper {
       createUser.setDescription('这个人很懒，什么也没留下');
       return await this.colUser.upsert(createUser);
     } catch (error) {
-      this.logger.error(`[third-login] createUser error: ${JSON.stringify(error)}`);
+      this.logger.error(`[third-login] createUser error: ${error}`);
       return -1;
     }
   }

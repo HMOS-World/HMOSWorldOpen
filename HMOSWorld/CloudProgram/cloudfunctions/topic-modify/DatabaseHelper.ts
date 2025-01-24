@@ -37,7 +37,7 @@ export class DatabaseHelper {
       }
       return await this.insertTopic(ids, userId);
     } catch (error) {
-      this.logger.error(`[topic-modify] modifyTopic error: ${JSON.stringify(error)}`);
+      this.logger.error(`[topic-modify] modifyTopic error: ${error}`);
       return -1;
     }
   }
@@ -54,7 +54,7 @@ export class DatabaseHelper {
       }
       return await this.colUserTopic.upsert(topicList);
     } catch (error) {
-      this.logger.error(`[topic-modify] insertTopic error: ${JSON.stringify(error)}`);
+      this.logger.error(`[topic-modify] insertTopic error: ${error}`);
       return -1;
     }
   }

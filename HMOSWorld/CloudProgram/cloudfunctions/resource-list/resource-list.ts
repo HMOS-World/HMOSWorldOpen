@@ -46,7 +46,7 @@ let myHandler = async function (event, _context, callback, logger) {
         });
       }
     } catch (err) {
-      this.logger.error(`[resource-list] func error: ${err.message}`);
+      logger.error(`[resource-list] func error: ${err.message}`);
       callback({
         code: 3,
         message: '[resource-list] operation exception',

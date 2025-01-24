@@ -93,7 +93,7 @@ export class DatabaseHelper {
       }
       return resList;
     } catch (error) {
-      this.logger.error(`[history] query resource error : ${JSON.stringify(error)}`);
+      this.logger.error(`[history] query resource error : ${error}`);
     }
   }
 
@@ -108,7 +108,7 @@ export class DatabaseHelper {
       }
       return likedIds;
     } catch (error) {
-      this.logger.error(`[history] queryLikedIds error : ${JSON.stringify(error)}`);
+      this.logger.error(`[history] queryLikedIds error : ${error}`);
     }
   }
 
@@ -123,7 +123,7 @@ export class DatabaseHelper {
       }
       return collectedIds;
     } catch (error) {
-      this.logger.error(`[history] queryCollectedIds error : ${JSON.stringify(error)}`);
+      this.logger.error(`[history] queryCollectedIds error : ${error}`);
     }
   }
 

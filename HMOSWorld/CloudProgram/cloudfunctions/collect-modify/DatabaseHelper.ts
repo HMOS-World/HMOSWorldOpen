@@ -39,7 +39,7 @@ export class DatabaseHelper {
       collectObj.setCollect_time(new Date());
       return await this.colCollect.upsert(collectObj);
     } catch (error) {
-      this.logger.error(`[collect-modify] insert collect error ${JSON.stringify(error)}`);
+      this.logger.error(`[collect-modify] insert collect error ${error}`);
       return -1;
     }
   }
@@ -54,7 +54,7 @@ export class DatabaseHelper {
       }
       return await this.colCollect.delete(collectData);
     } catch (error) {
-      this.logger.error(`[collect-modify] delete collect error ${JSON.stringify(error)}`);
+      this.logger.error(`[collect-modify] delete collect error ${error}`);
       return -1;
     }
   }
@@ -70,7 +70,7 @@ export class DatabaseHelper {
         await this.colResource.update(resourceOperator);
       }
     } catch (error) {
-      this.logger.error(`[collect-modify] update collect error ${JSON.stringify(error)}`);
+      this.logger.error(`[collect-modify] update collect error ${error}`);
     }
   }
 }

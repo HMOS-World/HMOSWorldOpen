@@ -44,7 +44,7 @@ let myHandler = async function (event, _context, callback, logger) {
       });
     }
   } catch (err) {
-    this.logger.error(`[history] func error: ${err.message}`);
+    logger.error(`[history] func error: ${err.message}`);
     callback({
       code: 3,
       message: '[history] operation exception',

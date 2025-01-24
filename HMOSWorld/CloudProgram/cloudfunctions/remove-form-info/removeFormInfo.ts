@@ -22,7 +22,7 @@ let myHandler = async function (event, _context, callback, logger) {
   if (!formId || !token) {
     callback({
       code: 1,
-      message: '[removeforminfo] params can not empty',
+      message: '[remove-form-info] params can not empty',
       data: null,
     });
   }
@@ -33,21 +33,21 @@ let myHandler = async function (event, _context, callback, logger) {
     if (result > 0) {
       callback({
         code: 0,
-        message: '[removeforminfo] operation successful',
+        message: '[remove-form-info] operation successful',
         result: event.body
       });
     } else {
       callback({
         code: 1,
-        message: '[removeforminfo] operation failed',
+        message: '[remove-form-info] operation failed',
         result: event.body
       });
     }
   } catch (err) {
-    this.logger.error(`[removeforminfo] func error: ${err.message}`);
+    logger.error(`[remove-form-info] func error: ${err.message}`);
     callback({
       code: 3,
-      message: '[removeforminfo] operation exception',
+      message: '[remove-form-info] operation exception',
       data: err,
     });
   }

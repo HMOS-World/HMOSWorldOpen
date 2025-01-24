@@ -44,7 +44,7 @@ let myHandler = async function (event, _context, callback, logger) {
       });
     }
   } catch (err) {
-    logger.error("func error:" + err.message);
+    logger.error(`[home-resource] func error: ${err.message}`);
     callback({
       code: 3,
       message: '[home-resource] operation exception',
