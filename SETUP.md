@@ -120,11 +120,11 @@ HMOS世界端云一体化配置，服务端需要配置信息与[AGC平台](http
 
 2. 登录[AGC平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，依次选择“我的项目” > “云数据库” > “存储区”，然后点击“新增”。在设置“存储区名称”时，请填写“HMOSWorld”。由于第3步上传的数据已关联此存储区名称，建议不要更改为其他名称。
 
-    ![image](screenshots/cloud/clouddata1.jpg)
+    ![image](screenshots/cloud/cloud_data.jpg)
 
 3. 在项目中选中CloudProgram，右击选择Deploy Cloud Program，即可上传云数据库和云函数，请确保上传完成并成功。
 
-    ![image](screenshots/cloud/cloudprogram.jpg)
+    ![image](screenshots/cloud/cloud_program.jpg)
 
     如果上传超时，请检查是否登录DevEco Studio；如果仍然上传超时或显示teamId报错，可重启DevEco Studio后再次上传。
 
