@@ -79,7 +79,8 @@ export class DatabaseHelper {
             dataQ.getTitle(),
             dataQ.getBrief(),
             dataQ.getType(),
-            dataQ.getHeader_src()
+            dataQ.getHeader_src(),
+            dataQ.getWeb_url()
           ));
         }
       }
