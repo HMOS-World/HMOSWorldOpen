@@ -191,7 +191,7 @@ export struct MapView {
         bundleName: 'com.huawei.hmos.maps.app',
         uri: 'maps://navigation',
         parameters: {
-          linkSource: 'Bundle name',
+          linkSource: 'com.hmosworld.opentest1',
           destinationLatitude: this.selectedZone.location.latitude,
           destinationLongitude: this.selectedZone.location.longitude,
           destinationName: title,

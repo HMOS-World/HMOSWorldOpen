@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "0000001D24EC444E7CF5D3BF177083AE9FEC998FCE6528FE3A3AAA52F30465ADA7F7E3EB5C8978BBDBD0C55967",
+          "certpath": "E:/hmosworld/HMOSWorldOpen/HMOSWorld/Application/signature/HMOSWorldOpenTest.cer",
+          "keyAlias": "HMOSWorld2024",
+          "keyPassword": "0000001DE15CFE43C11F4E14B89A1B047ED483888426999353E63BB80990F57EDAEEEC075F177FEEFEBB57F88A",
+          "profile": "E:/hmosworld/HMOSWorldOpen/HMOSWorld/Application/signature/HMOSWorldOpenTestDebug.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "E:/hmosworld/HMOSWorldOpen/HMOSWorld/Application/signature/HMOSWorld.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
