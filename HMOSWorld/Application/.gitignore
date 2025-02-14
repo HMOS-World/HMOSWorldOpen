@@ -14,3 +14,4 @@
 local.properties
 oh-package-lock.json5
 /.clang-format
+/AppScope/app.json5
