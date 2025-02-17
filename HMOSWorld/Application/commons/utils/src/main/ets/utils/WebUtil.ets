@@ -17,12 +17,12 @@ import { BuilderNode, FrameNode, NodeController, Size } from '@kit.ArkUI';
 import { webview } from '@kit.ArkWeb';
 import Logger from './Logger';
 
-let nodeMap: Map<string, MyNodeController | undefined> = new Map();
-let controllerMap: Map<string, WebviewController | undefined> = new Map();
-let onPageEndMap: Map<string, Function | undefined> = new Map();
-let onProgressChangeMap: Map<string, Function | undefined> = new Map();
-let onResourceLoadMap: Map<string, Function | undefined> = new Map();
-let context: UIContext;
+const nodeMap: Map<string, MyNodeController | undefined> = new Map();
+const controllerMap: Map<string, WebviewController | undefined> = new Map();
+const onPageEndMap: Map<string, Function | undefined> = new Map();
+const onProgressChangeMap: Map<string, Function | undefined> = new Map();
+const onResourceLoadMap: Map<string, Function | undefined> = new Map();
+const context: UIContext;
 const TAG: string = '[WebUtil]';
 
 class Data {

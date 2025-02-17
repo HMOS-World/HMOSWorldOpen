@@ -24,6 +24,7 @@ import { ZoneDetailView } from '../views/ZoneDetailView';
 import { SpeakPlayerButton } from './SpeakPlayerButton';
 
 const resourceManager = getContext().resourceManager;
+
 export enum ModalActionType {
   ROUTE = 0,
   NAVIGATION
@@ -56,29 +57,29 @@ export struct ZoneDetailModal {
   aboutToAppear(): void {
     this.handleShowChange();
   }
+
   // Recalculate the size of the pop-up window when the modal pop-up window is changed.
   handleShowChange() {
-      this.detailSheetWidth =
-        this.currentBreakpoint === BreakpointTypeEnum.SM ? this.deviceWidth :
-        Const.MODAL_MAX_WIDTH;
-      this.detailSheetMinHeight = this.detailSheetWidth * Const.IMG_ASPECT_RATIO + Const.MODAL_BOTTOM_HEIGHT;
-      this.detailSheetHeight = this.detailSheetMinHeight;
-      let tempHeight: number =
-        (AppStorage.get('deviceHeight') as number) - (AppStorage.get('statusBarHeight') as number) - 8 -
-          (AppStorage.get('naviIndicatorHeight') as number);
-      if (this.currentBreakpoint !== BreakpointTypeEnum.LG) {
-        tempHeight -= Const.TABBAR_HEIGHT;
-      }
-      if (this.currentBreakpoint === BreakpointTypeEnum.MD) {
-        tempHeight -= 20;
-      }
-      this.detailSheetMaxHeight = tempHeight;
-      this.maxPositionX = this.deviceWidth - Const.MODAL_MAX_WIDTH - this.minPositionX;
-      if (this.currentBreakpoint === BreakpointTypeEnum.LG) {
-        this.maxPositionX -= Const.TABBAR_WIDTH;
-      }
-
-      Logger.info(TAG, `maxHeight:${this.detailSheetMaxHeight}   minHeight: ${this.detailSheetMinHeight}`);
+    this.detailSheetWidth =
+      this.currentBreakpoint === BreakpointTypeEnum.SM ? this.deviceWidth :
+      Const.MODAL_MAX_WIDTH;
+    this.detailSheetMinHeight = this.detailSheetWidth * Const.IMG_ASPECT_RATIO + Const.MODAL_BOTTOM_HEIGHT;
+    this.detailSheetHeight = this.detailSheetMinHeight;
+    let tempHeight: number =
+      (AppStorage.get('deviceHeight') as number) - (AppStorage.get('statusBarHeight') as number) - 8 -
+        (AppStorage.get('naviIndicatorHeight') as number);
+    if (this.currentBreakpoint !== BreakpointTypeEnum.LG) {
+      tempHeight -= Const.TABBAR_HEIGHT;
+    }
+    if (this.currentBreakpoint === BreakpointTypeEnum.MD) {
+      tempHeight -= 20;
+    }
+    this.detailSheetMaxHeight = tempHeight;
+    this.maxPositionX = this.deviceWidth - Const.MODAL_MAX_WIDTH - this.minPositionX;
+    if (this.currentBreakpoint === BreakpointTypeEnum.LG) {
+      this.maxPositionX -= Const.TABBAR_WIDTH;
+    }
+    Logger.info(TAG, `maxHeight:${this.detailSheetMaxHeight}   minHeight: ${this.detailSheetMinHeight}`);
   }
 
   @Builder
@@ -154,6 +155,7 @@ export struct ZoneDetailModal {
           this.detailSheetHeight = this.detailSheetMinHeight;
           AudioPlayerService.getInstance().stop();
         })
+
         SpeakPlayerButton({
           speakText: this.getAllText(),
           onInitSpeak: async () => {

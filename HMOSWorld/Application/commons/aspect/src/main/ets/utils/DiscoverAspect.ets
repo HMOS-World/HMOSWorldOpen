@@ -20,7 +20,7 @@ const TAG = '[DiscoverAspect]';
 
 export class DiscoverAspect {
   static createAspect() {
-    let harName: string = '@ohos/discover';
+    const harName: string = '@ohos/discover';
     import(harName).then((ns: ESObject) => {
       const targetClass: ESObject = ns.DiscoverModel;
       const methodClassName: string = 'DiscoverModel';

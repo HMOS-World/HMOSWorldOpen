@@ -137,6 +137,7 @@ export struct ArticleDetailView {
             }
           }
 
+          // Buttons at the bottom are displayed only on the first-level web page.
           if (this.showInteractiveArea) {
             InteractiveAreaView({
               isLiked: this.articleDetail.isLiked,

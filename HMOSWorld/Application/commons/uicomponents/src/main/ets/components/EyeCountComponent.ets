@@ -16,6 +16,11 @@
 import { CommonConstants, CommonUtil } from '@ohos/utils';
 import { Constants } from '../common/Constants';
 
+/**
+ * Browse Quantity Component.
+ * @param count : Number of views.
+ */
+
 @Builder
 export function EyeCountComponent(count: number) {
   Row() {

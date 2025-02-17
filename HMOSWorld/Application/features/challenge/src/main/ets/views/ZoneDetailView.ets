@@ -86,8 +86,8 @@ export struct ZoneDetailView {
   }
 
   handleScrollFrame(offset: number): number {
-    let tempImgHeight: number = Math.ceil(this.imageHeight - offset);
-    let yOffset: number = this.scroller.currentOffset().yOffset;
+    const tempImgHeight: number = Math.ceil(this.imageHeight - offset);
+    const yOffset: number = this.scroller.currentOffset().yOffset;
     Logger.info(TAG, 'yOffset： ' + offset + '   Height： ' + (this.imageMaxHeight - this.imageMinHeight));
     if (yOffset > 0) {
       Logger.info(TAG, 'unHandle Image');

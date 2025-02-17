@@ -57,8 +57,10 @@ export struct ArticleCardView {
         .layoutWeight(1)
 
         Row() {
+          // View Count
           EyeCountComponent(this.articleItem.viewsCount)
 
+          // Like Button
           ArticleCardButtonView({
             clickAnimationPath: 'common/lottie/liked_lottie.json',
             cancelAnimationPath: 'common/lottie/cancel_liked_lottie.json',
@@ -72,6 +74,7 @@ export struct ArticleCardView {
             onImage: $r('app.media.btn_good_on')
           })
 
+          // Collect Button
           ArticleCardButtonView({
             clickAnimationPath: 'common/lottie/collected_lottie.json',
             cancelAnimationPath: 'common/lottie/cancel_collect_lottie.json',

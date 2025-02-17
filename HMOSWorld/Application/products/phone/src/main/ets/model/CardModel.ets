@@ -23,6 +23,7 @@ export interface CardData {
   defaultImg: Resource;
 }
 
+// Default data of the service card.
 export const CARD_LIST: CardData[] = [
   {
     id: '1000048',

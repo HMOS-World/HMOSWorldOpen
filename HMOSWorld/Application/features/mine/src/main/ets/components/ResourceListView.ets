@@ -59,6 +59,7 @@ export struct ResourceListView {
       this.jumpDetail(learningResource);
     }
     this.eventHub.on(EventTypeEnum.MINE_REFRESH, () => {
+      // On pad, the default details page on the right needs to be updated when the page is refreshed.
       if (this.resDataSource.dataArray.length > 0) {
         this.jumpDetail(this.resDataSource.dataArray[0]);
         this.scrollerForList?.scrollEdge(Edge.Start);
@@ -73,6 +74,7 @@ export struct ResourceListView {
       this.listPathStack.clear();
       this.selectedId = '';
     } else if (this.currentBreakpoint === BreakpointTypeEnum.LG) {
+      // A details page is displayed by default when the page is opened.
       let articleDetail: LearningResource = this.resDataSource.getData(0);
       if (this.appPathStack.size() > 0) {
         const params = this.appPathStack.getParamByName('DiscoverArticleDetail')[0] as Record<string, object>;

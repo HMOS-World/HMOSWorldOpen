@@ -55,7 +55,7 @@ export class SpeechPlayerService {
 
   // Set speak listener
   public setListener() {
-    let speakListener: textToSpeech.SpeakListener = {
+    const speakListener: textToSpeech.SpeakListener = {
       onStart: (requestId: string, response: textToSpeech.StartResponse) => {
         Logger.info(TAG, 'speakListener onStart.');
       },
@@ -68,10 +68,10 @@ export class SpeechPlayerService {
         Logger.info(TAG, 'speakListener onStop.');
       },
       onData: (requestId: string, audio: ArrayBuffer, response: textToSpeech.SynthesisResponse) => {
-        let path = getContext().tempDir;
-        let filePath = path + TEMP_AUDIO_FILE_NAME;
-        let file: fileIo.File = fileIo.openSync(filePath, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
-        let options: WriteOptions = {
+        const path = getContext().tempDir;
+        const filePath = path + TEMP_AUDIO_FILE_NAME;
+        const file: fileIo.File = fileIo.openSync(filePath, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
+        const options: WriteOptions = {
           offset: this.bufferSize,
           length: audio.byteLength
         };
@@ -98,7 +98,7 @@ export class SpeechPlayerService {
         "soundChannel": 1,
         "playType": 0
       }
-      let speakParams: textToSpeech.SpeakParams = {
+      const speakParams: textToSpeech.SpeakParams = {
         requestId: util.generateRandomUUID(),
         extraParams: extraParam
       };

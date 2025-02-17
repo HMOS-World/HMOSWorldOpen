@@ -50,6 +50,7 @@ export class TopicModel {
     });
   }
 
+  // Update the theme of the settings.
   updateFollowedTopics(followedIds: string[]): Promise<void> {
     return new Promise((resolve: Function, reject: Function) => {
       this.funNetwork.editTopicsFollowed(AppStorage.get<string>('userId') as string, followedIds.join(',')).then(() => {

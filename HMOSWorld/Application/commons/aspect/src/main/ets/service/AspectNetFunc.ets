@@ -22,6 +22,7 @@ import { Logger } from '@ohos/utils';
 const TAG = '[AspectNetFunc]';
 
 export class AspectNetFunc {
+  // Uploading Tracing Point Data.
   public uploadAspectInfo(params: AspectInfoParams): Promise<void> {
     return new Promise((resolve: () => void, reject: (error: BusinessError) => void) => {
       Request.call(AspectTrigger.UPLOAD_ASPECT, params).then(() => {
