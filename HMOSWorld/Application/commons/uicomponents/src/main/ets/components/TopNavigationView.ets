@@ -19,6 +19,10 @@ import { CommonConstants } from '@ohos/utils';
 function DefaultBuilder() {
 }
 
+/**
+ * Custom Title Block
+ */
+
 @Component
 export struct TopNavigationView {
   title?: ResourceStr;

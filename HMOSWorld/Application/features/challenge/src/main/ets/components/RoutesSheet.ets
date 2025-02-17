@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { curves } from '@kit.ArkUI';
+import  { curves } from '@kit.ArkUI';
 import { navi } from '@kit.MapKit';
 import { BreakpointType, BreakpointTypeEnum, CommonConstants, Logger } from '@ohos/utils';
 import ZonesItem from '../model/ZonesItem';
@@ -90,7 +90,6 @@ export struct RoutesSheet {
           .fillColor($r('sys.color.ohos_id_color_subtab_text_off'))
           .width($r('app.float.small_icon_size'))
           .margin({ left: $r('app.float.md_padding_margin') })
-
       }
       .padding({ left: $r('app.float.lg_padding_margin'), right: $r('app.float.lg_padding_margin') })
       .height($r('app.float.route_bg_height'))

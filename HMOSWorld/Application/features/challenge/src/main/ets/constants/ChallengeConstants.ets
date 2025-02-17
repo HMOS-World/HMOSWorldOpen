@@ -235,6 +235,3 @@ export class ChallengeConstants {
   static readonly TABBAR_HEIGHT: number = 56;
   static readonly TABBAR_WIDTH: number = 96;
 }
-
-
-

@@ -16,6 +16,10 @@
 import { ColSpanEnum, ColumnEnum, CommonConstants, OffsetEnum } from '@ohos/utils';
 import { Constants } from '../common/Constants';
 
+/**
+ * Buttons at the bottom of the article detail page.
+ */
+
 @Component
 export struct InteractiveAreaView {
   @Prop isLiked: boolean = false;

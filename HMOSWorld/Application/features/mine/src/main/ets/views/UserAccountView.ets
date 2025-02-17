@@ -79,6 +79,7 @@ export struct UserAccountView {
           Blank()
           Button($r('app.string.logout'))
             .onClick(() => {
+              // The login page is displayed after you log out of the app
               this.userModel.deleteUserAccount().then(()=>{
                 router.replaceNamedRoute({
                   name: 'LoginPage'

@@ -25,7 +25,7 @@ const TAG = '[BackgroundTaskManager]';
  */
 export class BackgroundTaskManager {
   public static startContinuousTask(context: common.UIAbilityContext): void {
-    let wantAgentInfo: wantAgent.WantAgentInfo = {
+    const wantAgentInfo: wantAgent.WantAgentInfo = {
       wants: [
         {
           bundleName: context.abilityInfo.bundleName,

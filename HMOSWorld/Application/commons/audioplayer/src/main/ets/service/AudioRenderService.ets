@@ -54,13 +54,14 @@ export class AudioRenderService {
     return AudioRenderService.instance;
   }
 
+  // Write audio data to the file.
   public writeDataCallback(buffer: ArrayBuffer) {
-    let path = getContext().tempDir;
-    let filePath = path + TEMP_AUDIO_FILE_NAME;
+    const path = getContext().tempDir;
+    const filePath = path + TEMP_AUDIO_FILE_NAME;
     // Check whether the file exists. If the file cannot be found, the program may break down.
     if (fileIo.accessSync(filePath)) {
-      let file: fileIo.File = fileIo.openSync(filePath, fileIo.OpenMode.READ_ONLY);
-      let options: ReadOptions = {
+      const file: fileIo.File = fileIo.openSync(filePath, fileIo.OpenMode.READ_ONLY);
+      const options: ReadOptions = {
         offset: this.renderBufferSize,
         length: buffer.byteLength
       }
@@ -73,6 +74,7 @@ export class AudioRenderService {
     }
   }
 
+  // Create an audio renderer and write audio data to a file
   public initAudioRenderInit(audioRendererOptions?: audio.AudioRendererOptions): Promise<void> {
     // Callback function for listening to the audio stream written by audio render
     return audio.createAudioRenderer(audioRendererOptions ?? DEFAULT_AUDIO_RENDERER_OPTIONS).then(renderer => {
@@ -86,9 +88,11 @@ export class AudioRenderService {
     });
   }
 
+  // Start playing the audio and monitor the audio status.
   public startAudioRender() {
     if (this.renderer) {
-      let stateGroup = [audio.AudioState.STATE_PREPARED, audio.AudioState.STATE_PAUSED, audio.AudioState.STATE_STOPPED];
+      const stateGroup =
+        [audio.AudioState.STATE_PREPARED, audio.AudioState.STATE_PAUSED, audio.AudioState.STATE_STOPPED];
       // Rendering starts if and only if the state is one of prepared, paused, and stopped.
       if (stateGroup.indexOf(this.renderer.state.valueOf()) === -1) {
         Logger.error(TAG, `Rendering starts if and only if the state is one of prepared, paused, and stopped.`);

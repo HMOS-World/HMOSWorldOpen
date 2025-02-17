@@ -30,6 +30,7 @@ let localStorage: LocalStorage = new LocalStorage();
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     Logger.info(TAG, 'Ability onCreate');
+    // Initializing the AGC Service.
     this.initAgc();
     this.handleParams(want);
     this.restoringData(want, launchParam);
@@ -52,7 +53,7 @@ export default class EntryAbility extends UIAbility {
 
   async initAgc() {
     const value = await this.context.resourceManager.getRawFileContent('agconnect-services.json');
-    let json: string = buffer.from(value as ArrayBuffer).toString('utf8');
+    const json: string = buffer.from(value as ArrayBuffer).toString('utf8');
     initialize(this.context, JSON.parse(json));
   }
 
@@ -119,8 +120,8 @@ export default class EntryAbility extends UIAbility {
     if (launchParam.launchReason === AbilityConstant.LaunchReason.CONTINUATION) {
       if (want.parameters && want.parameters.continueData) {
         Logger.info(TAG, 'restoringData parameters:' + JSON.stringify(want.parameters.continueData));
-        let cData = JSON.parse(want.parameters.continueData as string) as CData
-        let userId = (cData.userData as Record<string, string>).id as string;
+        const cData = JSON.parse(want.parameters.continueData as string) as CData
+        const userId = (cData.userData as Record<string, string>).id as string;
         ContinueModel.getInstance().data = cData;
         ContinueModel.getInstance().isContinue = true;
         if (userId) {

@@ -34,7 +34,7 @@ import { LearningComment } from '../model/LearningComment';
 const TAG = '[LearningDetailPage]';
 
 const LEARN_MIN_DURATION = 5;
-let continueModel = ContinueModel.getInstance();
+const continueModel = ContinueModel.getInstance();
 
 @Component
 export struct LearningDetailView {
@@ -56,7 +56,7 @@ export struct LearningDetailView {
   }
 
   onBackPressBack() {
-    let webController = WebUtil.getController(this.learningItem.url);
+    const webController = WebUtil.getController(this.learningItem.url);
     if (webController?.accessBackward()) {
       webController?.backward();
       return true;
@@ -100,17 +100,9 @@ export struct LearningDetailView {
       animateTo({ duration: 300 }, () => {
         this.showComment = false;
       });
-      // let webUrl: string = WebUtil.getController(this.learningItem.url)?.getUrl() || '';
-      // let shouldShow: boolean = webUrl.includes('/content?chapterId=');
-      // this.showCommentBtn = this.foldExpanded && shouldShow;
-      // if (!shouldShow) {
-      //   animateTo({ duration: 300 }, () => {
-      //     this.showComment = false;
-      //   });
-      // }
     })
     WebUtil.setOnResourceLoadAction(this.learningItem.url, (resourceUrl: string) => {
-      let shouldShow: boolean = resourceUrl.includes('FileServer/getFile/cmtyPub/103/404/958/');
+      const shouldShow: boolean = resourceUrl.includes('FileServer/getFile/cmtyPub/103/404/958/');
       if (this.showCommentBtn == false) {
         this.showCommentBtn = this.foldExpanded && shouldShow;
       }
@@ -263,7 +255,7 @@ export struct LearningDetailView {
     .width(LearningConstants.FULL_PERCENT)
     .hideTitleBar(true)
     .onReady((cxt: NavDestinationContext) => {
-      let params = cxt.pathInfo.param as Record<string, object>;
+      const params = cxt.pathInfo.param as Record<string, object>;
       this.learningItem = params.learningItem as LearningPath;
       this.initWebNode();
       continueModel.setData(RouterNameEnum.LEARNING_DETAIL, this.learningItem);

@@ -22,6 +22,7 @@ export struct ChallengeDetailView {
   @Consume('appPathStack') appPathStack: NavPathStack;
 
   onBackPress(): boolean {
+    // If the web has level-2 page. the web page is returned and the return event of the current page is intercepted.
     let webview = WebUtil.getController(WebUrls.ACTIVITY_URL);
     if (webview?.accessBackward()) {
       webview.backward();

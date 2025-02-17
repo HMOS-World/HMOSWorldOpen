@@ -18,6 +18,10 @@ import Constants from '../constants/Constants';
 import { UserModel } from '../model/UserModel';
 import { AchieveImage, ACHIEVE_IMAGE_LIST } from '../model/AchievementModel';
 
+
+/**
+ * My Achievements tab page.
+ */
 @Component
 export struct AchievesView {
   @State userModel: UserModel = UserModel.getInstance();
@@ -119,6 +123,7 @@ export struct AchievesView {
           .backgroundColor($r('app.color.achieve_background_color'))
           .onReady(() => {
             if (this.clickedItem != null) {
+              // Achievement view pop-up effects with lottie animation.
               LottieUtil.loadAnimation({
                 container: this.mainCanvasRenderingContext,
                 renderer: 'canvas',

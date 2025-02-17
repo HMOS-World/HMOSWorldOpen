@@ -63,7 +63,7 @@ export struct ImageViewDialog {
    * Detect boundary to keep the image in window.
    */
   detectBoundary(): void {
-    let maxOffsetX = this.imgScale * this.deviceWidth / 2 - this.deviceWidth / 2;
+    const maxOffsetX = this.imgScale * this.deviceWidth / 2 - this.deviceWidth / 2;
     if (vp2px(this.imgOffsetX) > (maxOffsetX)) {
       this.imgOffsetX = px2vp(maxOffsetX);
     }
@@ -126,7 +126,7 @@ export struct ImageViewDialog {
       // Save the picture to the album.
       this.appContext.resourceManager.getMediaContent(this.introductionData.imageList[this.currentIndex].id, 0)
         .then(async (value: Uint8Array) => {
-          let media = value.buffer;
+          const media = value.buffer;
           // Write to media library file
           await fileIo.write(file.fd, media);
           await fileIo.close(file.fd);

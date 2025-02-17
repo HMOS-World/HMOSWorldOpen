@@ -57,6 +57,7 @@ struct MainPage {
   @Provide('settingPathStack') settingPathStack: NavPathStack = new NavPathStack();
 
   aboutToAppear() {
+    // Preloading the web page.
     WebUtil.createNWeb(WebUrls.ACTIVITY_URL, this.getUIContext());
     WebUtil.createNWeb(WebUrls.CHALLENGE_URL, this.getUIContext());
     this.breakpointSystem.register();
@@ -72,10 +73,11 @@ struct MainPage {
     } catch (exception) {
       Logger.error(TAG, 'Is not fold able device error: ' + JSON.stringify(exception));
     }
+    // Set the current page to the transferable state.
     WindowUtil.setMissionContinueActive(context, true);
 
     if (ContinueModel.getInstance().isContinue) {
-      let userData: UserData = ContinueModel.getInstance().data.userData as UserData;
+      const userData: UserData = ContinueModel.getInstance().data.userData as UserData;
       this.currentIndex = ContinueModel.getInstance().data.mainTabIndex as number;
       UserModel.getInstance().saveDistributedUserData(userData);
     }
@@ -83,15 +85,17 @@ struct MainPage {
   }
 
   async createProfile() {
-    let isDisProfileAccess = fileIo.accessSync(ProfileConstants.getInstance().DISTRIBUTED_PROFILE_PATH);
+    // Copy the local avatar from the distributed file path to the app file path during transfer.
+    const isDisProfileAccess = fileIo.accessSync(ProfileConstants.getInstance().DISTRIBUTED_PROFILE_PATH);
     Logger.info(TAG, 'isDisProfileAccess:' + isDisProfileAccess);
     if (isDisProfileAccess) {
-      FileUtil.copyFile(ProfileConstants.getInstance().DISTRIBUTED_PROFILE_PATH, ProfileConstants.getInstance().LOCAL_PROFILE_PATH)
+      FileUtil.copyFile(ProfileConstants.getInstance().DISTRIBUTED_PROFILE_PATH,
+        ProfileConstants.getInstance().LOCAL_PROFILE_PATH)
     }
-    let isLocalProfileAccess = fileIo.accessSync(ProfileConstants.getInstance().LOCAL_PROFILE_PATH);
+    const isLocalProfileAccess = fileIo.accessSync(ProfileConstants.getInstance().LOCAL_PROFILE_PATH);
     Logger.info(TAG, 'isLocalProfileAccess:' + isLocalProfileAccess);
     if (isLocalProfileAccess) {
-      let imageSource: image.ImageSource = image.createImageSource(ProfileConstants.getInstance().LOCAL_PROFILE_PATH);
+      const imageSource: image.ImageSource = image.createImageSource(ProfileConstants.getInstance().LOCAL_PROFILE_PATH);
       imageSource.createPixelMap((err, pixelMap) => {
         if (!err) {
           AppStorage.setOrCreate('profilePixelMap', pixelMap);
@@ -113,6 +117,7 @@ struct MainPage {
   }
 
   aboutToDisappear() {
+    // Deregister the Listener.
     this.breakpointSystem.unregister();
     try {
       display.off('foldStatusChange');
@@ -125,10 +130,11 @@ struct MainPage {
 
   onPageShow() {
     DarkModeUtil.getInstance().checkDarkModeSetting();
-    let jumpArticleId: string = GlobalContext.getContext().getObject('articleId') as string;
+    const jumpArticleId: string = GlobalContext.getContext().getObject('articleId') as string;
+    // If the app is started from a service card or notification message, the corresponding article page is displayed.
     if (jumpArticleId) {
       GlobalContext.getContext().deleteObject('articleId');
-      let article: LearningResource = new LearningResource();
+      const article: LearningResource = new LearningResource();
       article.id = jumpArticleId;
       article.webUrl = GlobalContext.getContext().getObject('webUrl') as string;
       article.type = GlobalContext.getContext().getObject('type') as ResourcesType;
@@ -155,7 +161,8 @@ struct MainPage {
 
   onBackPress(): boolean | void {
     if (this.currentIndex === TabBarType.ACTIVITY) {
-      let webview = WebUtil.getController(WebUrls.ACTIVITY_URL);
+      const webview = WebUtil.getController(WebUrls.ACTIVITY_URL);
+      // If the web has level-2 page. the web page is returned and the return event of the current page is intercepted.
       if (webview?.accessBackward()) {
         webview.backward();
       }
@@ -205,6 +212,7 @@ struct MainPage {
             this.currentIndex = index;
             ContinueModel.getInstance().data.mainTabIndex = index;
 
+            // Close Voice Player when switching tabs.
             if (AppStorage.get('audioPlayerStatus') !== AudioPlayerStatus.IDLE) {
               AudioPlayerService.getInstance().stop().then(() => {
                 AudioPlayerService.destroy();

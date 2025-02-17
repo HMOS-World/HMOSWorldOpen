@@ -61,7 +61,7 @@ export struct FeedWaterFlow {
     .height(CommonConstants.FULL_PERCENT)
     .width(CommonConstants.FULL_PERCENT)
     .onReady((cxt: NavDestinationContext) => {
-      let params = cxt.pathInfo.param as Record<string, object>;
+      const params = cxt.pathInfo.param as Record<string, object>;
       this.onDestinationBack = params.onDestinationBack as () => boolean;
     })
     .hideTitleBar(true)

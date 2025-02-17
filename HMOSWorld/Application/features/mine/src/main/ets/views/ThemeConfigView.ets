@@ -38,6 +38,9 @@ function itemStyle() {
   .backgroundColor($r('app.color.hmos_article_card_color_white'))
 }
 
+/**
+ * Dark and light color mode setting page.
+ */
 @Component
 struct ThemeConfigView {
   @Consume('settingPathStack') settingPathStack: NavPathStack;
@@ -69,6 +72,7 @@ struct ThemeConfigView {
   })
 
   saveTimeFunc(): void {
+    // Save the dark and light color mode setting data.
     this.settingsUtil.saveDarkModeSettingsConfig(this.darkModeConfig);
     if (this.currentBreakpoint === BreakpointTypeEnum.SM) {
       WindowUtil.updateStatusBarColor(getContext(this),
@@ -202,6 +206,7 @@ function getTimeDesc(selectedTime: Date): Resource {
   let selectedHour: number = selectedTime.getHours();
   let selectedMinute: string = String(selectedTime.getMinutes()).padStart(2, '0');
   let timeStr: string = (String(selectedHour > 12 ? selectedHour - 12 : selectedHour)) + ':' + selectedMinute;
+  // Time Segmentation
   if (selectedHour <= 4) {
     return $r('app.string.early_morning', timeStr);
   }

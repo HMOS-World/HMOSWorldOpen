@@ -151,6 +151,7 @@ struct ThemeSettingPage {
     .margin({ top: $r('app.float.xxl_padding_margin'), bottom: $r('app.float.lg_padding_margin') })
   }
 
+  // Dynamic effect when saving data.
   savingEffect(): void {
     let count = 1;
     const loadingList = ['  ', '. ', '..'];

@@ -98,6 +98,7 @@ export class AudioPlayerService {
   }
 
   public createSession() {
+    // Access the Broadcast Control Center.
     avSession.createAVSession(this.context, 'SPEECH_AUDIO_SESSION', 'audio').then(async (avSession) => {
       this.session = avSession;
       Logger.info(TAG, 'Succeeded in create avSession.');
@@ -121,6 +122,7 @@ export class AudioPlayerService {
     });
   }
 
+  // Listening to Events of the Broadcast Control Center.
   public setListenerForMesFromController() {
     this.session?.on('play', () => {
       this.play();

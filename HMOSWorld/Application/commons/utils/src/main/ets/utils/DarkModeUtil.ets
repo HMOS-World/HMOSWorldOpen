@@ -26,8 +26,9 @@ export class DarkModeSettingsConfig {
   endTime: Date = new Date();
 
   constructor() {
-    let startDate = new Date();
-    let endDate = new Date(startDate);
+    const startDate = new Date();
+    const endDate = new Date(startDate);
+    // Set default time.
     startDate.setHours(22);
     startDate.setMinutes(0);
     this.startTime = startDate;
@@ -83,9 +84,10 @@ export class DarkModeUtil {
       colorMode = ConfigurationConstant.ColorMode.COLOR_MODE_DARK;
     } else {
       colorMode = ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT;
-      let startTime: number = darkModeConfig.startTime.getHours() * 60 + darkModeConfig.startTime.getMinutes();
-      let endTime: number = darkModeConfig.endTime.getHours() * 60 + darkModeConfig.endTime.getMinutes();
-      let nowTime: number = new Date().getHours() * 60 + new Date().getMinutes();
+      const startTime: number = darkModeConfig.startTime.getHours() * 60 + darkModeConfig.startTime.getMinutes();
+      const endTime: number = darkModeConfig.endTime.getHours() * 60 + darkModeConfig.endTime.getMinutes();
+      const nowTime: number = new Date().getHours() * 60 + new Date().getMinutes();
+      // Determine the applied dark and light color mode based on the current time.
       if (startTime > endTime) {
         if (nowTime <= endTime || nowTime >= startTime) {
           colorMode = ConfigurationConstant.ColorMode.COLOR_MODE_DARK;

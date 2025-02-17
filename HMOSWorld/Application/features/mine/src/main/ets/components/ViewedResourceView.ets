@@ -20,6 +20,9 @@ import { UserModel } from '../model/UserModel';
 import { LoadingView } from '../views/LoadingView';
 import { ResourceListView } from './ResourceListView';
 
+/**
+ * My Watch History tab page
+ */
 @Component
 export struct ViewedResourceView {
   @State userModel: UserModel = UserModel.getInstance();

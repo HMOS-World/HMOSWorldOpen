@@ -104,6 +104,7 @@ struct LoginPage {
     })
   }
 
+  // Request AccountKit authorization to request more user information.
   getHWAuthorization() {
     let authRequest = new authentication.HuaweiIDProvider().createAuthorizationWithHuaweiIDRequest();
     authRequest.scopes = ['profile', 'openid'];
@@ -140,6 +141,7 @@ struct LoginPage {
     }
   }
 
+  // Use the Account Kit to log in to the API to obtain data such as UnionID and OpenID.
   handleHWLogin() {
     let loginRequest = new authentication.HuaweiIDProvider().createLoginWithHuaweiIDRequest();
     loginRequest.forceLogin = true;

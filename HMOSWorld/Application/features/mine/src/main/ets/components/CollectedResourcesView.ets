@@ -20,6 +20,9 @@ import { UserModel } from '../model/UserModel';
 import { LoadingView } from '../views/LoadingView';
 import { ResourceListView } from './ResourceListView';
 
+/**
+ * My Favorites tab page.
+ */
 @Component
 export struct CollectedResourceView {
   @State userModel: UserModel = UserModel.getInstance();

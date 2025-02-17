@@ -35,6 +35,9 @@ let imageWidth: BreakpointType<string> = new BreakpointType<string>({
   lg: Constants.CLIP_RATIO_PAD
 })
 
+/**
+ * Page for confirming the profile picture change.
+ */
 @Component
 export struct ConfirmView {
   @Consume('appPathStack') appPathStack: NavPathStack;

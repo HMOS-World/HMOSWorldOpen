@@ -38,6 +38,7 @@ export struct SearchView {
   handleSearch(item: string): void {
     this.searchValue = item;
     this.discoverModel.search(this.searchValue);
+    // Jump to the search result page when click Search.
     this.appPathStack.pushPathByName('SearchResultView', new Object({ searchValue: item }));
   }
 
@@ -74,6 +75,7 @@ export struct SearchView {
         return;
       }
       if (data.index === 1) {
+        // Clear Search History.
         this.discoverModel.clearSearchHistory();
         Logger.info(TAG, 'Delete search history success.')
       }

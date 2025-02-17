@@ -75,6 +75,7 @@ export struct PhotoView {
   doSavePicture(stateCode: number, _bufferType: string, buffer: ArrayBuffer): void {
     if (stateCode === 0) {
       let imageSource = image.createImageSource(buffer);
+      // Images need to be saved to both the app file path and distributed file path.
       FileUtil.saveBuffer2File(ProfileConstants.getInstance().LOCAL_PROFILE_PATH, buffer);
       FileUtil.saveBuffer2File(ProfileConstants.getInstance().DISTRIBUTED_PROFILE_PATH, buffer);
       imageSource.createPixelMap().then((pixelMap) => {

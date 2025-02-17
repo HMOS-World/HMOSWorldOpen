@@ -65,7 +65,7 @@ export struct DiscoverView {
     this.loadResources();
     this.discoverModel.getHotList();
 
-    let routerName = continueModel.geRouterName();
+    const routerName = continueModel.geRouterName();
     Logger.info(TAG, 'aboutToAppear routerName is:' + routerName);
 
     if (continueModel.isContinue && routerName === RouterNameEnum.DISCOVER_ARTICLE_VIEW) {

@@ -133,6 +133,7 @@ export struct ArticleDetailView {
             right: $r('app.float.md_padding_margin')
           })
 
+          // Buttons at the bottom are displayed only on the first-level web page.
           if (this.showInteractiveArea) {
             InteractiveAreaView({
               isLiked: this.isLiked(),

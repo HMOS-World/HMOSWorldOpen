@@ -71,6 +71,7 @@ export struct MapView {
 
   aboutToDisappear(): void {
     if (canIUse('SystemCapability.Map.Core')) {
+      // Canceling Event Listening on the map.
       this.mapController?.off('mapLoad', () => {
         Logger.info(TAG, `off-mapLoad`);
       });
@@ -126,6 +127,7 @@ export struct MapView {
           this.mapController.setDayNightMode(mapCommon.DayNightMode.AUTO);
           this.mapController.setMyLocationStyle({ icon: $r('app.media.ic_me') });
           this.drawBuilding();
+
           this.mapController.on('mapLoad', async () => {
             Logger.info(TAG, `on-mapLoad`);
             const hasPermissions = await PermissionUtil.checkPermissions(this.permissions);
@@ -144,6 +146,7 @@ export struct MapView {
             Logger.info(TAG, `on-mapClick position = ${JSON.stringify(position)}`);
           });
 
+          // Listening point comment click event.
           this.mapController.on('pointAnnotationClick', (pointAnnotation: map.PointAnnotation) => {
             let index: number = this.pointIds.indexOf(pointAnnotation.getId());
             this.showDetail = true;
@@ -187,6 +190,7 @@ export struct MapView {
       let context = getContext(this) as common.UIAbilityContext;
       let name = ResourceUtil.getResourceString(context, $r('app.string.my_location'));
       let title = ResourceUtil.getResourceString(context, this.selectedZone.title);
+      // Start the map application and start navigation.
       let petalMapWant: Want = {
         bundleName: 'com.huawei.hmos.maps.app',
         uri: 'maps://navigation',
@@ -208,6 +212,7 @@ export struct MapView {
   async drawBuilding() {
     if (this.mapController) {
       let length: number = this.zonesList.length;
+      // Labeling building information on a map.
       for (let i = 0; i < length; i++) {
         let zoneItem: ZonesItem = this.zonesList[i];
         if (canIUse('SystemCapability.Map.Core')) {
@@ -241,6 +246,7 @@ export struct MapView {
     }
   }
 
+  // Draw the route on a map.
   async drawPaths() {
     if (canIUse('SystemCapability.Map.Core')) {
       try {
@@ -283,6 +289,7 @@ export struct MapView {
     }
   }
 
+  // Gets the distance between the current location and the selected location.
   getDistances() {
     this.distance = '';
     if (canIUse('SystemCapability.Map.Core')) {
@@ -313,6 +320,7 @@ export struct MapView {
     }
   }
 
+  // Get the route for the current location and selected location.
   async getMapRoutes() {
     let local = new intl.Locale();
     let language = 'en';

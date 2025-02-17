@@ -25,14 +25,14 @@ export class FileUtil {
     Logger.info(TAG, 'copyFile path src: ' + src);
     Logger.info(TAG, 'copyFile path dest: ' + dest);
     try {
-      let srcFile = fileIo.openSync(src, fileIo.OpenMode.READ_ONLY);
-      let distFile = fileIo.openSync(dest, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
+      const srcFile = fileIo.openSync(src, fileIo.OpenMode.READ_ONLY);
+      const distFile = fileIo.openSync(dest, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
       fileIo.copyFileSync(srcFile.fd, distFile.fd);
       fileIo.closeSync(srcFile);
       fileIo.closeSync(distFile);
       Logger.info(TAG, 'copyFile success');
     } catch (error) {
-      let err: BusinessError = error as BusinessError;
+      const err: BusinessError = error as BusinessError;
       Logger.error(TAG, `copyFile failed code: ${err.code}, message: ${err.message}`);
     }
   }

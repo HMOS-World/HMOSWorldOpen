@@ -21,7 +21,7 @@ const TAG: string = '[PermissionUtil]';
 
 export class PermissionUtil {
   public static requestPermissions(permissions: Array<Permissions>, callback?: Function): void {
-    let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+    const atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
     // Request Permissions From User.
     atManager.requestPermissionsFromUser(getContext(), permissions).then((data) => {
       let grantStatus: Array<number> = data.authResults;
@@ -46,7 +46,7 @@ export class PermissionUtil {
 
   public static async checkPermissions(permissions: Array<Permissions>): Promise<boolean> {
     for (let permission of permissions) {
-      let grantStatus: abilityAccessCtrl.GrantStatus = await PermissionUtil.checkAccessToken(permission);
+      const grantStatus: abilityAccessCtrl.GrantStatus = await PermissionUtil.checkAccessToken(permission);
       if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         return true;
       }
@@ -55,25 +55,25 @@ export class PermissionUtil {
   }
 
   static async checkAccessToken(permission: Permissions): Promise<abilityAccessCtrl.GrantStatus> {
-    let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+    const atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
     let grantStatus: abilityAccessCtrl.GrantStatus = abilityAccessCtrl.GrantStatus.PERMISSION_DENIED;
 
     // Obtains the accessTokenID of an application.
     let tokenId: number = 0;
     try {
-      let bundleInfo: bundleManager.BundleInfo =
+      const bundleInfo: bundleManager.BundleInfo =
         await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
-      let appInfo: bundleManager.ApplicationInfo = bundleInfo.appInfo;
+      const appInfo: bundleManager.ApplicationInfo = bundleInfo.appInfo;
       tokenId = appInfo.accessTokenId;
     } catch (error) {
-      let err: BusinessError = error as BusinessError;
+      const err: BusinessError = error as BusinessError;
       Logger.error(TAG, `Failed to get bundle info for self. Code is ${err.code}, message is ${err.message}`);
     }
     // Check whether the app is granted with the permission.
     try {
       grantStatus = await atManager.checkAccessToken(tokenId, permission);
     } catch (error) {
-      let err: BusinessError = error as BusinessError;
+      const err: BusinessError = error as BusinessError;
       Logger.error(TAG, `Failed to check access token. Code is ${err.code}, message is ${err.message}`);
     }
     return grantStatus;

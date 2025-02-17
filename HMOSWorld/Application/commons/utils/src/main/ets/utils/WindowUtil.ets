@@ -43,15 +43,14 @@ export class WindowUtil {
         Logger.error(TAG, 'Failed to obtain the main window. Cause: ' + JSON.stringify(err));
         return;
       }
-      let windowClass: window.Window = data;
+      const windowClass: window.Window = data;
       Logger.info(TAG, 'Succeeded in obtaining the main window. Data: ' + JSON.stringify(data));
 
       // Realize the immersive effect
-      let isLayoutFullScreen = true;
       try {
         // Get status bar height.
-        let area: window.AvoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
-        let naviBarArea: window.AvoidArea =
+        const area: window.AvoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+        const naviBarArea: window.AvoidArea =
           windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
         Logger.info(TAG,
           `Succeeded get the window navigation indicator HEIGHT: ${px2vp(naviBarArea.bottomRect.height)}`);
@@ -59,7 +58,7 @@ export class WindowUtil {
         AppStorage.setOrCreate<number>('naviIndicatorHeight', px2vp(naviBarArea.bottomRect.height));
         WindowUtil.getDeviceSize(context);
         if (area.topRect.height > 0) {
-          let promise: Promise<void> = windowClass.setWindowLayoutFullScreen(isLayoutFullScreen);
+          const promise: Promise<void> = windowClass.setWindowLayoutFullScreen(true);
           promise.then(() => {
             Logger.info(TAG, 'Succeeded in setting the window layout to full-screen mode.');
           }).catch((err: BusinessError) => {
@@ -75,7 +74,7 @@ export class WindowUtil {
   static getDeviceSize(context: Context): void {
     // Get device height.
     window.getLastWindow(context).then((data: window.Window) => {
-      let properties = data.getWindowProperties();
+      const properties = data.getWindowProperties();
       AppStorage.setOrCreate<number>('deviceHeight', px2vp(properties.windowRect.height));
       AppStorage.setOrCreate<number>('deviceWidth', px2vp(properties.windowRect.width));
     });
@@ -104,7 +103,7 @@ export class WindowUtil {
   }
 
   static setMissionContinueActive(context: common.UIAbilityContext, active: boolean) {
-    let activeState = active ? AbilityConstant.ContinueState.ACTIVE : AbilityConstant.ContinueState.INACTIVE;
+    const activeState = active ? AbilityConstant.ContinueState.ACTIVE : AbilityConstant.ContinueState.INACTIVE;
     context.setMissionContinueState(activeState).then(() => {
       Logger.info('setMissionContinueState success');
     }).catch((err: BusinessError) => {

@@ -36,6 +36,10 @@ import { SplashImages } from '../model/SplashModel';
 
 const TAG: string = '[SplashPage]';
 
+/**
+ * Launch Page
+ */
+
 @Entry
 @Component
 struct SplashPage {
@@ -73,15 +77,19 @@ struct SplashPage {
   }
 
   aboutToAppear(): void {
+    //  Determines the App's dark/light color mode setting.
     DarkModeUtil.getInstance().checkDarkModeSetting();
     this.dynamicLoading();
     setTimeout(() => {
       this.checkAgreedPrivacy();
     }, 0);
 
+    // Register breakpoint
     this.breakpointSystem.register();
+
+    //Sets the rotation image based on the current time.
     let data: Resource[] = [];
-    let hours = new Date().getHours();
+    const hours = new Date().getHours();
     if (hours >= SplashConstants.MORNING_TIME && hours < SplashConstants.EVENING_TIME) {
       data = SplashImages.day;
       this.current_swiper.time = 'day';
@@ -139,7 +147,6 @@ struct SplashPage {
   }
 
   LoadingResource(): void {
-    // Wait 1s for dependent resource initialization to complete.
     this.userModel.checkIsLogged().then((logged: boolean) => {
       AppStorage.setOrCreate('getHomeResource', true);
       if (logged) {
@@ -162,6 +169,7 @@ struct SplashPage {
       const bundleInfo = await bundleManager.getBundleInfoForSelf(bundleFlags);
       const grantStatus = await accessManager.checkAccessToken(bundleInfo.appInfo.accessTokenId, permissions[0]);
       if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+        // Request permission to allow data exchange between different devices.
         accessManager.requestPermissionsFromUser(getContext(this), permissions)
       }
     } catch (err) {
@@ -181,7 +189,7 @@ struct SplashPage {
   }
 
   jump(): void {
-    let bundleName = (getContext(this) as common.UIAbilityContext).applicationInfo.name;
+    const bundleName = (getContext(this) as common.UIAbilityContext).applicationInfo.name;
     if (!this.loggedIn) {
       router.replaceNamedRoute({
         name: 'LoginPage',
@@ -191,6 +199,7 @@ struct SplashPage {
       });
       return;
     }
+    // If no Theme has been set, need go to the theme setting page first.
     this.preferenceManager.getValue<boolean>('ThemeIsSet').then((isSet: boolean | null) => {
       if (isSet) {
         router.replaceUrl({
@@ -211,6 +220,7 @@ struct SplashPage {
     });
   }
 
+  // Check wether is opened for the first time.
   checkIsFirstStart(): void {
     this.preferenceManager.hasValue('isFirstStart').then((hasResult: boolean) => {
       if (hasResult) {
