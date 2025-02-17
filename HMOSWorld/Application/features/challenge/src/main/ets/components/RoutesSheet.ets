@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import  { curves } from '@kit.ArkUI';
+import { curves } from '@kit.ArkUI';
 import { navi } from '@kit.MapKit';
 import { BreakpointType, BreakpointTypeEnum, CommonConstants, Logger } from '@ohos/utils';
 import ZonesItem from '../model/ZonesItem';
