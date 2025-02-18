@@ -44,6 +44,7 @@ export class DatabaseHelper {
   async queryResourceList(topics: Topic[]): Promise<ResourceResp[]> {
     const resList: ResourceResp[] = [];
     try {
+      // Retrieve the top 10 pieces of resource data based on their page views.
       const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query().orderByDesc("views_count").limit(10);
       const resourceData: Resource[] = await resourceQuery.get();
       if (resourceData.length > 0) {

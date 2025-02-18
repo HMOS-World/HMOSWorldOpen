@@ -22,9 +22,13 @@ let myHandler = async function (_event, context, callback, logger) {
   try {
     const credential = JSON.parse(context.env.PROJECT_CREDENTIAL);
     const databaseHelper: DatabaseHelper = new DatabaseHelper(logger);
+    // Obtain the data of push cards.
     const resultList: ResourceResp[] = await databaseHelper.queryResData();
+    // Request token for verification.
     const authorization: string = await databaseHelper.getToken();
+    // Carry out risk control verification on the pictures issued by the plan and obtain the addresses of the verified pictures.
     await databaseHelper.convertUrl(resultList, credential, authorization);
+    // Obtain information about the registration card.
     const formInfos: FormInfo[] = await databaseHelper.queryFormInfo();
     if (formInfos === undefined) {
       callback({
@@ -32,6 +36,7 @@ let myHandler = async function (_event, context, callback, logger) {
         message: '[push-data] operation failed'
       });
     }
+    // Send a request to refresh the content of the card.
     for (let index = 0; index < formInfos.length; index++) {
       databaseHelper.pushData(resultList, formInfos[index], credential, authorization).then(() => {
       });

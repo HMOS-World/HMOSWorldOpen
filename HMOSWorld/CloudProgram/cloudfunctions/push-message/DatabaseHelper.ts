@@ -42,6 +42,7 @@ export class DatabaseHelper {
     let result = undefined;
     const pushTokens: string[] = [];
     try {
+      // Obtain all users' pushToken.
       const cloudDBZoneQuery: CloudDBZoneQuery<UserPushToken> = this.colUserPushToken.query();
       const userPushTokens: UserPushToken[] = await cloudDBZoneQuery.get();
       if (userPushTokens.length > 0) {
@@ -55,7 +56,10 @@ export class DatabaseHelper {
           const element: UserPushToken = userPushTokens[index];
           pushTokens.push(element.getPush_token());
         }
+
+        // Request token for verification.
         const authorization: string = this.getAuthorization();
+        // Send messages push request.
         for (let i = 0; i < pushTokens.length; i += 10) {
           result = await this.sendMessage(pushTokens.slice(i, i + 10), randomResource, authorization);
         }

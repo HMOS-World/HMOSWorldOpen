@@ -40,6 +40,7 @@ export class DatabaseHelper {
   async queryResource(userId: string): Promise<ResourceResp[]> {
     const resList: ResourceResp[] = [];
     try {
+      // Query the user favorites list.
       const collectQuery: CloudDBZoneQuery<Collect> =
         this.colCollect.query().orderByDesc("collect_time").equalTo('user_id', userId);
       const collectData: Collect[] = await collectQuery.get();

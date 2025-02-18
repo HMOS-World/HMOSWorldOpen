@@ -67,6 +67,7 @@ export class DatabaseHelper {
     let userResult: User;
     const cloudDBZoneQuery: CloudDBZoneQuery<User> = this.colUser.query().equalTo("union_id", loginParams.unionId);
     const userList: User[] = await cloudDBZoneQuery.get();
+    // If the user data already exists, return directly; otherwise, insert the user data.
     if (userList.length > 0) {
       userResult = userList[0];
     } else {
