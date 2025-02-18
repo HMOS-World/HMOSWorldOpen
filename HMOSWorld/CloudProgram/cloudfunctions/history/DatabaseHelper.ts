@@ -43,6 +43,7 @@ export class DatabaseHelper {
   async queryResource(userId: string): Promise<ResourceResp[]> {
     const resList: ResourceResp[] = [];
     try {
+      // Query the user's historical browsing data.
       const historyQuery: CloudDBZoneQuery<UserHistory> =
         this.colUserHistory.query().orderByDesc("browse_time").equalTo('user_id', userId);
       const historyData: UserHistory[] = await historyQuery.get();
@@ -56,6 +57,7 @@ export class DatabaseHelper {
         historyIds.push(historyItem.getResource_id());
       }
 
+      // Obtain resource information based on the query of historical data.
       const resourceQuery: CloudDBZoneQuery<Resource> = this.colResource.query().in("id", historyIds);
       const resourceData: Resource[] = await resourceQuery.get();
       if (resourceData.length <= 0) {
