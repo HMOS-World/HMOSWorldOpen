@@ -14,8 +14,8 @@
  */
 
 import { BusinessError, deviceInfo } from '@kit.BasicServicesKit';
-import { picker } from '@kit.CoreFileKit';
 import { image } from '@kit.ImageKit';
+import { photoAccessHelper } from '@kit.MediaLibraryKit';
 import {
   CollaborationServiceFilter,
   CollaborationServiceStateDialog,
@@ -86,11 +86,11 @@ export struct PhotoView {
   }
 
   selectPicture() {
-    const photoSelectOptions = new picker.PhotoSelectOptions();
-    photoSelectOptions.MIMEType = picker.PhotoViewMIMETypes.IMAGE_TYPE;
+    const photoSelectOptions = new photoAccessHelper.PhotoSelectOptions();
+    photoSelectOptions.MIMEType = photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE;
     photoSelectOptions.maxSelectNumber = 1;
-    const photoViewPicker = new picker.PhotoViewPicker();
-    photoViewPicker.select(photoSelectOptions).then((photoSelectResult: picker.PhotoSelectResult) => {
+    const photoViewPicker = new photoAccessHelper.PhotoViewPicker();
+    photoViewPicker.select(photoSelectOptions).then((photoSelectResult: photoAccessHelper.PhotoSelectResult) => {
       let uris: Array<string> = photoSelectResult.photoUris;
       if (uris.length > 0) {
         this.appPathStack.replacePathByName('ConfirmView', new Object({ uri: uris[0] }));

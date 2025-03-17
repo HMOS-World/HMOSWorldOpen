@@ -24,13 +24,13 @@ export class WindowUtil {
   public static updateStatusBarColor(context: common.BaseContext, isDark: boolean) {
     window.getLastWindow(context).then((windowClass: window.Window) => {
       try {
-        windowClass.setWindowSystemBarProperties({ statusBarContentColor: isDark ? '#FFFFFF' : '#000000' }, (err) => {
-          if (err.code) {
+        windowClass.setWindowSystemBarProperties({ statusBarContentColor: isDark ? '#FFFFFF' : '#000000' })
+          .then(() => {
+            Logger.info(TAG, 'Succeeded in setting the system bar properties.');
+          })
+          .catch((err: BusinessError) => {
             Logger.error(TAG, 'Failed to set the system bar properties. Cause: ' + JSON.stringify(err));
-            return;
-          }
-          Logger.info(TAG, 'Succeeded in setting the system bar properties.');
-        });
+          });
       } catch (exception) {
         Logger.error(TAG, 'Failed to set the system bar properties. Cause: ' + JSON.stringify(exception));
       }
