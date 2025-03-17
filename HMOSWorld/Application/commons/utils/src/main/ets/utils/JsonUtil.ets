@@ -26,7 +26,7 @@ export class JsonUtil {
     const textDecoder: util.TextDecoder = util.TextDecoder.create('utf-8', {
       ignoreBOM: true
     });
-    const resultPut: string = textDecoder.decodeWithStream(new Uint8Array(buffer), {
+    const resultPut: string = textDecoder.decodeToString(new Uint8Array(buffer), {
       stream: true
     });
     return resultPut;

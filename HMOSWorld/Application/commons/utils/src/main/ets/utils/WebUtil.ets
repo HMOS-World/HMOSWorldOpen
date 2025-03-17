@@ -22,7 +22,7 @@ const controllerMap: Map<string, WebviewController | undefined> = new Map();
 const onPageEndMap: Map<string, Function | undefined> = new Map();
 const onProgressChangeMap: Map<string, Function | undefined> = new Map();
 const onResourceLoadMap: Map<string, Function | undefined> = new Map();
-const context: UIContext;
+let context: UIContext;
 const TAG: string = '[WebUtil]';
 
 class Data {
